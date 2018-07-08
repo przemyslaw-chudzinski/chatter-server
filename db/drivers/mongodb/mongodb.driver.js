@@ -78,6 +78,10 @@ class MongoDbDDriver {
             message: 'Error database connection'
         });
     }
+
+    ObjectId(_id) {
+        return this._mongodb.ObjectId(_id);
+    }
 }
 
 module.exports = MongoDbDDriver;
