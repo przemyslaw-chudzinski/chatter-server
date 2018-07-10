@@ -26,7 +26,7 @@ class WebSocketServer {
     _assignEvents(conn) {
         conn.on('text', event => this._onTextHandler(conn, event));
         conn.on('close', event => this.__onCloseHandler(conn, event));
-        conn.on('error', err => console.log(err));
+        conn.on('error', () => {});
     }
 
     _onTextHandler(conn, event) {
@@ -37,9 +37,13 @@ class WebSocketServer {
                 this._userLoggedAction(event);
                 break;
             case wsActions.UserLoggedOut:
+                console.log('test')
                 this._userLoggedOutAction(event);
                 break;
             case wsActions.ContactStatusChanged:
+                break;
+            case wsActions.MessageToContact:
+                this._messageToContactAction(event);
                 break;
         }
     }
@@ -52,12 +56,16 @@ class WebSocketServer {
         this._sendToAll(this._prepareDataToSend());
     }
 
-    _userLoggedOutAction() {
-        const index = serverWs.connections.findIndex(c => c.userId === event.userId);
+    _userLoggedOutAction(event) {
+        const index = this._server.connections.findIndex(c => c.userId === event.userId);
         if (index !== -1) {
             this._connections.splice(index, 1);
         }
         this._sendToAll(this._prepareDataToSend());
+    }
+
+    _messageToContactAction(event) {
+        console.log(event);
     }
 
     _sendToAll(data) {
