@@ -37,7 +37,6 @@ class WebSocketServer {
                 this._userLoggedAction(event);
                 break;
             case wsActions.UserLoggedOut:
-                console.log('test')
                 this._userLoggedOutAction(event);
                 break;
             case wsActions.ContactStatusChanged:
@@ -49,11 +48,11 @@ class WebSocketServer {
     }
 
     __onCloseHandler(conn, event) {
-        this._sendToAll(this._prepareDataToSend());
+        this._sendToAll(this._prepareDataOnStatusChanged());
     }
 
     _userLoggedAction(event) {
-        this._sendToAll(this._prepareDataToSend());
+        this._sendToAll(this._prepareDataOnStatusChanged());
     }
 
     _userLoggedOutAction(event) {
@@ -61,20 +60,37 @@ class WebSocketServer {
         if (index !== -1) {
             this._connections.splice(index, 1);
         }
-        this._sendToAll(this._prepareDataToSend());
+        this._sendToAll(this._prepareDataOnStatusChanged());
     }
 
     _messageToContactAction(event) {
-        console.log(event);
+        if (event.contactId) {
+            const data = JSON.stringify({
+                action: wsActions.MessageToContact,
+                contactId: event.userId,
+                data: event.data
+            });
+            this._sendToOne(event.contactId, data) || console.log('contact is logged out');
+        }
+
     }
 
     _sendToAll(data) {
         this._connections.forEach(c => {
-            c.sendText(data)
+            c.sendText(data);
         });
     }
 
-    _prepareDataToSend() {
+    _sendToOne(userId, data) {
+        const index = this._connections.findIndex(c => c.userId === userId);
+        if (index !== -1) {
+            this._connections[index].sendText(data);
+            return true;
+        }
+        return false;
+    }
+
+    _prepareDataOnStatusChanged() {
         return JSON.stringify({
             action: wsActions.ContactStatusChanged,
             visibleContactsIds: this._server.connections.map(c => c.userId)
