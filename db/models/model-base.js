@@ -8,7 +8,7 @@ class ModelBase {
         this._jwt = new Jwt;
     }
 
-    get userId() {
+    get loggedUserId() {
         const token = this._req.headers.authorization.split(' ')[1];
         const decodedToken = this._jwt.decode(token);
         return database.dbDriver.ObjectId(decodedToken.user._id) || null;

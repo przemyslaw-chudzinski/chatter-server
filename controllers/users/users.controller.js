@@ -1,5 +1,7 @@
 const GetUsersAction = require('./actions/get-users.action');
+const GetUserAction = require('./actions/get-user.action');
 
 module.exports = {
-    GetUsersAction: GetUsersAction
+    GetUsersAction: GetUsersAction,
+    GetUserAction: GetUserAction
 };

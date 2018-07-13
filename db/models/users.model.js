@@ -15,7 +15,7 @@ class UsersModel extends ModelBase {
             return database.dbDriver.openConncetion(this._req, this._res, (client, db) => {
                 return db.collection(collections.USERS).find({
                     _id: {
-                        $ne: this.userId
+                        $ne: this.loggedUserId
                     }
                 }).toArray((err, results) => {
                     if (err) {
@@ -26,6 +26,8 @@ class UsersModel extends ModelBase {
                             return reject(err);
                         }
 
+                        client.close();
+
                         return resolve({
                             results: results.map(result => {
                                 delete result.password;
@@ -34,6 +36,32 @@ class UsersModel extends ModelBase {
                             results_number: count
                         });
                     });
+                });
+            });
+        });
+    }
+
+    getUserById(userId) {
+        if (!userId) {
+            throw new Error('userId is required');
+        }
+        return new Promise((resolve, reject) => {
+            return database.dbDriver.openConncetion(this._req, this._res, (client, db) => {
+                return db.collection(collections.USERS).find({
+                    _id: database.dbDriver.ObjectId(userId)
+                }).toArray((err, results) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    client.close();
+
+                    delete results[0].password;
+                    delete results[0].active;
+                    delete results[0].createdAt;
+                    delete results[0].updatedAt;
+
+                    return resolve(results[0]);
                 });
             });
         });
