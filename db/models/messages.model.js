@@ -38,6 +38,7 @@ class MessagesModel extends ModelBase {
                         recipientId: this.loggedUserId
                     }]
                 };
+
                 db.collection(collections.MESSAGES).find(query).toArray((err, results) => {
                     if (err) {
                         client.close();

@@ -113,6 +113,7 @@ class WebSocketServer {
         if (index !== -1) {
             message.read = true;
         }
+        // TODO: Create notification that contact has new unread message
         this._messagesModel.saveMessage(message);
     }
 }
