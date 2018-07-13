@@ -15,7 +15,7 @@ class UsersModel extends ModelBase {
             return database.dbDriver.openConncetion(this._req, this._res, (client, db) => {
                 return db.collection(collections.USERS).find({
                     _id: {
-                        $ne: this.loggedUserId
+                        $ne: this.loggedUserObjectId
                     }
                 }).toArray((err, results) => {
                     if (err) {

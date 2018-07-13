@@ -8,10 +8,16 @@ class ModelBase {
         this._jwt = new Jwt;
     }
 
-    get loggedUserId() {
+    get loggedUserObjectId() {
         const token = this._req.headers.authorization.split(' ')[1];
         const decodedToken = this._jwt.decode(token);
         return database.dbDriver.ObjectId(decodedToken.user._id) || null;
+    }
+
+    get loggedUserId() {
+        const token = this._req.headers.authorization.split(' ')[1];
+        const decodedToken = this._jwt.decode(token);
+        return decodedToken.user._id;
     }
 }
 

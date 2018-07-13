@@ -16,7 +16,7 @@ class GetUserAction extends ActionBase {
         return this._res.json(data);
     }
 
-    _catchHandler() {
+    _catchHandler(err) {
         console.log('error');
         return this.internalServerErrorHandler(err);
     }
