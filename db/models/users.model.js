@@ -3,7 +3,7 @@ const collections = require('../collections/collections');
 const ModelBase = require('./model-base');
 
 class UsersModel extends ModelBase {
-    constructor(req, res) {
+    constructor(req = null, res = null) {
         super(req, res);
     }
 
@@ -41,6 +41,10 @@ class UsersModel extends ModelBase {
         });
     }
 
+    /**
+     * @desc It gets user by id from database
+     * @param {string} userId
+     */
     getUserById(userId) {
         if (!userId) {
             throw new Error('userId is required');
