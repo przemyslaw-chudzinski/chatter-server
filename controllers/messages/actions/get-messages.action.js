@@ -1,6 +1,7 @@
 const ActionBase = require('../../action-base');
 const MessagesModel = require('../../../db/models/messages.model');
 const UsersModel = require('../../../db/models/users.model');
+const async = require('async');
 
 class GetMessagesAction extends ActionBase {
     constructor(req, res) {
@@ -14,6 +15,7 @@ class GetMessagesAction extends ActionBase {
         this._messagesModel.getMessages(this.loggedUserId, this._req.params.recipientId).then(data => {
             this._res.status(200);
             this._res.json(data);
+            console.log(data);
         }).catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 }

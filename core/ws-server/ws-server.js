@@ -3,13 +3,13 @@ const wsActions = require('./ws-server-actions');
 const MessagesModel = require('../../db/models/messages.model')
 
 class WebSocketServer {
-    constructor(port = 8000, host = 'localhost', cb) {
+    constructor(cb, port = 8000, host = 'localhost') {
         this._port = port;
         this._host = host;
         this._cb = cb || function () {
             console.log(`Websocket Server is running on ws://${host}:${port}`);
         };
-        this._messagesModel = new MessagesModel();
+        this._messagesModel = new MessagesModel;
         this._server = ws.createServer(conn => this._wsCreateServerCallback(conn));
     }
 
@@ -69,7 +69,6 @@ class WebSocketServer {
     }
 
     _messageToContactAction(event) {
-        console.log(event);
         if (event.contactId) {
             const data = JSON.stringify({
                 action: wsActions.MessageToContact,
@@ -79,9 +78,9 @@ class WebSocketServer {
             this._saveMessage({
                 authorId: event.userId,
                 recipientId: event.contactId,
-                message: event.data,
-                createdAt: '',
-                updatedAt: ''
+                content: event.data,
+                createdAt: new Date(),
+                updatedAt: new Date()
             });
             this._sendToOne(event.contactId, data) || console.log('contact is logged out');
         }

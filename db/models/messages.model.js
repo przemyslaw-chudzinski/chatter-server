@@ -8,12 +8,13 @@ class MessagesModel extends ModelBase {
     }
 
     saveMessage(message) {
+        console.log('save message', message);
         return new Promise((resolve, reject) => {
-            database.dbDriver.openConncetion((err, client, db) => {
+            database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     return reject(err);
                 }
-                this.insertOne(db, collections.MESSAGES).then(item => {
+                this.insertOne(db, collections.MESSAGES, message).then(item => {
                     client.close();
                     resolve(item);
                 }).catch(err => {
@@ -32,7 +33,7 @@ class MessagesModel extends ModelBase {
             throw new Error('user is not logged');
         }
         return new Promise((resolve, reject) => {
-            return database.dbDriver.openConncetion((err, client, db) => {
+            return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     client.close();
                     return reject(err);

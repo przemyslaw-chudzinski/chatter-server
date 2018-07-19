@@ -46,7 +46,7 @@ class MongoDbDDriver {
         }
     }
 
-    openConncetion(next) {
+    openConnection(next) {
         this._client.connect(this._dbUrl, {
             useNewUrlParser: true
         }, (err, client) => {

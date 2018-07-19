@@ -8,7 +8,7 @@ class UsersModel extends ModelBase {
             throw new Error('loggedUserId is required parameter');
         }
         return new Promise((resolve, reject) => {
-            database.dbDriver.openConncetion((err, client, db) => {
+            database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     client.close();
                     return reject(err);
@@ -34,7 +34,7 @@ class UsersModel extends ModelBase {
             throw new Error('userId is required parameter');
         }
         return new Promise((resolve, reject) => {
-            database.dbDriver.openConncetion((err, client, db) => {
+            database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     client.close();
                     return reject(err);
@@ -52,7 +52,7 @@ class UsersModel extends ModelBase {
 
     getUserByEmail(email) {
         return new Promise((resolve, reject) => {
-            database.dbDriver.openConncetion((err, client, db) => {
+            database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     client.close();
                     reject(err);

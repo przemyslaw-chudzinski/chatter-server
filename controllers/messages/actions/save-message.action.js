@@ -1,4 +1,5 @@
 const ActionBase = require('../../action-base');
+const MessagesModel = require('../../../db/models/messages.model');
 
 class SaveMessageAction extends ActionBase {
     constructor(req, res) {
@@ -8,6 +9,7 @@ class SaveMessageAction extends ActionBase {
 
     _init() {
         console.log('SaveMessageAction called');
+        // this.
     }
 }
 
