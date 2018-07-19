@@ -9,17 +9,16 @@ class GetUserAction extends ActionBase {
     }
 
     _init() {
-        this._userModel.getUserById(this._req.params.id).then(data => this._resloveHandler(data)).catch(err => this._catchHandler(err));
+        this._userModel.getUserById(this._req.params.id).then(data => {
+            if (data) {
+                this._res.status(200);
+                this._res.json(data);
+                return;
+            }
+            this.simpleResponse(404, 'User not found');
+        }).catch(err => this.simpleResponse(500, 'Inernal server error', err))
     }
 
-    _resloveHandler(data) {
-        return this._res.json(data);
-    }
-
-    _catchHandler(err) {
-        console.log('error');
-        return this.internalServerErrorHandler(err);
-    }
 }
 
 module.exports = GetUserAction;

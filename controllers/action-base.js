@@ -1,9 +1,13 @@
+const Jwt = require('../core/jwt/jwt');
+
 class ActionBase {
     constructor(req, res) {
         this._req = req;
         this._res = res;
+        this._jwt = new Jwt;
     }
-    internalServerErrorHandler(err, status = 500, message = 'Internal server error') {
+
+    simpleResponse(status = 400, message = '', err = null) {
         this._res.status(status);
         return this._res.json({
             message: message,
@@ -11,12 +15,13 @@ class ActionBase {
         });
     }
 
-    simpleErrorHandler(status = 400, message = '') {
-        this._res.status(status);
-        return this._res.json({
-            message: message,
-            error: true
-        });
+    get loggedUserId() {
+        return this.decodedToken.user._id;
+    }
+
+    get decodedToken() {
+        const token = this._req.headers.authorization.split(' ')[1];
+        return this._jwt.decode(token);
     }
 }
 

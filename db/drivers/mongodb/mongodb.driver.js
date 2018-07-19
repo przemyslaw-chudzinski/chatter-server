@@ -17,14 +17,13 @@ class MongoDbDDriver {
         this._eventEmitter = new EventEmitter();
         this._prepareConfig(config);
         this._validateConfig();
-        this._assignEvents();
     }
 
     _prepareDefaultConfig() {
         this._defaultConfig = {
             dbName: null,
-            host: null,
-            port: null
+            host: 'localhost',
+            port: 27017
         };
     }
 
@@ -47,35 +46,15 @@ class MongoDbDDriver {
         }
     }
 
-    _assignEvents() {
-        this._eventEmitter.on(mongoDbEvents.errorConnectionEvent, this.connectionErrorHandler.bind(this));
-    }
-
-    openConncetion(req, res, callback) {
-        callback = callback || function () {};
-        req = req || null;
-        res = res || null;
+    openConncetion(next) {
         this._client.connect(this._dbUrl, {
             useNewUrlParser: true
         }, (err, client) => {
             if (err) {
-                return this._eventEmitter.emit(mongoDbEvents.errorConnectionEvent, req, res, err);
+                return next(err, client, false);
             }
             const db = client.db(this._config.dbName);
-            this._eventEmitter.emit(mongoDbEvents.successConnectionEvent, client, db);
-            return callback(client, db);
-        });
-    }
-
-    connectionErrorHandler(req, res, err) {
-        if (!req || !res) {
-            console.log('Error database connection');
-            return false;
-        }
-        res.status(500);
-        res.json({
-            err: err,
-            message: 'Error database connection'
+            return next(false, client, db);
         });
     }
 

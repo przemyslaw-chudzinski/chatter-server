@@ -4,21 +4,15 @@ const UsersModel = require('../../../db/models/users.model');
 class GetUsersAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._userModel = new UsersModel(req, res);
+        this._userModel = new UsersModel;
         this._init();
     }
 
     _init() {
-        this._userModel.getUsers().then(data => this._resolveHandler(data)).catch(err => this.__rejectHandler(err));
-    }
-
-    _resolveHandler(data) {
-        return this._res.json(data);
-    }
-
-    _rejectHandler(err) {
-        console.log('error');
-        return this.internalServerErrorHandler(err);
+        this._userModel.users(this.loggedUserId).then(data => {
+            this._res.status(200);
+            this._res.json(data);
+        }).catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 }
 

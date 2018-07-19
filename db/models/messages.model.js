@@ -3,8 +3,8 @@ const collections = require('../collections/collections');
 const ModelBase = require('./model-base');
 
 class MessagesModel extends ModelBase {
-    constructor(req = null, res = null) {
-        super(req, res);
+    constructor() {
+        super();
     }
 
     saveMessage(message) {
@@ -20,41 +20,34 @@ class MessagesModel extends ModelBase {
         });
     }
 
-    getMessages(recipientId) {
+    getMessages(userLoggedId, recipientId) {
         if (!recipientId) {
             throw new Error('recipientId is required');
         }
-        if (!this.loggedUserId) {
+        if (!userLoggedId) {
             throw new Error('user is not logged');
         }
         return new Promise((resolve, reject) => {
-            return database.dbDriver.openConncetion(this._req, this._res, (client, db) => {
+            return database.dbDriver.openConncetion((err, client, db) => {
+                if (err) {
+                    client.close();
+                    return reject(err);
+                }
                 const query = {
                     $or: [{
-                        authorId: this.loggedUserId,
+                        authorId: userLoggedId,
                         recipientId: recipientId
                     }, {
                         authorId: recipientId,
-                        recipientId: this.loggedUserId
+                        recipientId: userLoggedId
                     }]
                 };
-
-                db.collection(collections.MESSAGES).find(query).toArray((err, results) => {
-                    if (err) {
-                        client.close();
-                        return reject(err);
-                    }
-                    db.collection(collections.MESSAGES).count(query, (err, count) => {
-                        if (err) {
-                            client.close();
-                            return reject(err);
-                        }
-                        client.close();
-                        return resolve({
-                            results: results,
-                            results_count: count
-                        });
-                    });
+                this.find(db, query, collections.MESSAGES).then(data => {
+                    client.close();
+                    resolve(data);
+                }).catch(err => {
+                    client.close();
+                    reject(err);
                 });
             });
         });

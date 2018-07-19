@@ -30,7 +30,7 @@ class SignInAction extends ActionBase {
                 if (err) {
                     return this.internalServerErrorHandler(err);
                 }
-                if (results && results.length && results.length === 1) {
+                if (results && results.length && results.length === 1 && results[0].confirmed) {
                     return resolve(results[0]);
                 }
                 return reject();
@@ -54,7 +54,7 @@ class SignInAction extends ActionBase {
     }
 
     _credentialRejectCallback(reason) {
-        return this.simpleErrorHandler(400, 'Invalid email or password');
+        return this.simpleResponse(400, 'Invalid email or password');
     }
 
     _createToken(user) {
@@ -69,7 +69,6 @@ class SignInAction extends ActionBase {
     _createTokenResolveCallback(user, token) {
         this._res.status(200);
         return this._res.json({
-            error: false,
             message: 'You have sign in correctly',
             user,
             token: token

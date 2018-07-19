@@ -1,24 +1,48 @@
-const Jwt = require('../../core/jwt/jwt');
 const database = require('../../db/db');
-
 class ModelBase {
-    constructor(req, res) {
-        this._req = req;
-        this._res = res;
-        this._jwt = new Jwt;
+
+    count(db, query, collectionName) {
+        return new Promise((resolve, reject) => {
+            db.collection(collectionName).count(query, (err, count) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(count);
+            });
+        });
     }
 
-    get loggedUserObjectId() {
-        const token = this._req.headers.authorization.split(' ')[1];
-        const decodedToken = this._jwt.decode(token);
-        return database.dbDriver.ObjectId(decodedToken.user._id) || null;
+    find(db, query, collectionName) {
+        return new Promise((resolve, reject) => {
+            db.collection(collectionName).find(query).toArray((err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                this.count(db, query, collectionName).then(count => {
+                    resolve({
+                        results,
+                        results_count: count
+                    });
+                }).catch(err => {
+                    reject(err)
+                });
+            });
+        });
     }
 
-    get loggedUserId() {
-        const token = this._req.headers.authorization.split(' ')[1];
-        const decodedToken = this._jwt.decode(token);
-        return decodedToken.user._id;
+    findById(db, collectionName, id) {
+        return new Promise((resolve, reject) => {
+            db.collection(collectionName).find({
+                _id: database.dbDriver.ObjectId(id)
+            }).toArray((err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(results[0]);
+            });
+        });
     }
+
 }
 
 module.exports = ModelBase;

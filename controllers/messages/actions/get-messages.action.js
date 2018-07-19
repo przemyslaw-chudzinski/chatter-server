@@ -1,7 +1,6 @@
 const ActionBase = require('../../action-base');
 const MessagesModel = require('../../../db/models/messages.model');
 const UsersModel = require('../../../db/models/users.model');
-const async = require('async');
 
 class GetMessagesAction extends ActionBase {
     constructor(req, res) {
@@ -12,27 +11,10 @@ class GetMessagesAction extends ActionBase {
     }
 
     _init() {
-        this._messagesModel.getMessages(this._req.params.recipientId).then(data => this._resloveHandler(data)).catch(err => this._catchHandler(err));
-    }
-
-    _resloveHandler(data) {
-        async.map(data.results, (msg, next) => {
-            return this._usersModel.getUserById(msg.authorId).then(user => {
-                msg.author = user;
-                next(false, msg);
-            }).catch();
-        }, (err, results) => {
-            if (err) {
-                return;
-            }
+        this._messagesModel.getMessages(this.loggedUserId, this._req.params.recipientId).then(data => {
             this._res.status(200);
-            return this._res.json(data);
-        })
-    }
-
-    _catchHandler(err) {
-        console.log('error');
-        return this.internalServerErrorHandler(err);
+            this._res.json(data);
+        }).catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 }
 
