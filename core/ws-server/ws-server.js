@@ -46,6 +46,9 @@ class WebSocketServer {
             case wsActions.MessageToContact:
                 this._messageToContactAction(event);
                 break;
+            case wsActions.SwitchedToContact:
+                this._switchedToContactAction(event);
+                break;
         }
     }
 
@@ -85,6 +88,13 @@ class WebSocketServer {
 
     }
 
+    _switchedToContactAction(event) {
+        const index = this._connections.findIndex(c => c.userId = event.userId);
+        if (index !== -1) {
+            this._connections[index].switchedContactId = event.contactId;
+        }
+    }
+
     _sendToAll(data) {
         this._connections.forEach(c => {
             c.sendText(data);
@@ -111,7 +121,12 @@ class WebSocketServer {
         message.read = false;
         const index = this._connections.findIndex(c => c.userId === message.recipientId);
         if (index !== -1) {
-            message.read = true;
+            // user is logged
+            if (this._connections[index].switchedContactId === message.authorId) {
+                message.read = true;
+            } else {
+                // TODO: Create notification that contact has new unread message
+            }
         }
         // TODO: Create notification that contact has new unread message
         this._messagesModel.saveMessage(message);

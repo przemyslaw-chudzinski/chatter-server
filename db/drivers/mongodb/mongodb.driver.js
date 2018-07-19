@@ -74,7 +74,7 @@ class MongoDbDDriver {
         }
         res.status(500);
         res.json({
-            err: true,
+            err: err,
             message: 'Error database connection'
         });
     }
