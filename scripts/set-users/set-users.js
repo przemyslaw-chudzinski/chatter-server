@@ -21,25 +21,28 @@ db.dbDriver.openConncetion(null, null, (client, db) => {
         lastName: 'Chudziński',
         email: 'przemyslaw-chudzinski@wp.pl',
         password: password,
-        active: true,
+        confirmed: true,
         createdAt: '',
         updatedAt: '',
+        avatar: 'http://placehold.it/100x100'
     }, {
         firstName: 'Anna',
         lastName: 'Kowalska',
-        email: 'anna.kowalska@exmpale.com',
+        email: 'anna.kowalska@example.com',
         password: password,
-        active: true,
+        confirmed: true,
         createdAt: '',
         updatedAt: '',
+        avatar: 'http://placehold.it/100x100'
     }, {
         firstName: 'Karloina',
         lastName: 'Nowak',
         email: 'karolina.nowak@example.com',
         password: password,
-        active: true,
+        confirmed: true,
         createdAt: '',
         updatedAt: '',
+        avatar: 'http://placehold.it/100x100'
     }];
     insertData(db, collections.USERS, users);
     client.close();

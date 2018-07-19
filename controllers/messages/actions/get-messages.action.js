@@ -12,7 +12,7 @@ class GetMessagesAction extends ActionBase {
     }
 
     _init() {
-        this._messagesModel.getMessages(this._req.params.id).then(data => this._resloveHandler(data)).catch(err => this._catchHandler(err));
+        this._messagesModel.getMessages(this._req.params.recipientId).then(data => this._resloveHandler(data)).catch(err => this._catchHandler(err));
     }
 
     _resloveHandler(data) {
