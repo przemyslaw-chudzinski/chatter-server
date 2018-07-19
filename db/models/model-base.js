@@ -1,7 +1,7 @@
 const database = require('../../db/db');
 class ModelBase {
 
-    count(db, query, collectionName) {
+    count(db, collectionName, query = {}) {
         return new Promise((resolve, reject) => {
             db.collection(collectionName).count(query, (err, count) => {
                 if (err) {
@@ -12,13 +12,13 @@ class ModelBase {
         });
     }
 
-    find(db, query, collectionName) {
+    find(db, collectionName, query = {}) {
         return new Promise((resolve, reject) => {
             db.collection(collectionName).find(query).toArray((err, results) => {
                 if (err) {
                     return reject(err);
                 }
-                this.count(db, query, collectionName).then(count => {
+                this.count(db, collectionName, query).then(count => {
                     resolve({
                         results,
                         results_count: count
@@ -39,6 +39,28 @@ class ModelBase {
                     return reject(err);
                 }
                 resolve(results[0]);
+            });
+        });
+    }
+
+    first(db, collectionName, query = {}) {
+        return new Promise((resolve, reject) => {
+            db.collection(collectionName).find(query).toArray((err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results[0]);
+            });
+        });
+    }
+
+    insertOne(db, collectionName, data, query = {}) {
+        return new Promise((resolve, reject) => {
+            db.collection(collectionName).insertOne(data, query, (err, result) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(result);
             });
         });
     }

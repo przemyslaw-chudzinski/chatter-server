@@ -9,12 +9,16 @@ class MessagesModel extends ModelBase {
 
     saveMessage(message) {
         return new Promise((resolve, reject) => {
-            return database.dbDriver.openConncetion(this._req, this._req, (client, db) => {
-                return db.collection(collections.MESSAGES).insertOne(message, (err, result) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    return resolve();
+            database.dbDriver.openConncetion((err, client, db) => {
+                if (err) {
+                    return reject(err);
+                }
+                this.insertOne(db, collections.MESSAGES).then(item => {
+                    client.close();
+                    resolve(item);
+                }).catch(err => {
+                    client.close();
+                    reject(err);
                 });
             });
         });
@@ -42,7 +46,7 @@ class MessagesModel extends ModelBase {
                         recipientId: userLoggedId
                     }]
                 };
-                this.find(db, query, collections.MESSAGES).then(data => {
+                this.find(db, collections.MESSAGES, query).then(data => {
                     client.close();
                     resolve(data);
                 }).catch(err => {

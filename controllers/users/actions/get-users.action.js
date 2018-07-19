@@ -9,7 +9,7 @@ class GetUsersAction extends ActionBase {
     }
 
     _init() {
-        this._userModel.users(this.loggedUserId).then(data => {
+        this._userModel.getUsers(this.loggedUserId).then(data => {
             this._res.status(200);
             this._res.json(data);
         }).catch(err => this.simpleResponse(500, 'Internal server error', err));
