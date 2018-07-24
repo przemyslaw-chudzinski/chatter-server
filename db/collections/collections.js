@@ -1,4 +1,5 @@
 module.exports = {
     USERS: 'users',
-    MESSAGES: 'messages'
+    MESSAGES: 'messages',
+    NOTIFICATIONS: 'notifications'
 }

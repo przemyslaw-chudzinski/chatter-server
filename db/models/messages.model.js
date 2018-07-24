@@ -8,7 +8,6 @@ class MessagesModel extends ModelBase {
     }
 
     saveMessage(message) {
-        console.log('save message', message);
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
@@ -25,29 +24,16 @@ class MessagesModel extends ModelBase {
         });
     }
 
-    getMessages(userLoggedId, recipientId) {
-        if (!recipientId) {
-            throw new Error('recipientId is required');
-        }
-        if (!userLoggedId) {
-            throw new Error('user is not logged');
-        }
+    getMessages(query = {}, filter = {}) {
+
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     client.close();
                     return reject(err);
                 }
-                const query = {
-                    $or: [{
-                        authorId: userLoggedId,
-                        recipientId: recipientId
-                    }, {
-                        authorId: recipientId,
-                        recipientId: userLoggedId
-                    }]
-                };
-                this.find(db, collections.MESSAGES, query).then(data => {
+
+                this.find(db, collections.MESSAGES, query, filter).then(data => {
                     client.close();
                     resolve(data);
                 }).catch(err => {

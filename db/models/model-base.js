@@ -12,9 +12,9 @@ class ModelBase {
         });
     }
 
-    find(db, collectionName, query = {}) {
+    find(db, collectionName, query = {}, filter = {}) {
         return new Promise((resolve, reject) => {
-            db.collection(collectionName).find(query).toArray((err, results) => {
+            db.collection(collectionName).find(query, filter).toArray((err, results) => {
                 if (err) {
                     return reject(err);
                 }

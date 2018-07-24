@@ -12,7 +12,29 @@ class GetMessagesAction extends ActionBase {
     }
 
     _init() {
-        this._messagesModel.getMessages(this.loggedUserId, this._req.params.recipientId).then(data => {
+        if (!this._req.params.recipientId) {
+            throw new Error('recipientId route param is required');
+        }
+        if (!this.loggedUserId) {
+            throw new Error('user is not logged');
+        }
+
+
+        const query = {
+            $or: [{
+                authorId: this.loggedUserId,
+                recipientId: this._req.params.recipientId
+            }, {
+                authorId: this._req.params.recipientId,
+                recipientId: this.loggedUserId
+            }]
+        };
+
+        const filter = {
+            limit: this._req.query.limit || 50
+        };
+
+        this._messagesModel.getMessages(query, filter).then(data => {
             async.map(data.results, (item, next) => {
                 this._usersModel.getUserById(item.authorId).then(author => {
                     item.author = author;
