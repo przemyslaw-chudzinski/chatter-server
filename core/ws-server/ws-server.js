@@ -34,11 +34,8 @@ class WebSocketServer {
     }
 
     _onTextHandler(conn, event) {
-        console.log('text event', event);
         event = JSON.parse(event);
-        if (conn.userId) {
-            conn.userId = event.userId
-        }
+        conn.userId = event.userId
         switch (event.action) {
             case wsActions.UserLogged:
                 this._userLoggedAction(event);
@@ -75,7 +72,6 @@ class WebSocketServer {
     }
 
     _messageToContactAction(event) {
-        // console.log('event', event);
         if (event.contactId) {
             const data = JSON.stringify({
                 action: wsActions.MessageToContact,
@@ -95,9 +91,9 @@ class WebSocketServer {
     }
 
     _switchedToContactAction(event) {
-        const index = this._connections.findIndex(c => c.userId = event.userId);
+        const index = this._connections.findIndex(c => c.userId === event.userId);
         if (index !== -1) {
-            this._connections[index].switchedContactId = event.contactId;
+            this._connections[index].switchedUserId = event.contactId;
         }
     }
 
@@ -109,36 +105,27 @@ class WebSocketServer {
 
     _sendToOne(recipientId, data) {
         const c = this._connections.find(c => c.userId === recipientId);
-        // console.log('index', c);
-        // console.log('connections length', this._connections.length);
         return c && c.sendText(data);
-        // if (index !== -1) {
-        //     this._connections[index].sendText(data);
-        //     return true;
-        // }
-        // return false;
     }
 
     _prepareDataOnStatusChanged() {
         return JSON.stringify({
             action: wsActions.ContactStatusChanged,
-            visibleContactsIds: this._server.connections.map(c => c.userId)
+            visibleContactsIds: this._connections.map(c => c.userId)
         });
     }
 
     _saveMessage(message) {
-        // message.read = false;
-        // const index = this._connections.findIndex(c => c.userId === message.recipientId);
-        // if (index !== -1) {
-        //     // user is logged
-        //     if (this._connections[index].switchedContactId === message.authorId) {
-        //         message.read = true;
-        //     } else {
-        //         // TODO: Create notification that contact has new unread message
-        //     }
-        // }
-        // // TODO: Create notification that contact has new unread message
-        // this._messagesModel.saveMessage(message);
+        const index = this._connections.findIndex(c => c.userId === message.recipientId);
+        if (index !== -1) {
+            const recipientConn = this._connections[index];
+            if (recipientConn.switchedUserId !== message.authorId) {
+                console.log('send notification - new message');
+            }
+        } else {
+            console.log('send notification - new message');
+        }
+        this._messagesModel.saveMessage(message);
     }
 }
 
