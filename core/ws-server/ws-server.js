@@ -109,8 +109,8 @@ class WebSocketServer {
 
     _sendToOne(recipientId, data) {
         const c = this._connections.find(c => c.userId === recipientId);
-        console.log('index', c);
-        console.log('connections length', this._connections.length);
+        // console.log('index', c);
+        // console.log('connections length', this._connections.length);
         return c && c.sendText(data);
         // if (index !== -1) {
         //     this._connections[index].sendText(data);
