@@ -100,6 +100,8 @@ class ModelBase {
 
             update = update || {$set: data};
 
+            delete message._id;
+
             db.collection(collectionName).findAndModify(query, {}, update, {new: true}, (err, result) => {
                 if (err) {
                     return reject(err);
@@ -107,6 +109,16 @@ class ModelBase {
                 return resolve(result);
             });
         });
+    }
+
+    static catchRejection(client, err = null, next) {
+        client && client.close();
+        typeof next === 'function' && next(err);
+    }
+
+    static catchResolve(client, data = null, next) {
+        client && client.close();
+        typeof next === 'function' && next(data);
     }
 
 }

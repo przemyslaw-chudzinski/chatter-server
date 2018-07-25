@@ -1,7 +1,7 @@
 const ActionBase = require('../../action-base');
 const MessagesModel = require('../../../db/models/messages.model');
 
-class EditMessageAction extends ActionBase {
+class UpdateMessageAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
         this._messagesModel = new MessagesModel(req, res);
@@ -33,4 +33,4 @@ class EditMessageAction extends ActionBase {
     }
 }
 
-module.exports = EditMessageAction;
+module.exports = UpdateMessageAction;

@@ -15,12 +15,11 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return reject(err);
+                    return MessagesModel.catchRejection(client, err, resolve);
                 }
                 this.insertOne(db, collections.MESSAGES, message)
-                    .then(item => resolve(item))
-                    .catch(err => reject(err))
-                    .finally(() => client.close());
+                    .then(result => MessagesModel.catchResolve(client, result, resolve))
+                    .catch(err => MessagesModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -34,15 +33,12 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    client.close();
-                    return reject(err);
+                    return MessagesModel.catchRejection(client, err, resolve);
                 }
 
                 this.find(db, collections.MESSAGES, query, filter)
-                    .then(data => resolve(data))
-                    .then(() => client.close())
-                    .catch(() => client.close())
-                    .catch(err => reject(err));
+                    .then(result => MessagesModel.catchResolve(client, result, resolve))
+                    .catch(err => MessagesModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -55,8 +51,7 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    client.close();
-                    return reject(err);
+                    return MessagesModel.catchRejection(client, err, resolve);
                 }
 
                 const query = {
@@ -64,10 +59,8 @@ class MessagesModel extends ModelBase {
                 };
 
                 return this.first(db, collections.MESSAGES, query)
-                    .then(result => resolve(result))
-                    .catch(err => reject(err))
-                    .then(() => client.close())
-                    .catch(() => client.close());
+                    .then(result => MessagesModel.catchResolve(client, result, resolve))
+                    .catch(err => MessagesModel.catchRejection(client, err, reject));
 
             });
         });
@@ -81,16 +74,12 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    client.close();
-                    return reject(err);
+                    return MessagesModel.catchRejection(client, err, resolve);
                 }
 
                 return this.findAndModify(db, collections.MESSAGES, message)
-                    .then(result => resolve(result))
-                    .catch(err => reject(err))
-                    .then(() => client.close())
-                    .catch(() => client.close());
-
+                    .then(result => MessagesModel.catchResolve(client, result, resolve))
+                    .catch(err => MessagesModel.catchRejection(client, err, reject));
             });
         });
     }

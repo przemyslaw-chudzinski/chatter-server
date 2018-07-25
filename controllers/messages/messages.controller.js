@@ -1,6 +1,6 @@
 const SaveMessageAction = require('./actions/save-message.action');
 const GetMessagesAction = require('./actions/get-messages.action');
-const UpdateMessageAction = require('./actions/edit-message.action');
+const UpdateMessageAction = require('./actions/update-message.action');
 
 module.exports = {
     SaveMessageAction: SaveMessageAction,
