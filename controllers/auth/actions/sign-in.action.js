@@ -14,7 +14,6 @@ class SignInAction extends ActionBase {
     }
 
     _init() {
-        // database.dbDriver.openConncetion(this._req, this._res, (client, db) => this._openConnectionCallback(client, db));
         this._userModel.getUserByEmail(this._req.body.email).then(data => {
             if (data.results_number === 0) {
                 return this.simpleResponse(404, 'Wrong email or password');
