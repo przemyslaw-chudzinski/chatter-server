@@ -18,7 +18,7 @@ class UpdateMessageAction extends ActionBase {
         this._userIsAuthor()
             .then(isAuthor => {
                 isAuthor && this._messagesModel.updateMessage(this._req.body)
-                    .then()
+                    .then(() => this.simpleResponse(200, 'Message has been updated', null))
                     .catch(err => this.simpleResponse(500, 'Internal server error', err));
             })
             .catch(err => this.simpleResponse(500, 'Internal server error', err));
