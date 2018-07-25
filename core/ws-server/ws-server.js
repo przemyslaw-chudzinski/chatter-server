@@ -119,12 +119,12 @@ class WebSocketServer {
     }
 
     _saveMessage(message) {
-        message.read = false;
+        // message.read = true;
         const index = this._connections.findIndex(c => c.userId === message.recipientId);
         if (index !== -1) {
             const recipientConn = this._connections[index];
             if (recipientConn.switchedUserId !== message.authorId) {
-                message.read = true;
+                // message.read = false;
                 this._notifyContact(message.recipientId, message.authorId, wsNotifications.NewMessage);
             }
         } else {
