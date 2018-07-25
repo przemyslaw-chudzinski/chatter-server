@@ -1,6 +1,7 @@
 const ws = require('nodejs-websocket');
 const wsActions = require('./ws-server-actions');
 const MessagesModel = require('../../db/models/messages.model')
+const wsNotifications = require('./ws-server-notifications');
 
 class WebSocketServer {
     constructor(cb, port = 8000, host = 'localhost') {
@@ -50,6 +51,8 @@ class WebSocketServer {
                 break;
             case wsActions.SwitchedToContact:
                 this._switchedToContactAction(event);
+                break;
+            case wsActions.NotifyContact:
                 break;
         }
     }
@@ -116,16 +119,28 @@ class WebSocketServer {
     }
 
     _saveMessage(message) {
+        message.read = false;
         const index = this._connections.findIndex(c => c.userId === message.recipientId);
         if (index !== -1) {
             const recipientConn = this._connections[index];
             if (recipientConn.switchedUserId !== message.authorId) {
-                console.log('send notification - new message');
+                message.read = true;
+                this._notifyContact(message.recipientId, message.authorId, wsNotifications.NewMessage);
             }
         } else {
-            console.log('send notification - new message');
+            this._notifyContact(message.recipientId, message.authorId, wsNotifications.NewMessage);
         }
         this._messagesModel.saveMessage(message);
+    }
+
+    _notifyContact(recipientId, userId, type = wsNotifications.NewMessage) {
+        const data = JSON.stringify({
+            action: wsActions.NotifyContact,
+            type,
+            data: 'You recived new message',
+            contactId: userId
+        });
+        this._sendToOne(recipientId, data);
     }
 }
 
