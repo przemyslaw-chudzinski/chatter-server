@@ -15,7 +15,7 @@ class SignInAction extends ActionBase {
 
     _init() {
         this._userModel.getUserByEmail(this._req.body.email).then(data => {
-            if (data.results_number === 0) {
+            if (!data) {
                 return this.simpleResponse(404, 'Wrong email or password');
             }
             if (this._passwordEncryption.verify(this._req.body.password, data.password)) {

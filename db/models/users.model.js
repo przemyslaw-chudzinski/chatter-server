@@ -12,13 +12,11 @@ class UsersModel extends ModelBase {
                     return reject(err);
                 }
 
-                this.find(db, collections.USERS, query, filter).then(data => {
-                    client.close();
-                    resolve(data);
-                }).catch(err => {
-                    client.close();
-                    reject(err);
-                });
+                this.find(db, collections.USERS, query, filter)
+                    .then(data => resolve(data))
+                    .then(() => client.close())
+                    .catch(() => client.close())
+                    .catch(err => reject(err));
             });
         });
     }
@@ -33,13 +31,11 @@ class UsersModel extends ModelBase {
                     client.close();
                     return reject(err);
                 }
-                this.findById(db, collections.USERS, userId).then(item => {
-                    client.close();
-                    resolve(item);
-                }).catch(err => {
-                    client.close();
-                    reject(err);
-                });
+                this.findById(db, collections.USERS, userId)
+                    .then(item => resolve(item))
+                    .then(() => client.close())
+                    .catch(() => client.close())
+                    .catch(err => reject(err));
             });
         });
     }
@@ -54,13 +50,12 @@ class UsersModel extends ModelBase {
                 const query = {
                     email: email
                 };
-                this.first(db, collections.USERS, query).then(data => {
-                    client.close();
-                    resolve(data);
-                }).catch(err => {
-                    client.close();
-                    reject(err);
-                });
+
+                this.first(db, collections.USERS, query)
+                    .then(data => resolve(data))
+                    .then(() => client.close())
+                    .catch(() => client.close())
+                    .catch(err => reject(err));
             });
         });
     }
