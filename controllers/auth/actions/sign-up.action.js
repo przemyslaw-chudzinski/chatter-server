@@ -1,5 +1,5 @@
 const passwordHash = require('password-hash');
-const db = require('../../../db/db');
+const db = require('../../../db/index');
 
 class SignUpAction {
     constructor(req, res) {

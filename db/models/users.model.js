@@ -1,5 +1,5 @@
-const database = require('../../db/db');
-const collections = require('../collections/collections');
+const database = require('../index');
+const collections = require('../collections/index');
 const ModelBase = require('./model-base');
 
 class UsersModel extends ModelBase {

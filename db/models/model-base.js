@@ -1,4 +1,4 @@
-const database = require('../../db/db');
+const database = require('../index');
 class ModelBase {
 
     /**
