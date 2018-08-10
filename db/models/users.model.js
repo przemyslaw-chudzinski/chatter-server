@@ -3,24 +3,35 @@ const collections = require('../collections/index');
 const ModelBase = require('./model-base');
 
 class UsersModel extends ModelBase {
+    constructor() {
+        super();
+    }
+
+    /**
+     *
+     * @param query
+     * @param filter
+     * @returns {Promise<any>}
+     */
     getUsers(query = {}, filter = {}) {
 
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    client.close();
-                    return reject(err);
+                    UsersModel.catchRejection(client, err, reject);
                 }
 
                 this.find(db, collections.USERS, query, filter)
-                    .then(data => resolve(data))
-                    .then(() => client.close())
-                    .catch(() => client.close())
-                    .catch(err => reject(err));
+                    .then(result => UsersModel.catchResolve(client, result, resolve))
+                    .catch(err => UsersModel.catchRejection(client, err, reject));
             });
         });
     }
 
+    /**
+     * @param userId
+     * @returns {Promise<any>}
+     */
     getUserById(userId) {
         if (!userId) {
             throw new Error('userId is required parameter');
@@ -28,34 +39,51 @@ class UsersModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    client.close();
-                    return reject(err);
+                    UsersModel.catchRejection(client, err, reject);
                 }
                 this.findById(db, collections.USERS, userId)
-                    .then(item => resolve(item))
-                    .then(() => client.close())
-                    .catch(() => client.close())
-                    .catch(err => reject(err));
+                    .then(result => UsersModel.catchResolve(client, result, resolve))
+                    .catch(err => UsersModel.catchRejection(client, err, reject));
             });
         });
     }
 
+    /**
+     * @param email
+     * @returns {Promise<any>}
+     */
     getUserByEmail(email) {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    client.close();
-                    reject(err);
+                    UsersModel.catchRejection(client, err, reject);
                 }
                 const query = {
                     email: email
                 };
 
                 this.first(db, collections.USERS, query)
-                    .then(data => resolve(data))
-                    .then(() => client.close())
-                    .catch(() => client.close())
-                    .catch(err => reject(err));
+                    .then(result => UsersModel.catchResolve(client, result, resolve))
+                    .catch(err => UsersModel.catchRejection(client, err, reject));
+            });
+        });
+    }
+
+    /**
+     * @param objectId
+     * @param user
+     * @returns {Promise<any>}
+     */
+    updateUser(user) {
+        return new Promise((resolve, reject) => {
+            database.dbDriver.openConnection((err, client, db) => {
+                if (err) {
+                    UsersModel.catchRejection(client, err, reject);
+                }
+
+                this.findAndModify(db, collections.USERS, user)
+                    .then(result => UsersModel.catchResolve(client, result, resolve))
+                    .catch(err => UsersModel.catchRejection(client, err, reject));
             });
         });
     }

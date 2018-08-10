@@ -1,5 +1,5 @@
 const db = require('../../db');
-const PasswordEncryption = require('../../core/password-encryption/password-encryption');
+const PasswordEncryption = require('../../core/password-encryption/index');
 const PasswordEncryptionBaseStrategy = require('../../core/password-encryption/password-encryption-base-strategy');
 const collections = require('../../db/collections/index');
 

@@ -1,6 +1,6 @@
 const PasswordEncryptionStrategy = require('./password-encryption-strategy');
 
-class PasswordEncryption {
+class Index {
     constructor(PasswordEncryptionStrategyClass) {
         this._strategy = new PasswordEncryptionStrategyClass;
         if (!(this._strategy instanceof PasswordEncryptionStrategy)) {
@@ -17,4 +17,4 @@ class PasswordEncryption {
     }
 }
 
-module.exports = PasswordEncryption;
+module.exports = Index;

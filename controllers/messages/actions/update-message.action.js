@@ -18,7 +18,14 @@ class UpdateMessageAction extends ActionBase {
         this._userIsAuthor()
             .then(isAuthor => {
                 isAuthor && this._messagesModel.updateMessage(this._req.body)
-                    .then(() => this.simpleResponse(200, 'Message has been updated', null))
+                    .then(message => {
+                        this._res.status(200);
+                        this._res.json({
+                            data: message,
+                            message: "Message has been updated",
+                            error: false
+                        });
+                    })
                     .catch(err => this.simpleResponse(500, 'Internal server error', err));
             })
             .catch(err => this.simpleResponse(500, 'Internal server error', err));
@@ -26,7 +33,7 @@ class UpdateMessageAction extends ActionBase {
 
     _userIsAuthor() {
         return new Promise((resolve, reject) => {
-            this._messagesModel.getMessageById(this._req.params.id)
+            this._messagesModel.getMessageById(this._req.body._id)
                 .then(result => resolve(result.authorId === this.loggedUserId))
                 .catch(err => reject(err));
         });

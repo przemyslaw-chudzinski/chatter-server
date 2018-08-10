@@ -1,4 +1,4 @@
-const Jwt = require('../core/jwt/jwt');
+const Jwt = require('../core/jwt');
 
 class ActionBase {
     constructor(req, res) {
@@ -10,7 +10,7 @@ class ActionBase {
     simpleResponse(status = 400, message = '', err = null) {
         this._res.status(status);
         return this._res.json({
-            message: message,
+            message,
             error: err
         });
     }

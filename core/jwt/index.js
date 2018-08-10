@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const index = require('jsonwebtoken');
 
 class Jwt {
     constructor() {
@@ -16,7 +16,7 @@ class Jwt {
 
     sign(payload = {}) {
         return new Promise((resolve, reject) => {
-            jwt.sign(payload, process.env.JWT_SECRET_KEY, this._config, (err, token) => this._signCallback(err, token, resolve, reject));
+            index.sign(payload, process.env.JWT_SECRET_KEY, this._config, (err, token) => this._signCallback(err, token, resolve, reject));
         });
     }
 
@@ -26,7 +26,7 @@ class Jwt {
 
     verify(token = '') {
         return new Promise((resolve, reject) => {
-            jwt.verify(token, process.env.JWT_SECRET_KEY, null, (err, decodedToken) => this._verifyCallback(err, decodedToken, resolve, reject));
+            index.verify(token, process.env.JWT_SECRET_KEY, null, (err, decodedToken) => this._verifyCallback(err, decodedToken, resolve, reject));
         });
     }
 
@@ -41,7 +41,7 @@ class Jwt {
     decode(token = '', callbackError) {
         callbackError = callbackError || function () {};
         try {
-            return jwt.decode(token);
+            return index.decode(token);
         } catch (e) {
             return callbackError(err);
         }
