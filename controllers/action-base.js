@@ -16,7 +16,15 @@ class ActionBase {
     }
 
     get loggedUserId() {
-        return this.decodedToken.user._id;
+        return this.loggedUser._id;
+    }
+
+    get loggedUser() {
+        return this.decodedToken.user;
+    }
+
+    get loggeduserEmail() {
+        return this.loggedUser.email;
     }
 
     get decodedToken() {

@@ -14,7 +14,6 @@ class UsersModel extends ModelBase {
      * @returns {Promise<any>}
      */
     getUsers(query = {}, filter = {}) {
-
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
@@ -76,6 +75,7 @@ class UsersModel extends ModelBase {
      */
     updateUser(user) {
         return new Promise((resolve, reject) => {
+            user.updatedAt = new Date();
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     UsersModel.catchRejection(client, err, reject);

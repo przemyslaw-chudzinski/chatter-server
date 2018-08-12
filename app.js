@@ -16,5 +16,6 @@ app.use('/api/v1/auth', require('./api/v1/routes/auth.routes'));
 app.use('/api/v1/user', require('./api/v1/routes/users.routes'));
 app.use('/api/v1/users', require('./api/v1/routes/users.routes'));
 app.use('/api/v1/messages', require('./api/v1/routes/messages.routes'));
+app.use('/api/v1/validator', require('./api/v1/routes/validator.routes'));
 
 module.exports = app;
