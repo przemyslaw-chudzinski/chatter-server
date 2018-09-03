@@ -22,7 +22,7 @@ class CheckEmailAction extends ActionBase {
                 } else {
                     console.log('3', this._req.body.email);
                     return this._res.json({
-                        validate: false
+                        isTaken: true
                     });
                 }
             })

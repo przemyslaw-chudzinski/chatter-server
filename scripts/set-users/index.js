@@ -16,34 +16,58 @@ const insertData = (db, collection, body) => {
 };
 
 db.dbDriver.openConnection((err, client, db) => {
-    const users = [{
-        firstName: 'Przemysław',
-        lastName: 'Chudziński',
-        email: 'przemyslaw-chudzinski@wp.pl',
-        password: password,
-        confirmed: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        avatar: 'http://placehold.it/100x100'
-    }, {
-        firstName: 'Anna',
-        lastName: 'Kowalska',
-        email: 'anna.kowalska@example.com',
-        password: password,
-        confirmed: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        avatar: 'http://placehold.it/100x100'
-    }, {
-        firstName: 'Karloina',
-        lastName: 'Nowak',
-        email: 'karolina.nowak@example.com',
-        password: password,
-        confirmed: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        avatar: 'http://placehold.it/100x100'
-    }];
+    const users = [
+        {
+            firstName: 'Przemysław',
+            lastName: 'Chudziński',
+            email: 'przemyslaw-chudzinski@wp.pl',
+            password: password,
+            confirmed: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            avatar: 'http://placehold.it/100x100'
+        },
+        {
+            firstName: 'Anna',
+            lastName: 'Kowalska',
+            email: 'anna.kowalska@example.com',
+            password: password,
+            confirmed: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            avatar: 'http://placehold.it/100x100'
+        },
+        {
+            firstName: 'Karloina',
+            lastName: 'Nowak',
+            email: 'karolina.nowak@example.com',
+            password: password,
+            confirmed: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            avatar: 'http://placehold.it/100x100'
+        },
+        {
+            firstName: 'Barbara',
+            lastName: 'Doe',
+            email: 'barbara.doe@example.com',
+            password: password,
+            confirmed: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            avatar: 'http://placehold.it/100x100'
+        },
+        {
+            firstName: 'Katarzyna',
+            lastName: 'Mega',
+            email: 'katarzyna.mega@example.com',
+            password: password,
+            confirmed: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            avatar: 'http://placehold.it/100x100'
+        }
+    ];
     insertData(db, collections.USERS, users);
     client.close();
     process.exit();

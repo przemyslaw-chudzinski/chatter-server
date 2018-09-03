@@ -9,7 +9,6 @@ class SaveMessageAction extends ActionBase {
 
     _init() {
         console.log('SaveMessageAction called');
-        // this.
     }
 }
 
