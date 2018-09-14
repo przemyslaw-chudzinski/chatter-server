@@ -14,18 +14,32 @@ class WebSocketServer {
         this._server = ws.createServer(conn => this._wsCreateServerCallback(conn));
     }
 
-    get _connections() {
+    /**
+     * @desc It returns all connections
+     * @private
+     */
+    get connections() {
         return this._server.connections;
     }
 
-    get server() {
-        return this._server;
+    /**
+     * @param connections
+     */
+    set connections(connections) {
+        this._server.connections = connections;
     }
 
+    /**
+     * @desc It returns number of connections
+     * @returns {*}
+     */
     get length() {
         return this._connections.length;
     }
 
+    /**
+     * @desc It starts server
+     */
     listen() {
         this._server.listen(this._port, this._host, this._cb);
     }
@@ -42,9 +56,18 @@ class WebSocketServer {
         });
     }
 
+    /**
+     * @param conn
+     * @param event
+     * @private
+     */
     _onTextHandler(conn, event) {
         event = JSON.parse(event);
         conn.userId = event.userId;
+        // console.log(conn.userId);
+        // this._actions.forEach(action => {
+        //     action.init(event, this);
+        // });
         switch (event.action) {
             case wsActions.UserLogged:
                 this._userLoggedAction(event);
@@ -66,23 +89,23 @@ class WebSocketServer {
     }
 
     _onCloseHandler(conn, event) {
-        console.log('ws on close');
+        // console.log('ws on close');
         // this._server.connections = this._connections.filter(c => c.userId === conn.userId);
-        this._sendToAll(this._prepareDataOnStatusChanged());
+        this.sendToAll(this._prepareDataOnStatusChanged());
     }
 
     _userLoggedAction(event) {
-        console.log('_userLoggedAction',this.length);
-        this._sendToAll(this._prepareDataOnStatusChanged());
+        // console.log('_userLoggedAction',this.length);
+        this.sendToAll(this._prepareDataOnStatusChanged());
     }
 
     _userLoggedOutAction(event) {
         const index = this._server.connections.findIndex(c => c.userId === event.userId);
         if (index !== -1) {
-            this._connections.splice(index, 1);
+            this.connections.splice(index, 1);
         }
-        this._sendToAll(this._prepareDataOnStatusChanged());
-        console.log(this.length);
+        this.sendToAll(this._prepareDataOnStatusChanged());
+        // console.log(this.length);
     }
 
     _messageToContactAction(event) {
@@ -106,36 +129,36 @@ class WebSocketServer {
     }
 
     _switchedToContactAction(event) {
-        console.log('_switchedToContactAction', event.contactId);
-        const index = this._connections.findIndex(c => c.userId === event.userId);
+        // console.log('_switchedToContactAction', event.contactId);
+        const index = this.connections.findIndex(c => c.userId === event.userId);
         if (index !== -1) {
-            this._connections[index].switchedUserId = event.contactId;
+            this.connections[index].switchedUserId = event.contactId;
         }
     }
 
-    _sendToAll(data) {
-        this._connections.forEach(c => {
+    sendToAll(data) {
+        this.connections.forEach(c => {
             c.sendText(data);
         });
     }
 
     _sendToOne(recipientId, data) {
-        const c = this._connections.find(c => c.userId === recipientId);
+        const c = this.connections.find(c => c.userId === recipientId);
         return c && c.sendText(data);
     }
 
     _prepareDataOnStatusChanged() {
         return JSON.stringify({
             action: wsActions.ContactStatusChanged,
-            visibleContactsIds: this._connections.map(c => c.userId)
+            visibleContactsIds: this.connections.map(c => c.userId)
         });
     }
 
     _saveMessage(message) {
         // message.read = true;
-        const index = this._connections.findIndex(c => c.userId === message.recipientId);
+        const index = this.connections.findIndex(c => c.userId === message.recipientId);
         if (index !== -1) {
-            const recipientConn = this._connections[index];
+            const recipientConn = this.connections[index];
             if (recipientConn.switchedUserId !== message.authorId) {
                 // message.read = false;
                 this._notifyContact(message.recipientId, message.authorId, wsNotifications.NewMessage);
