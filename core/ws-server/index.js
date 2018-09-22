@@ -34,7 +34,7 @@ class WebSocketServer {
      * @returns {*}
      */
     get length() {
-        return this._connections.length;
+        return this.connections.length;
     }
 
     /**
@@ -51,9 +51,7 @@ class WebSocketServer {
     _assignEvents(conn) {
         conn.on('text', event => this._onTextHandler(conn, event));
         conn.on('close', event => this._onCloseHandler(conn, event));
-        conn.on('error', () => {
-            console.log('ws on error');
-        });
+        conn.on('error', () => console.log('ws on error'));
     }
 
     /**
@@ -64,10 +62,6 @@ class WebSocketServer {
     _onTextHandler(conn, event) {
         event = JSON.parse(event);
         conn.userId = event.userId;
-        // console.log(conn.userId);
-        // this._actions.forEach(action => {
-        //     action.init(event, this);
-        // });
         switch (event.action) {
             case wsActions.UserLogged:
                 this._userLoggedAction(event);
@@ -89,14 +83,19 @@ class WebSocketServer {
     }
 
     _onCloseHandler(conn, event) {
-        // console.log('ws on close');
-        // this._server.connections = this._connections.filter(c => c.userId === conn.userId);
-        this.sendToAll(this._prepareDataOnStatusChanged());
+        this.connections = this.connections.filter(c => c.userId !== conn.userId);
+        this.sendToAll(JSON.stringify({
+            action: wsActions.ContactStatusChanged,
+            visibleContactsIds: this.connections.map(c => c.userId)
+        }));
     }
 
     _userLoggedAction(event) {
-        // console.log('_userLoggedAction',this.length);
-        this.sendToAll(this._prepareDataOnStatusChanged());
+        const visibleContactsIds = this.connections.map(c => c.userId);
+        this.sendToAll(JSON.stringify({
+            action: wsActions.ContactStatusChanged,
+            visibleContactsIds
+        }));
     }
 
     _userLoggedOutAction(event) {
@@ -104,8 +103,10 @@ class WebSocketServer {
         if (index !== -1) {
             this.connections.splice(index, 1);
         }
-        this.sendToAll(this._prepareDataOnStatusChanged());
-        // console.log(this.length);
+        this.sendToAll(JSON.stringify({
+            action: wsActions.ContactStatusChanged,
+            visibleContactsIds: this.connections.map(c => c.userId)
+        }));
     }
 
     _messageToContactAction(event) {
@@ -129,7 +130,6 @@ class WebSocketServer {
     }
 
     _switchedToContactAction(event) {
-        // console.log('_switchedToContactAction', event.contactId);
         const index = this.connections.findIndex(c => c.userId === event.userId);
         if (index !== -1) {
             this.connections[index].switchedUserId = event.contactId;
@@ -147,12 +147,12 @@ class WebSocketServer {
         return c && c.sendText(data);
     }
 
-    _prepareDataOnStatusChanged() {
-        return JSON.stringify({
-            action: wsActions.ContactStatusChanged,
-            visibleContactsIds: this.connections.map(c => c.userId)
-        });
-    }
+    // _prepareDataOnStatusChanged() {
+    //     return JSON.stringify({
+    //         action: wsActions.ContactStatusChanged,
+    //         visibleContactsIds: this.connections.map(c => c.userId)
+    //     });
+    // }
 
     _saveMessage(message) {
         // message.read = true;
