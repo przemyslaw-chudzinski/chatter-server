@@ -94,7 +94,7 @@ class ModelBase {
                 if (err) {
                     return ModelBase.catchRejection(null, err, reject);
                 }
-                return ModelBase.catchResolve(null, result, resolve);
+                return ModelBase.catchResolve(null, result.ops[0], resolve);
             });
         });
     }

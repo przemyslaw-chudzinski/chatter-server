@@ -4,11 +4,28 @@ const MessagesModel = require('../../../db/models/messages.model');
 class SaveMessageAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
+        this._messagesModel = new MessagesModel(req, res);
         this._init();
     }
 
     _init() {
-        console.log('SaveMessageAction called');
+        if (!this.loggedUserId) {
+            throw new Error('user is not logged');
+        }
+        const message = this._req.body;
+        message.authorId = this.loggedUserId;
+        this
+            ._messagesModel
+            .saveMessage(message)
+            .then(message => {
+                this._res.status(200);
+                this._res.json({
+                    data: message,
+                    message: "Message has been updated",
+                    error: false
+                });
+            })
+            .catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 }
 

@@ -12,12 +12,14 @@ class MessagesModel extends ModelBase {
      * @returns {Promise<any>}
      */
     saveMessage(message) {
+        message.createdAt = new Date();
+        message.updatedAt = null;
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     return MessagesModel.catchRejection(client, err, reject);
                 }
-                this.insertOne(db, collections.MESSAGES, message)
+                return this.insertOne(db, collections.MESSAGES, message)
                     .then(result => MessagesModel.catchResolve(client, result, resolve))
                     .catch(err => MessagesModel.catchRejection(client, err, reject));
             });
@@ -76,7 +78,7 @@ class MessagesModel extends ModelBase {
                 if (err) {
                     return MessagesModel.catchRejection(client, err, reject);
                 }
-
+                message.updatedAt = new Date();
                 return this.findAndModify(db, collections.MESSAGES, message)
                     .then(result => MessagesModel.catchResolve(client, result, resolve))
                     .catch(err => MessagesModel.catchRejection(client, err, reject));

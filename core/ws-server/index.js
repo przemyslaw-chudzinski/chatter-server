@@ -79,6 +79,9 @@ class WebSocketServer {
                 break;
             case wsActions.NotifyContact:
                 break;
+            case wsActions.MessageUpdated:
+                this._messageUpdatedAction(event);
+                break;
         }
     }
 
@@ -110,23 +113,11 @@ class WebSocketServer {
     }
 
     _messageToContactAction(event) {
-        if (event.contactId) {
-            const data = JSON.stringify({
-                action: wsActions.MessageToContact,
-                contactId: event.userId,
-                data: event.data
-            });
-            this._saveMessage({
-                authorId: event.userId,
-                recipientId: event.contactId,
-                content: event.data,
-                createdAt: new Date(),
-                updatedAt: new Date()
-            })
-                .then(() => this._sendToOne(event.contactId, data) || console.log('contact is logged out'));
-
-        }
-
+        const data = JSON.stringify({
+            action: wsActions.MessageToContact,
+            data: event.data
+        });
+        this._sendToOne(event.data.recipientId, data);
     }
 
     _switchedToContactAction(event) {
@@ -177,6 +168,14 @@ class WebSocketServer {
             contactId: userId
         });
         this._sendToOne(recipientId, data);
+    }
+
+    _messageUpdatedAction(event) {
+        const data = JSON.stringify({
+            action: wsActions.MessageUpdated,
+            data: event.data
+        });
+        this._sendToOne(event.data.recipientId, data);
     }
 }
 
