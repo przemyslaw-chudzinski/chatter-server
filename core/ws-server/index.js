@@ -61,7 +61,9 @@ class WebSocketServer {
      */
     _onTextHandler(conn, event) {
         event = JSON.parse(event);
-        conn.userId = event.userId;
+        if (conn && !conn.userId) {
+            conn.userId = event.userId;
+        }
         switch (event.action) {
             case wsActions.UserLogged:
                 this._userLoggedAction(event);
@@ -118,6 +120,21 @@ class WebSocketServer {
             data: event.data
         });
         this._sendToOne(event.data.recipientId, data);
+        // find conn what you want to send message
+        const conn = this.connections.find(c => c.userId === event.data.recipientId);
+        // check if exists or not
+        if (conn) {
+            if (conn.switchedUserId && event.data.authorId === conn.switchedUserId) {
+                // is connected
+            } else if (conn.switchedUserId && event.data.authorId !== conn.switchedUserId) {
+                // is connected to other user
+                this._notifyContact(event.data.recipientId, event.data.authorId);
+            } else {
+                // con is not connected to any user
+            }
+        } else {
+            // conn is logged out
+        }
     }
 
     _switchedToContactAction(event) {
@@ -145,20 +162,20 @@ class WebSocketServer {
     //     });
     // }
 
-    _saveMessage(message) {
-        // message.read = true;
-        const index = this.connections.findIndex(c => c.userId === message.recipientId);
-        if (index !== -1) {
-            const recipientConn = this.connections[index];
-            if (recipientConn.switchedUserId !== message.authorId) {
-                // message.read = false;
-                this._notifyContact(message.recipientId, message.authorId, wsNotifications.NewMessage);
-            }
-        } else {
-            this._notifyContact(message.recipientId, message.authorId, wsNotifications.NewMessage);
-        }
-        return this._messagesModel.saveMessage(message);
-    }
+    // _saveMessage(message) {
+    //     // message.read = true;
+    //     const index = this.connections.findIndex(c => c.userId === message.recipientId);
+    //     if (index !== -1) {
+    //         const recipientConn = this.connections[index];
+    //         if (recipientConn.switchedUserId !== message.authorId) {
+    //             // message.read = false;
+    //             this._notifyContact(message.recipientId, message.authorId, wsNotifications.NewMessage);
+    //         }
+    //     } else {
+    //         this._notifyContact(message.recipientId, message.authorId, wsNotifications.NewMessage);
+    //     }
+    //     return this._messagesModel.saveMessage(message);
+    // }
 
     _notifyContact(recipientId, userId, type = wsNotifications.NewMessage) {
         const data = JSON.stringify({
