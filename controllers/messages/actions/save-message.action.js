@@ -14,6 +14,7 @@ class SaveMessageAction extends ActionBase {
         }
         const message = this._req.body;
         message.authorId = this.loggedUserId;
+        message.read = false;
         this
             ._messagesModel
             .saveMessage(message)

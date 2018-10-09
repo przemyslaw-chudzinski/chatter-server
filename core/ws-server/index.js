@@ -120,9 +120,8 @@ class WebSocketServer {
             data: event.data
         });
         this._sendToOne(event.data.recipientId, data);
-        // find conn what you want to send message
         const conn = this.connections.find(c => c.userId === event.data.recipientId);
-        // check if exists or not
+
         if (conn) {
             if (conn.switchedUserId && event.data.authorId === conn.switchedUserId) {
                 // is connected
@@ -131,11 +130,14 @@ class WebSocketServer {
                 this._notifyContact(event.data.recipientId, event.data.authorId);
             } else {
                 // con is not connected to any user
+                this._notifyContact(event.data.recipientId, event.data.authorId);
             }
         } else {
             // conn is logged out
         }
     }
+
+
 
     _switchedToContactAction(event) {
         const index = this.connections.findIndex(c => c.userId === event.userId);
