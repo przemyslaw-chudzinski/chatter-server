@@ -3,6 +3,10 @@ const router = express.Router();
 const messagesController = require('../../../controllers/messages/messages.controller');
 
 /**
+ * @desc It returns a list of unread messages
+ */
+router.get('/unread-messages', (req, res) => new messagesController.GetUnreadMessagesAction(req, res));
+/**
  * @desc It returns list of messages from single contact
  * @todo: Change the recipientId into contactId
  */
@@ -15,9 +19,5 @@ router.patch('/update-message', (req, res) => new messagesController.UpdateMessa
  * @desc It creates single message
  */
 router.post('/', (req, res) => new messagesController.SaveMessageAction(req, res));
-/**
- * @desc It returns a list with unread messages
- */
-router.get('/unread-messages', (req, res) => new messagesController.GetUnreadMessagesAction(req, res));
 
 module.exports = router;

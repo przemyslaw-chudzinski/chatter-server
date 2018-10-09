@@ -14,6 +14,8 @@ class SaveMessageAction extends ActionBase {
         }
         const message = this._req.body;
         message.authorId = this.loggedUserId;
+        message.read = false;
+        message.readAt = null;
 
         this
             ._messagesModel
@@ -22,7 +24,7 @@ class SaveMessageAction extends ActionBase {
                 this._res.status(200);
                 this._res.json({
                     data: message,
-                    message: "Message has been updated",
+                    message: "Message has been created",
                     error: false
                 });
             })
