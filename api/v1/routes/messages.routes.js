@@ -15,5 +15,9 @@ router.patch('/update-message', (req, res) => new messagesController.UpdateMessa
  * @desc It creates single message
  */
 router.post('/', (req, res) => new messagesController.SaveMessageAction(req, res));
+/**
+ * @desc It returns a list with unread messages
+ */
+router.get('/unread-messages', (req, res) => new messagesController.GetUnreadMessagesAction(req, res));
 
 module.exports = router;

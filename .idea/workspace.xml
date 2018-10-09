@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="fixed bugs">
+    <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="working on the project">
+      <change afterPath="$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/v1/routes/messages.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/routes/messages.routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/ws-server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/ws-server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/messages/messages.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/messages.controller.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +33,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="js" value="174" />
+          <entry key="js" value="175" />
           <entry key="json" value="6" />
         </counts>
       </usages-collector>
@@ -39,34 +41,34 @@
         <counts>
           <entry key="Git file" value="1" />
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="174" />
+          <entry key="JavaScript" value="175" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="10" />
-          <entry key="js" value="8692" />
+          <entry key="js" value="8836" />
           <entry key="json" value="5" />
-          <entry key="txt" value="94" />
+          <entry key="txt" value="116" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Git file" value="10" />
           <entry key="JSON" value="5" />
-          <entry key="JavaScript" value="8692" />
-          <entry key="PLAIN_TEXT" value="94" />
+          <entry key="JavaScript" value="8836" />
+          <entry key="PLAIN_TEXT" value="116" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/ws-server/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="132" column="81" selection-start-line="132" selection-start-column="81" selection-end-line="132" selection-end-column="81" />
+            <state relative-caret-position="2921">
+              <caret line="127" column="32" selection-start-line="127" selection-start-column="32" selection-end-line="127" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -74,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/models/messages.model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
+            <state relative-caret-position="644">
               <caret line="40" column="25" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="25" />
             </state>
           </provider>
@@ -83,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/v1/routes/messages.routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+            <state relative-caret-position="382">
+              <caret line="20" column="91" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -92,17 +94,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/messages/messages.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+            <state relative-caret-position="276">
+              <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/messages/actions/save-message.action.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+            <state relative-caret-position="368">
+              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -166,9 +168,7 @@
         <option value="$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js" />
         <option value="$PROJECT_DIR$/core/socket-server/index.js" />
         <option value="$PROJECT_DIR$/controllers/messages/actions/send-message.action.js" />
-        <option value="$PROJECT_DIR$/controllers/messages/messages.controller.js" />
         <option value="$PROJECT_DIR$/controllers/action-base.js" />
-        <option value="$PROJECT_DIR$/api/v1/routes/messages.routes.js" />
         <option value="$PROJECT_DIR$/core/ws-server/ws-actions/WSUserLogged.action.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/core/ws-server/ws-actions/index.js" />
@@ -180,8 +180,11 @@
         <option value="$PROJECT_DIR$/core/ws-server/ws-server-actions.js" />
         <option value="$PROJECT_DIR$/db/models/model-base.js" />
         <option value="$PROJECT_DIR$/db/models/messages.model.js" />
-        <option value="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" />
         <option value="$PROJECT_DIR$/core/ws-server/index.js" />
+        <option value="$PROJECT_DIR$/api/v1/routes/messages.routes.js" />
+        <option value="$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js" />
+        <option value="$PROJECT_DIR$/controllers/messages/messages.controller.js" />
+        <option value="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" />
       </list>
     </option>
   </component>
@@ -226,6 +229,42 @@
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="v1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="v1" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="messages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="messages" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -243,15 +282,15 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.JavaScript" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\przem\Desktop\chatter\server\controllers\validator\actions" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\przem\Desktop\chatter\server\core\ws-server\ws-actions" />
       <recent name="C:\Users\przem\Desktop\chatter\server\controllers\messages\actions" />
+      <recent name="C:\Users\przem\Desktop\chatter\server\core\ws-server\ws-actions" />
       <recent name="C:\Users\przem\Desktop\chatter\server\api\v1\routes" />
       <recent name="C:\Users\przem\Desktop\chatter\server\controllers\auth\actions" />
       <recent name="C:\Users\przem\Desktop\chatter\server\controllers\users\actions" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\przem\Desktop\chatter\server\controllers\validator\actions" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -318,7 +357,7 @@
       <workItem from="1538223468321" duration="12000" />
       <workItem from="1538223508689" duration="25000" />
       <workItem from="1538929864936" duration="280000" />
-      <workItem from="1539083649785" duration="963000" />
+      <workItem from="1539083649785" duration="1652000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -383,17 +422,24 @@
       <option name="project" value="LOCAL" />
       <updated>1537812744909</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="working on the project">
+      <created>1539090150088</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1539090150088</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120004000" />
+    <option name="totallyTimeSpent" value="120693000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.2715655" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.2715655" />
       <window_info id="Structure" order="1" sideWeight="0.5007728" side_tool="true" weight="0.25239617" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -406,7 +452,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.33809" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.30735457" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3600439" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32934782" />
@@ -485,7 +531,8 @@
     <MESSAGE value="add socket io lib to the project" />
     <MESSAGE value="fix actions with websockets" />
     <MESSAGE value="fixed bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs" />
+    <MESSAGE value="working on the project" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on the project" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.vscode/settings.json">
@@ -727,6 +774,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="50" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/ws-server/ws-server-notifications.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -736,36 +790,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db/models/messages.model.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
+        <state relative-caret-position="644">
           <caret line="40" column="25" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1/routes/messages.routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/messages/messages.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/save-message.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/ws-server/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="132" column="81" selection-start-line="132" selection-start-column="81" selection-end-line="132" selection-end-column="81" />
+        <state relative-caret-position="2921">
+          <caret line="127" column="32" selection-start-line="127" selection-start-column="32" selection-end-line="127" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1/routes/messages.routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="20" column="91" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/messages/messages.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/save-message.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
         </state>
       </provider>
     </entry>
