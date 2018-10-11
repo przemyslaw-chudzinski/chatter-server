@@ -12,15 +12,15 @@ class UpdateMessageAction extends ActionBase {
         if (!this.loggedUserId) {
             throw new Error('user is not logged');
         }
-        if (!this._req.body._id) {
+        if (!this.req.body._id) {
             throw new Error('payload data is incorrect');
         }
         this._userIsAuthor()
             .then(isAuthor => {
                 isAuthor && this._messagesModel.updateMessage(this._req.body)
                     .then(message => {
-                        this._res.status(200);
-                        this._res.json({
+                        this.res.status(200);
+                        this.res.json({
                             data: message,
                             message: "Message has been updated",
                             error: false
@@ -33,7 +33,7 @@ class UpdateMessageAction extends ActionBase {
 
     _userIsAuthor() {
         return new Promise((resolve, reject) => {
-            this._messagesModel.getMessageById(this._req.body._id)
+            this._messagesModel.getMessageById(this.req.body._id)
                 .then(result => resolve(result.authorId === this.loggedUserId))
                 .catch(err => reject(err));
         });

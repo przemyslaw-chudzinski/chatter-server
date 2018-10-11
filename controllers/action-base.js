@@ -15,6 +15,18 @@ class ActionBase {
         });
     }
 
+    get req() {
+        return this._req;
+    }
+
+    get res() {
+        return this._res;
+    }
+
+    get jwt() {
+        return this._jwt;
+    }
+
     get loggedUserId() {
         return this.loggedUser._id;
     }

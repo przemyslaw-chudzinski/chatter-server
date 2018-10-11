@@ -1,7 +1,7 @@
 const ActionBase = require('../../action-base');
 const MessagesModel = require('../../../db/models/messages.model');
 
-class GetUnreadMessagesAction extends ActionBase {
+class ResetUnreadMessagesAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
         this._messagesModel = new MessagesModel();
@@ -12,12 +12,10 @@ class GetUnreadMessagesAction extends ActionBase {
         if (!this.loggedUserId) {
             throw new Error('user is not logged');
         }
-
-        this._messagesModel.getUnreadMessages(this.loggedUserId).then(data => {
-            this.res.status(200);
-            this.res.json(data);
-        }).catch(err => this.simpleResponse(500, 'Internal server error', err));
+        this._messagesModel.resetUnreadMessages(this.req.body.contactId)
+            .then(() => this.simpleResponse(200, 'Messages has been set as read successfully', false))
+            .catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 }
 
-module.exports = GetUnreadMessagesAction;
+module.exports = ResetUnreadMessagesAction;

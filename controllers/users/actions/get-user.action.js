@@ -9,10 +9,10 @@ class GetUserAction extends ActionBase {
     }
 
     _init() {
-        this._userModel.getUserById(this._req.params.id).then(data => {
+        this._userModel.getUserById(this.req.params.id).then(data => {
             if (data) {
-                this._res.status(200);
-                this._res.json(data);
+                this.res.status(200);
+                this.res.json(data);
                 return;
             }
             this.simpleResponse(404, 'User not found');

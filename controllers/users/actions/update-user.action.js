@@ -12,18 +12,18 @@ class UpdateUserAction extends ActionBase {
         if (!this.loggedUserId) {
             throw new Error('user is not logged');
         }
-        if (!this._req.body._id) {
+        if (!this.req.body._id) {
             throw new Error('payload data is incorrect');
         }
 
-        if (this.loggedUserId !== this._req.body._id) {
+        if (this.loggedUserId !== this.req.body._id) {
             throw new Error('You dont have permission for this action');
         }
 
-        this._userModel.updateUser(this._req.body)
+        this._userModel.updateUser(this.req.body)
             .then(updatedUser => {
-                this._res.status(200);
-                this._res.json(updatedUser);
+                this.res.status(200);
+                this.res.json(updatedUser);
             })
             .catch(err => this.simpleResponse(500, 'Something went wrong', err))
     }

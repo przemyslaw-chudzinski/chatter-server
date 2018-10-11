@@ -2,29 +2,29 @@ const PasswordEncryption = require('../../../core/password-encryption/index');
 const PasswordEncryptionBaseStrategy = require('../../../core/password-encryption/password-encryption-base-strategy');
 const ActionBase = require('../../action-base');
 const UsersModel = require('../../../db/models/users.model');
-const Jwt = require('../../../core/jwt/index');
+// const Jwt = require('../../../core/jwt/index');
 
 class SignInAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
         this._passwordEncryption = new PasswordEncryption(PasswordEncryptionBaseStrategy);
-        this._jwt = new Jwt;
+        // this._jwt = new Jwt;
         this._userModel = new UsersModel;
         this._init();
     }
 
     _init() {
-        this._userModel.getUserByEmail(this._req.body.email).then(data => {
+        this._userModel.getUserByEmail(this.req.body.email).then(data => {
             if (!data) {
                 return this.simpleResponse(404, 'Wrong email or password');
             }
-            if (this._passwordEncryption.verify(this._req.body.password, data.password)) {
-                this._res.status(200);
-                return this._jwt.sign({
+            if (this._passwordEncryption.verify(this.req.body.password, data.password)) {
+                this.res.status(200);
+                return this.jwt.sign({
                     user: data
                 }).then(token => {
-                    this._res.status(200);
-                    this._res.json({
+                    this.res.status(200);
+                    this.res.json({
                         message: 'You have sing in correctly',
                         user: data,
                         token

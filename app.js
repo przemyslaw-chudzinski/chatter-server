@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
 
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -17,5 +17,6 @@ app.use('/api/v1/user', require('./api/v1/routes/users.routes'));
 app.use('/api/v1/users', require('./api/v1/routes/users.routes'));
 app.use('/api/v1/messages', require('./api/v1/routes/messages.routes'));
 app.use('/api/v1/validator', require('./api/v1/routes/validator.routes'));
+app.use('/api/v1/channels', require('./api/v1/routes/channels.routes'));
 
 module.exports = app;

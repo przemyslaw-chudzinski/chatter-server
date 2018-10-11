@@ -12,7 +12,7 @@ class SaveMessageAction extends ActionBase {
         if (!this.loggedUserId) {
             throw new Error('user is not logged');
         }
-        const message = this._req.body;
+        const message = this.req.body;
         message.authorId = this.loggedUserId;
         message.read = false;
         message.readAt = null;
@@ -21,8 +21,8 @@ class SaveMessageAction extends ActionBase {
             ._messagesModel
             .saveMessage(message)
             .then(message => {
-                this._res.status(200);
-                this._res.json({
+                this.res.status(200);
+                this.res.json({
                     data: message,
                     message: "Message has been created",
                     error: false

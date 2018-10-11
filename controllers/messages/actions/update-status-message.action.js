@@ -12,7 +12,7 @@ class UpdateStatusMessageAction extends ActionBase {
         if (!this.loggedUserId) {
             throw new Error('user is not logged');
         }
-        if (!this._req.body._id) {
+        if (!this.req.body._id) {
             throw new Error('payload data is incorrect');
         }
     }

@@ -71,7 +71,6 @@ class MessagesModel extends ModelBase {
                                 read: false,
                                 authorId: user._id
                             };
-                            console.log(query)
                             if (user._id !== recipientId) {
                                 this
                                     .count(db, collections.MESSAGES, query)
@@ -136,6 +135,31 @@ class MessagesModel extends ModelBase {
                 return this.findAndModify(db, collections.MESSAGES, message)
                     .then(result => MessagesModel.catchResolve(client, result, resolve))
                     .catch(err => MessagesModel.catchRejection(client, err, reject));
+            });
+        });
+    }
+
+    resetUnreadMessages(contactId) {
+        return new Promise((resolve, reject) => {
+            database.dbDriver.openConnection((err, client, db) => {
+                if (err) {
+                    return MessagesModel.catchRejection(client, err, reject);
+                }
+
+                const payload = {
+                    read: true,
+                    readAt: new Date()
+                };
+
+                const query = {
+                    authorId: contactId
+                };
+
+                return this
+                    .findAndModify(db, collections.MESSAGES, payload, query)
+                    .then(result => MessagesModel.catchResolve(client, result, resolve))
+                    .catch(err => MessagesModel.catchRejection(client, err, reject));
+
             });
         });
     }

@@ -14,8 +14,8 @@ class GetLoggedUserAction extends ActionBase {
         }
         this._userModel.getUserById(this.loggedUserId).then(data => {
             if (data) {
-                this._res.status(200);
-                this._res.json(data);
+                this.res.status(200);
+                this.res.json(data);
                 return;
             }
             this.simpleResponse(404, 'User not found');

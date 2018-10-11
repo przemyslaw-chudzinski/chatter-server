@@ -19,5 +19,9 @@ router.patch('/update-message', (req, res) => new messagesController.UpdateMessa
  * @desc It creates single message
  */
 router.post('/', (req, res) => new messagesController.SaveMessageAction(req, res));
+/**
+ * @desc It resets unread messages by contactId
+ */
+router.patch('/reset-unread/:contactId', (req ,res) => new messagesController.ResetUnreadMessagesAction(req, res));
 
 module.exports = router;

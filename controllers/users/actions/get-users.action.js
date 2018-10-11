@@ -24,8 +24,8 @@ class GetUsersAction extends ActionBase {
         };
 
         this._userModel.getUsers(query, filter).then(data => {
-            this._res.status(200);
-            this._res.json(data);
+            this.res.status(200);
+            this.res.json(data);
         }).catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 }

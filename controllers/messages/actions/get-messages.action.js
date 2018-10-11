@@ -12,7 +12,7 @@ class GetMessagesAction extends ActionBase {
     }
 
     _init() {
-        if (!this._req.params.recipientId) {
+        if (!this.req.params.recipientId) {
             throw new Error('recipientId route param is required');
         }
         if (!this.loggedUserId) {
@@ -23,15 +23,15 @@ class GetMessagesAction extends ActionBase {
         const query = {
             $or: [{
                 authorId: this.loggedUserId,
-                recipientId: this._req.params.recipientId
+                recipientId: this.req.params.recipientId
             }, {
-                authorId: this._req.params.recipientId,
+                authorId: this.req.params.recipientId,
                 recipientId: this.loggedUserId
             }]
         };
 
         const filter = {
-            limit: this._req.query.limit || 50
+            limit: this.req.query.limit || 50
         };
 
         this._messagesModel.getMessages(query, filter).then(data => {
@@ -45,8 +45,8 @@ class GetMessagesAction extends ActionBase {
                     return this.simpleResponse(500, 'Internal server error', err);
                 }
                 data.results = results;
-                this._res.status(200);
-                this._res.json(data);
+                this.res.status(200);
+                this.res.json(data);
             });
         }).catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
