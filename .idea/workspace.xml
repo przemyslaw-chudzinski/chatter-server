@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="clean up">
-      <change afterPath="$PROJECT_DIR$/core/ws-server/ws-server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/action-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/action-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/messages/actions/update-message.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/actions/update-message.action.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/ws-server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/ws-server/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
@@ -49,7 +44,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="10" />
-          <entry key="js" value="12932" />
+          <entry key="js" value="12934" />
           <entry key="json" value="5" />
           <entry key="txt" value="138" />
         </counts>
@@ -58,30 +53,30 @@
         <counts>
           <entry key="Git file" value="10" />
           <entry key="JSON" value="5" />
-          <entry key="JavaScript" value="12932" />
+          <entry key="JavaScript" value="12934" />
           <entry key="PLAIN_TEXT" value="138" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50514704">
+    <splitter split-orientation="horizontal" split-proportion="0.44852942">
       <split-first>
         <leaf>
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/server.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
-                  <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+                <state relative-caret-position="161">
+                  <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/controllers/action-base.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="392">
-                  <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
+                <state relative-caret-position="230">
+                  <caret line="10" column="18" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="18" />
                 </state>
               </provider>
             </entry>
@@ -89,7 +84,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/controllers/messages/actions/save-message.action.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
+                <state relative-caret-position="357">
                   <caret line="31" column="46" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="46" />
                 </state>
               </provider>
@@ -104,14 +99,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/core/ws-server/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1288">
-                  <caret line="216" column="16" selection-start-line="216" selection-start-column="4" selection-end-line="216" selection-end-column="16" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
+                <state relative-caret-position="414">
+                  <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
                 </state>
               </provider>
             </entry>
@@ -141,8 +133,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/core/ws-server/ws-server.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="516">
-                  <caret line="201" column="68" selection-start-line="201" selection-start-column="68" selection-end-line="201" selection-end-column="68" />
+                <state relative-caret-position="33">
+                  <caret line="66" column="38" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="38" />
                 </state>
               </provider>
             </entry>
@@ -218,13 +210,13 @@
         <option value="$PROJECT_DIR$/controllers/auth/actions/sign-in.action.js" />
         <option value="$PROJECT_DIR$/api/v1/routes/validator.routes.js" />
         <option value="$PROJECT_DIR$/db/drivers/mongodb/mongodb.events.js" />
-        <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/core/ws-server/index.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" />
         <option value="$PROJECT_DIR$/controllers/messages/actions/update-message.action.js" />
         <option value="$PROJECT_DIR$/core/ws-server/ws-server.js" />
         <option value="$PROJECT_DIR$/controllers/action-base.js" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/core/ws-server/index.js" />
       </list>
     </option>
   </component>
@@ -402,7 +394,7 @@
       <workItem from="1539252256427" duration="621000" />
       <workItem from="1539257344980" duration="617000" />
       <workItem from="1539286695433" duration="2617000" />
-      <workItem from="1539339180699" duration="5187000" />
+      <workItem from="1539339180699" duration="5332000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -506,7 +498,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146469000" />
+    <option name="totallyTimeSpent" value="146614000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
@@ -525,7 +517,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.37211856" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.233809" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3600439" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32934782" />
@@ -875,41 +867,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/ws-server/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1288">
-          <caret line="216" column="16" selection-start-line="216" selection-start-column="4" selection-end-line="216" selection-end-column="16" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="19" column="72" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/save-message.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="31" column="46" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/ws-server/ws-server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="201" column="68" selection-start-line="201" selection-start-column="68" selection-end-line="201" selection-end-column="68" />
         </state>
       </provider>
     </entry>
@@ -920,10 +881,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/ws-server/ws-server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="66" column="38" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/action-base.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
+        <state relative-caret-position="230">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/save-message.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="31" column="46" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/ws-server/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
         </state>
       </provider>
     </entry>
