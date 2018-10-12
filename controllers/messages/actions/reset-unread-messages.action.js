@@ -12,7 +12,7 @@ class ResetUnreadMessagesAction extends ActionBase {
         if (!this.loggedUserId) {
             throw new Error('user is not logged');
         }
-        this._messagesModel.resetUnreadMessages(this.req.body.contactId)
+        this._messagesModel.resetUnreadMessages(this.req.params.contactId)
             .then(() => this.simpleResponse(200, 'Messages has been set as read successfully', false))
             .catch(err => this.simpleResponse(500, 'Internal server error', err));
     }

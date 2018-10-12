@@ -139,6 +139,10 @@ class MessagesModel extends ModelBase {
         });
     }
 
+    /**
+     * @param contactId
+     * @returns {Promise<any>}
+     */
     resetUnreadMessages(contactId) {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
@@ -152,14 +156,13 @@ class MessagesModel extends ModelBase {
                 };
 
                 const query = {
-                    authorId: contactId
+                    authorId: contactId.toString()
                 };
 
                 return this
-                    .findAndModify(db, collections.MESSAGES, payload, query)
+                    .updateMany(db, collections.MESSAGES, payload, query)
                     .then(result => MessagesModel.catchResolve(client, result, resolve))
                     .catch(err => MessagesModel.catchRejection(client, err, reject));
-
             });
         });
     }
