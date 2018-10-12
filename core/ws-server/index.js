@@ -2,18 +2,24 @@ const WebSocketServer = require('./ws-server');
 
 let wsInstance = null;
 
-const getInstance = () => wsInstance;
+// const getInstance = () => wsInstance;
 
-const createServer = () => {
+const getInstance = () => {
     if (!wsInstance) {
         wsInstance = new WebSocketServer();
     }
-    wsInstance.listen();
     return wsInstance;
 };
 
+// const registerActions = (actions) => {
+//     wsInstance.register(actions);
+//     return wsInstance;
+// };
+
+const listen = () => wsInstance.listen();
 
 module.exports = {
     getInstance,
-    createServer
+    // registerActions,
+    listen
 };

@@ -1,11 +1,12 @@
 const ws = require('nodejs-websocket');
-const wsActions = require('./ws-server-actions');
+const wsActions = require('../../ws-actions/ws-server-actions');
 const wsNotifications = require('./ws-server-notifications');
 
 class WebSocketServer {
     constructor(cb, port = 8000, host = 'localhost') {
         this._port = port;
         this._host = host;
+        this._actions = [];
         this._cb = cb || function () {
             console.log(`Websocket Server is running on ws://${host}:${port}`);
         };
@@ -42,6 +43,15 @@ class WebSocketServer {
         this._server.listen(this._port, this._host, this._cb);
     }
 
+    registerActions(actions = []) {
+        // this._actions.push(actions);
+        // todo check a name of the action is unique ??
+        if (actions && actions.length) {
+            actions.forEach(action => this._actions.push(new action));
+        }
+        return this;
+    }
+
     _wsCreateServerCallback(conn) {
         this._assignEvents(conn);
     }
@@ -62,26 +72,11 @@ class WebSocketServer {
         if (conn && !conn.userId) {
             conn.userId = event.userId;
         }
-        switch (event.action) {
-            case wsActions.UserLogged:
-                this._userLoggedAction(event);
-                break;
-            case wsActions.UserLoggedOut:
-                this._userLoggedOutAction(event);
-                break;
-            case wsActions.ContactStatusChanged:
-                break;
-            case wsActions.MessageToContact:
-                this._messageToContactAction(event);
-                break;
-            case wsActions.SwitchedToContact:
-                this._switchedToContactAction(event);
-                break;
-            case wsActions.NotifyContact:
-                break;
-            case wsActions.MessageUpdated:
-                this._messageUpdatedAction(event);
-                break;
+
+        if (this._actions.length) {
+            this._actions.forEach(action => {
+                event.action === action.actionName ? action.init(event, this, conn) : null;
+            });
         }
     }
 
@@ -93,48 +88,6 @@ class WebSocketServer {
         }));
     }
 
-    _userLoggedAction(event) {
-        const visibleContactsIds = this.connections.map(c => c.userId);
-        this.sendToAll(JSON.stringify({
-            action: wsActions.ContactStatusChanged,
-            visibleContactsIds
-        }));
-    }
-
-    _userLoggedOutAction(event) {
-        const index = this._server.connections.findIndex(c => c.userId === event.userId);
-        if (index !== -1) {
-            this.connections.splice(index, 1);
-        }
-        this.sendToAll(JSON.stringify({
-            action: wsActions.ContactStatusChanged,
-            visibleContactsIds: this.connections.map(c => c.userId)
-        }));
-    }
-
-    _messageToContactAction(event) {
-        const data = JSON.stringify({
-            action: wsActions.MessageToContact,
-            data: event.data
-        });
-        this._sendToOne(event.data.recipientId, data);
-        const conn = this.connections.find(c => c.userId === event.data.recipientId);
-
-        if (conn) {
-            if (conn.switchedUserId && event.data.authorId === conn.switchedUserId) {
-                // is connected
-            } else if (conn.switchedUserId && event.data.authorId !== conn.switchedUserId) {
-                // is connected to other user
-                this._notifyContact(event.data.recipientId, event.data.authorId);
-            } else {
-                // con is not connected to any user
-                this._notifyContact(event.data.recipientId, event.data.authorId);
-            }
-        } else {
-            // conn is logged out
-        }
-    }
-
     /**
      * @desc It sends a message to contact
      * @param message
@@ -144,7 +97,7 @@ class WebSocketServer {
             action: wsActions.MessageToContact,
             data: message
         });
-        this._sendToOne(message.recipientId, data);
+        this.sendToOne(message.recipientId, data);
         const conn = this.connections.find(c => c.userId === message.recipientId);
 
         if (conn) {
@@ -152,20 +105,13 @@ class WebSocketServer {
                 // is connected
             } else if (conn.switchedUserId && message.authorId !== conn.switchedUserId) {
                 // is connected to other user
-                this._notifyContact(message.recipientId, message.authorId);
+                this.notifyContact(message.recipientId, message.authorId);
             } else {
                 // con is not connected to any user
-                this._notifyContact(message.recipientId, message.authorId);
+                this.notifyContact(message.recipientId, message.authorId);
             }
         } else {
             // conn is logged out
-        }
-    }
-
-    _switchedToContactAction(event) {
-        const index = this.connections.findIndex(c => c.userId === event.userId);
-        if (index !== -1) {
-            this.connections[index].switchedUserId = event.contactId;
         }
     }
 
@@ -175,27 +121,19 @@ class WebSocketServer {
         });
     }
 
-    _sendToOne(recipientId, data) {
+    sendToOne(recipientId, data) {
         const c = this.connections.find(c => c.userId === recipientId);
         return c && c.sendText(data);
     }
 
-    _notifyContact(recipientId, userId, type = wsNotifications.NewMessage) {
+    notifyContact(recipientId, userId, type = wsNotifications.NewMessage) {
         const data = JSON.stringify({
             action: wsActions.NotifyContact,
             type,
             data: 'You received new message',
             contactId: userId
         });
-        this._sendToOne(recipientId, data);
-    }
-
-    _messageUpdatedAction(event) {
-        const data = JSON.stringify({
-            action: wsActions.MessageUpdated,
-            data: event.data
-        });
-        this._sendToOne(event.data.recipientId, data);
+        this.sendToOne(recipientId, data);
     }
 
     /**
@@ -207,7 +145,7 @@ class WebSocketServer {
             action: wsActions.MessageUpdated,
             data: message
         });
-        this._sendToOne(message.recipientId, data);
+        this.sendToOne(message.recipientId, data);
     }
 }
 

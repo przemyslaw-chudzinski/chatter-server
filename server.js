@@ -2,8 +2,27 @@ const app = require('./app');
 const serverConfig = require('./config/http-server/server-dev');
 const wsServer = require('./core/ws-server');
 
+const WsUserLoggedAction = require('./ws-actions/actions/ws-user-logged.action');
+const WsUserLoggedOutAction = require('./ws-actions/actions/ws-user-logged-out.action');
+const WsContactStatusChangedAction = require('./ws-actions/actions/ws-contact-status-changed.action');
+const WsMessageToContactAction = require('./ws-actions/actions/ws-message-to-contact.action');
+const WsSwitchedToContactAction = require('./ws-actions/actions/ws-switched-to-contact.action');
+const WsNotifyContactAction = require('./ws-actions/actions/ws-notify-contact.action');
+const WsMessageUpdatedAction = require('./ws-actions/actions/ws-message-updated.action');
+
 app.listen(serverConfig.port, () => console.log('Http Server is running on http://localhost:' + serverConfig.port));
 
-wsServer.createServer();
+wsServer
+    .getInstance()
+    .registerActions([
+        WsUserLoggedAction,
+        WsUserLoggedOutAction,
+        WsContactStatusChangedAction,
+        WsMessageToContactAction,
+        WsSwitchedToContactAction,
+        WsNotifyContactAction,
+        WsMessageUpdatedAction
+    ])
+    .listen();
 
 module.exports = app;
