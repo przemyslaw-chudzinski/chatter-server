@@ -1,5 +1,6 @@
 module.exports = {
     USERS: 'users',
     MESSAGES: 'messages',
-    CHANNELS: 'channels'
+    CHANNELS: 'channels',
+    NOTIFICATIONS: 'notifications'
 };
