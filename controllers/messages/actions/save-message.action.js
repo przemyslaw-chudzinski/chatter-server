@@ -9,9 +9,11 @@ class SaveMessageAction extends ActionBase {
     }
 
     _init() {
+
         if (!this.loggedUserId) {
             throw new Error('user is not logged');
         }
+
         const message = this.req.body;
         message.authorId = this.loggedUserId;
         message.read = false;
@@ -27,6 +29,7 @@ class SaveMessageAction extends ActionBase {
                     message: "Message has been created",
                     error: false
                 });
+                this.wsServer.messageToContact(message);
             })
             .catch(err => this.simpleResponse(500, 'Internal server error', err));
     }

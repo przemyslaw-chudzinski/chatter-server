@@ -25,6 +25,7 @@ class UpdateMessageAction extends ActionBase {
                             message: "Message has been updated",
                             error: false
                         });
+                        this.wsServer.notifyContactMessageUpdated(message);
                     })
                     .catch(err => this.simpleResponse(500, 'Internal server error', err));
             })
