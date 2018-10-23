@@ -9,9 +9,9 @@ class CheckEmailAction extends ActionBase {
     }
 
     _init() {
-        this._userModel.getUserByEmail(this.req.body.email)
+        this._userModel.getUserByEmail(this.req.body.email.toLowerCase())
             .then(user => {
-                if (user && user.email === this.loggeduserEmail) {
+                if (user && user.email=== this.loggeduserEmail) {
                     return this._res.json(null);
                 } else if (!user) {
                     return this._res.json(null);

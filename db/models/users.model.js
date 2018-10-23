@@ -58,7 +58,7 @@ class UsersModel extends ModelBase {
                     UsersModel.catchRejection(client, err, reject);
                 }
                 const query = {
-                    email: email
+                    email
                 };
 
                 this.first(db, collections.USERS, query)

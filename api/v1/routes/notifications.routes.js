@@ -6,5 +6,9 @@ const notificationsController = require('../../../controllers/notifications/noti
  * @desc It returns a notifications list of logged user
  */
 router.get('/', (req, res) => new notificationsController.GetNotificationsAction(req, res));
+/**
+ * @desc It returns number of notifications
+ */
+router.get('/count', (req, res) => new notificationsController.CountNotificationsAction(req, res));
 
 module.exports = router;

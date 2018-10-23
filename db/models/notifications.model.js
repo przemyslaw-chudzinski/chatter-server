@@ -53,6 +53,32 @@ class NotificationsModel extends ModelBase {
             });
         });
     }
+
+    /**
+     * @param id
+     * @returns {Promise<any>}
+     */
+    countUnreadNotifications(id) {
+        return new Promise((resolve, reject) => {
+            return database.dbDriver.openConnection((err, client, db) => {
+                if (err) {
+                    return NotificationsModel.catchRejection(client, err, reject);
+                }
+
+                const query = {
+                    recipientIds: {
+                        $elemMatch: {
+                            $eq: id
+                        }
+                    }
+                };
+
+                return this.count(db, collections.NOTIFICATIONS, query)
+                    .then(result => NotificationsModel.catchResolve(client, result, resolve))
+                    .catch(err => NotificationsModel.catchRejection(client, err, reject));
+            });
+        });
+    }
 }
 
 module.exports = NotificationsModel;

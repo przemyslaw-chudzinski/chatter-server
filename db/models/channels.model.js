@@ -25,6 +25,10 @@ class ChannelsModel extends ModelBase {
         });
     }
 
+    /**
+     * @param id
+     * @returns {Promise<any>}
+     */
     getChannels(id) {
         const query = {
             members: {
