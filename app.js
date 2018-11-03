@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const app = express();
 
 // app.use(morgan('dev'));
+app.use(express.static('public'));
 app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -19,5 +20,6 @@ app.use('/api/v1/messages', require('./api/v1/routes/messages.routes'));
 app.use('/api/v1/validator', require('./api/v1/routes/validator.routes'));
 app.use('/api/v1/channels', require('./api/v1/routes/channels.routes'));
 app.use('/api/v1/notifications', require('./api/v1/routes/notifications.routes'));
+app.use('/api/v1/files', require('./api/v1/routes/files.routes'));
 
 module.exports = app;

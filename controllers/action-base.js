@@ -1,11 +1,13 @@
 const Jwt = require('../core/jwt');
 const wsServer = require('../core/ws-server');
+const fileSystem = require('../core/file-system');
 
 class ActionBase {
     constructor(req, res) {
         this._req = req;
         this._res = res;
         this._jwt = new Jwt;
+        this._filesSystem = new fileSystem.FileSystem(req, res);
     }
 
     simpleResponse(status = 400, message = '', err = null) {
@@ -80,6 +82,14 @@ class ActionBase {
      */
     get wsServer() {
         return wsServer.getInstance();
+    }
+
+    /**
+     * @desc It returns the instance of FileSystem (not file system built in node js)
+     * @returns {FileSystem}
+     */
+    get filesSystem() {
+        return this._filesSystem;
     }
 }
 

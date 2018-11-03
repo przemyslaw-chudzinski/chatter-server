@@ -25,7 +25,7 @@ db.dbDriver.openConnection((err, client, db) => {
             confirmed: true,
             createdAt: new Date(),
             updatedAt: new Date(),
-            avatar: 'http://placehold.it/100x100'
+            avatar: null
         },
         {
             firstName: 'Anna',
@@ -35,7 +35,7 @@ db.dbDriver.openConnection((err, client, db) => {
             confirmed: true,
             createdAt: new Date(),
             updatedAt: new Date(),
-            avatar: 'http://placehold.it/100x100'
+            avatar: null
         },
         {
             firstName: 'Karloina',
@@ -55,7 +55,7 @@ db.dbDriver.openConnection((err, client, db) => {
             confirmed: true,
             createdAt: new Date(),
             updatedAt: new Date(),
-            avatar: 'http://placehold.it/100x100'
+            avatar: null
         },
         {
             firstName: 'Katarzyna',
@@ -65,7 +65,7 @@ db.dbDriver.openConnection((err, client, db) => {
             confirmed: true,
             createdAt: new Date(),
             updatedAt: new Date(),
-            avatar: 'http://placehold.it/100x100'
+            avatar: null
         }
     ];
     insertData(db, collections.USERS, users);
