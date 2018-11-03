@@ -1,5 +1,5 @@
 const ActionBase = require('../../action-base');
-const NotificationsModel = require('../../../db/models/notifications.model');
+const NotificationsModel = require('../../../db/models/notification.model');
 
 class GetNotificationsAction extends ActionBase {
     constructor(req, res) {

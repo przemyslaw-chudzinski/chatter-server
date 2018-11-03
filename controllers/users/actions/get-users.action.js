@@ -1,5 +1,5 @@
 const ActionBase = require('../../action-base');
-const UsersModel = require('../../../db/models/users.model');
+const UsersModel = require('../../../db/models/user.model');
 const database = require('../../../db/index');
 
 class GetUsersAction extends ActionBase {

@@ -2,7 +2,7 @@ const database = require('../index');
 const collections = require('../collections/index');
 const ModelBase = require('./model-base');
 
-class UsersModel extends ModelBase {
+class UserModel extends ModelBase {
     constructor() {
         super();
     }
@@ -17,12 +17,12 @@ class UsersModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    UsersModel.catchRejection(client, err, reject);
+                    UserModel.catchRejection(client, err, reject);
                 }
 
-                this.find(db, collections.USERS, query, filter)
-                    .then(result => UsersModel.catchResolve(client, result, resolve))
-                    .catch(err => UsersModel.catchRejection(client, err, reject));
+                UserModel.find(db, collections.USERS, query, filter)
+                    .then(result => UserModel.catchResolve(client, result, resolve))
+                    .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -38,11 +38,11 @@ class UsersModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    UsersModel.catchRejection(client, err, reject);
+                    UserModel.catchRejection(client, err, reject);
                 }
                 this.findById(db, collections.USERS, userId)
-                    .then(result => UsersModel.catchResolve(client, result, resolve))
-                    .catch(err => UsersModel.catchRejection(client, err, reject));
+                    .then(result => UserModel.catchResolve(client, result, resolve))
+                    .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -55,15 +55,15 @@ class UsersModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    UsersModel.catchRejection(client, err, reject);
+                    UserModel.catchRejection(client, err, reject);
                 }
                 const query = {
                     email
                 };
 
                 this.first(db, collections.USERS, query)
-                    .then(result => UsersModel.catchResolve(client, result, resolve))
-                    .catch(err => UsersModel.catchRejection(client, err, reject));
+                    .then(result => UserModel.catchResolve(client, result, resolve))
+                    .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -78,15 +78,15 @@ class UsersModel extends ModelBase {
             user.updatedAt = new Date();
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    UsersModel.catchRejection(client, err, reject);
+                    UserModel.catchRejection(client, err, reject);
                 }
 
                 this.findAndModify(db, collections.USERS, user)
-                    .then(result => UsersModel.catchResolve(client, result, resolve))
-                    .catch(err => UsersModel.catchRejection(client, err, reject));
+                    .then(result => UserModel.catchResolve(client, result, resolve))
+                    .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });
     }
 }
 
-module.exports = UsersModel;
+module.exports = UserModel;

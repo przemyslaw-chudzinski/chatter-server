@@ -2,7 +2,7 @@ const ModelBase = require('./model-base');
 const database = require('../../db');
 const collections = require('../collections');
 
-class NotificationsModel extends ModelBase {
+class NotificationModel extends ModelBase {
     constructor() {
         super();
     }
@@ -19,11 +19,11 @@ class NotificationsModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return NotificationsModel.catchRejection(client, err, reject);
+                    return NotificationModel.catchRejection(client, err, reject);
                 }
                 return this.insertOne(db, collections.NOTIFICATIONS, payload)
-                    .then(result => NotificationsModel.catchResolve(client, result, resolve))
-                    .catch(err => NotificationsModel.catchRejection(client, err, reject));
+                    .then(result => NotificationModel.catchResolve(client, result, resolve))
+                    .catch(err => NotificationModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -44,12 +44,12 @@ class NotificationsModel extends ModelBase {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return NotificationsModel.catchRejection(client, err, reject);
+                    return NotificationModel.catchRejection(client, err, reject);
                 }
 
-                this.find(db, collections.NOTIFICATIONS, query)
-                    .then(result => NotificationsModel.catchResolve(client, result, resolve))
-                    .catch(err => NotificationsModel.catchRejection(client, err, reject));
+                NotificationModel.find(db, collections.NOTIFICATIONS, query)
+                    .then(result => NotificationModel.catchResolve(client, result, resolve))
+                    .catch(err => NotificationModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -62,7 +62,7 @@ class NotificationsModel extends ModelBase {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return NotificationsModel.catchRejection(client, err, reject);
+                    return NotificationModel.catchRejection(client, err, reject);
                 }
 
                 const query = {
@@ -73,12 +73,12 @@ class NotificationsModel extends ModelBase {
                     }
                 };
 
-                return this.count(db, collections.NOTIFICATIONS, query)
-                    .then(result => NotificationsModel.catchResolve(client, result, resolve))
-                    .catch(err => NotificationsModel.catchRejection(client, err, reject));
+                return NotificationModel.count(db, collections.NOTIFICATIONS, query)
+                    .then(result => NotificationModel.catchResolve(client, result, resolve))
+                    .catch(err => NotificationModel.catchRejection(client, err, reject));
             });
         });
     }
 }
 
-module.exports = NotificationsModel;
+module.exports = NotificationModel;

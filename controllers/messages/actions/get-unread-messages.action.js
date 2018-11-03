@@ -1,5 +1,5 @@
 const ActionBase = require('../../action-base');
-const MessagesModel = require('../../../db/models/messages.model');
+const MessagesModel = require('../../../db/models/message.model');
 
 class GetUnreadMessagesAction extends ActionBase {
     constructor(req, res) {

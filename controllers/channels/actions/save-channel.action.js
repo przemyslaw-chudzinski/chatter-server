@@ -1,40 +1,23 @@
 const ActionBase = require('../../action-base');
-const ChannelsModel = require('../../../db/models/channels.model');
-const NotificationsModel = require('../../../db/models/notifications.model');
+const ChannelModel = require('../../../db/models/channel.model');
+const NotificationsModel = require('../../../db/models/notification.model');
 const wsActions = require('../../../ws-actions/ws-server-actions');
 
 class SaveChannelAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._channelsModel = new ChannelsModel;
         this._notificationsModel = new NotificationsModel();
         this._init();
     }
 
     _init() {
 
-        this.req.body.memberIds.push(this.loggedUserId);
+        const channel = new ChannelModel();
 
-        const payload = {
-            name: this.req.body.name,
-            authorId: this.loggedUserId,
-            members: this.req.body.memberIds.map(member => {
-                const _result = {
-                    memberId: member,
-                    confirmed: false,
-                    confirmedAt: null
-                };
-                if (member === this.loggedUserId) {
-                    _result.confirmed = true;
-                }
-                return _result;
-            }),
-            createdAt: new Date()
-        };
-
-        this
-            ._channelsModel
-            .saveChannel(payload)
+        channel.name = this.req.body.name;
+        channel.authorId = this.loggedUserId;
+        channel.members = this.members;
+        channel.save()
             .then(channel => {
                 this._sendNotification(channel);
             })
@@ -73,6 +56,24 @@ class SaveChannelAction extends ActionBase {
             data: channel,
             message: "Channel has been created",
             error: false
+        });
+    }
+
+    get members() {
+        const membersIds = [...this.req.body.memberIds, this.loggedUserId];
+        return membersIds.map(memberId => {
+            const result = {
+                memberId,
+                confirmed: false,
+                confirmedAt: null
+            };
+
+            if (memberId === this.loggedUserId) {
+                result.confirmed = true;
+                result.confirmedAt = new Date();
+            }
+
+            return result;
         });
     }
 }

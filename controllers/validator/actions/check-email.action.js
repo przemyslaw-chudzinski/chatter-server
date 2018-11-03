@@ -1,5 +1,5 @@
 const ActionBase = require('../../action-base');
-const UserModel = require('../../../db/models/users.model');
+const UserModel = require('../../../db/models/user.model');
 
 class CheckEmailAction extends ActionBase {
     constructor(req, res) {

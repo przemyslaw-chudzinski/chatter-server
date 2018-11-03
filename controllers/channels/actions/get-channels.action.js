@@ -1,16 +1,15 @@
 const ActionBase = require('../../action-base');
-const ChannelsModel = require('../../../db/models/channels.model');
+const ChannelModel = require('../../../db/models/channel.model');
 
 
 class GetChannelsAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._channelsModel = new ChannelsModel();
         this._init();
     }
 
     _init() {
-        this._channelsModel.getChannels(this.loggedUserId)
+        ChannelModel.all(this.loggedUserId)
             .then(channels => {
                 this.res.status(200);
                 this.res.json(channels)

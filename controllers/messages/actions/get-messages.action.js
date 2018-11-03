@@ -1,6 +1,6 @@
 const ActionBase = require('../../action-base');
-const MessagesModel = require('../../../db/models/messages.model');
-const UsersModel = require('../../../db/models/users.model');
+const MessagesModel = require('../../../db/models/message.model');
+const UsersModel = require('../../../db/models/user.model');
 const async = require('async');
 
 class GetMessagesAction extends ActionBase {

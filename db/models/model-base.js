@@ -7,7 +7,7 @@ class ModelBase {
      * @param query
      * @returns {Promise<any>}
      */
-    count(db, collectionName, query = {}) {
+    static count(db, collectionName, query = {}) {
         return new Promise((resolve, reject) => {
             db.collection(collectionName).count(query, (err, count) => {
                 if (err) {
@@ -25,7 +25,7 @@ class ModelBase {
      * @param filter
      * @returns {Promise<any>}
      */
-    find(db, collectionName, query = {}, filter = {}) {
+    static find(db, collectionName, query = {}, filter = {}) {
         return new Promise((resolve, reject) => {
             db.collection(collectionName)
                 .find(query, filter)
@@ -33,7 +33,7 @@ class ModelBase {
                     if (err) {
                         return ModelBase.catchRejection(null, err, reject);
                     }
-                    this.count(db, collectionName, query).then(count => ModelBase.catchResolve(null, {
+                    ModelBase.count(db, collectionName, query).then(count => ModelBase.catchResolve(null, {
                         results,
                         results_count: count
                     }, resolve)).catch(err => ModelBase.catchRejection(null, err, reject));

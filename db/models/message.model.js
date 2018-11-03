@@ -1,10 +1,10 @@
 const database = require('../index');
 const collections = require('../collections/index');
 const ModelBase = require('./model-base');
-const UsersModel = require('./users.model');
+const UsersModel = require('./user.model');
 const async = require('async');
 
-class MessagesModel extends ModelBase {
+class MessageModel extends ModelBase {
     constructor() {
         super();
         this._usersModel = new UsersModel();
@@ -20,11 +20,11 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return MessagesModel.catchRejection(client, err, reject);
+                    return MessageModel.catchRejection(client, err, reject);
                 }
                 return this.insertOne(db, collections.MESSAGES, message)
-                    .then(result => MessagesModel.catchResolve(client, result, resolve))
-                    .catch(err => MessagesModel.catchRejection(client, err, reject));
+                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                    .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -38,12 +38,12 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return MessagesModel.catchRejection(client, err, reject);
+                    return MessageModel.catchRejection(client, err, reject);
                 }
 
                 this.find(db, collections.MESSAGES, query, filter)
-                    .then(result => MessagesModel.catchResolve(client, result, resolve))
-                    .catch(err => MessagesModel.catchRejection(client, err, reject));
+                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                    .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -56,7 +56,7 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return MessagesModel.catchRejection(client, err, reject);
+                    return MessageModel.catchRejection(client, err, reject);
                 }
 
                 const result = [];
@@ -82,7 +82,7 @@ class MessagesModel extends ModelBase {
                                         result.push(res);
                                         next();
                                     })
-                                    .catch(err => MessagesModel.catchRejection(client, err, reject));
+                                    .catch(err => MessageModel.catchRejection(client, err, reject));
                             } else {
                                 next();
                             }
@@ -93,7 +93,7 @@ class MessagesModel extends ModelBase {
                             return resolve(result);
                         });
                     })
-                    .catch(err => MessagesModel.catchRejection(client, err, reject));
+                    .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -106,7 +106,7 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return MessagesModel.catchRejection(client, err, reject);
+                    return MessageModel.catchRejection(client, err, reject);
                 }
 
                 const query = {
@@ -114,8 +114,8 @@ class MessagesModel extends ModelBase {
                 };
 
                 return this.first(db, collections.MESSAGES, query)
-                    .then(result => MessagesModel.catchResolve(client, result, resolve))
-                    .catch(err => MessagesModel.catchRejection(client, err, reject));
+                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                    .catch(err => MessageModel.catchRejection(client, err, reject));
 
             });
         });
@@ -129,12 +129,12 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return MessagesModel.catchRejection(client, err, reject);
+                    return MessageModel.catchRejection(client, err, reject);
                 }
                 message.updatedAt = new Date();
                 return this.findAndModify(db, collections.MESSAGES, message)
-                    .then(result => MessagesModel.catchResolve(client, result, resolve))
-                    .catch(err => MessagesModel.catchRejection(client, err, reject));
+                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                    .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
     }
@@ -147,7 +147,7 @@ class MessagesModel extends ModelBase {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
-                    return MessagesModel.catchRejection(client, err, reject);
+                    return MessageModel.catchRejection(client, err, reject);
                 }
 
                 const payload = {
@@ -161,11 +161,11 @@ class MessagesModel extends ModelBase {
 
                 return this
                     .updateMany(db, collections.MESSAGES, payload, query)
-                    .then(result => MessagesModel.catchResolve(client, result, resolve))
-                    .catch(err => MessagesModel.catchRejection(client, err, reject));
+                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                    .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
     }
 }
 
-module.exports = MessagesModel;
+module.exports = MessageModel;

@@ -1,5 +1,5 @@
 const ActionBase = require('../../action-base');
-const UsersModel = require('../../../db/models/users.model');
+const UsersModel = require('../../../db/models/user.model');
 
 class GetAvatarAction extends ActionBase {
     constructor(req, res) {

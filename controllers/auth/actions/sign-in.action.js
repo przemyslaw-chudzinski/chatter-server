@@ -1,7 +1,7 @@
 const PasswordEncryption = require('../../../core/password-encryption/index');
 const PasswordEncryptionBaseStrategy = require('../../../core/password-encryption/password-encryption-base-strategy');
 const ActionBase = require('../../action-base');
-const UsersModel = require('../../../db/models/users.model');
+const UsersModel = require('../../../db/models/user.model');
 
 class SignInAction extends ActionBase {
     constructor(req, res) {
