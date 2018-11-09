@@ -1,16 +1,17 @@
 const database = require('../index');
 const collections = require('../collections/index');
 const ModelBase = require('./model-base');
+const Collection = require('../../core/collection/collection');
 
 class ChannelModel extends ModelBase {
-    constructor(name = null, members = [], authorId = null, createdAt = new Date(), updatedAt = null, _id = null) {
+    constructor(channel = {}) {
         super();
-        this._id = _id;
-        this.name = name;
-        this.members = members;
-        this.authorId = authorId;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this._id = channel._id ? database.dbDriver.ObjectId(channel._id) : null;
+        this.name = channel.name || null;
+        this.members = channel.members || [];
+        this.authorId = channel.authorId || null;
+        this.createdAt = channel.createdAt || null;
+        this.updatedAt = channel.updatedAt || null;
     }
 
     /**
@@ -24,7 +25,7 @@ class ChannelModel extends ModelBase {
                     return ChannelModel.catchRejection(client, err, reject);
                 }
                 return this.insertOne(db, collections.CHANNELS, this)
-                    .then(result => ChannelModel.catchResolve(client, result, resolve))
+                    .then(channel => ChannelModel.catchResolve(client, new ChannelModel(channel), resolve))
                     .catch(err => ChannelModel.catchRejection(client, err, reject));
             });
         });
@@ -54,7 +55,7 @@ class ChannelModel extends ModelBase {
                     return ChannelModel.catchRejection(client, err, reject);
                 }
                 ChannelModel.find(db, collections.CHANNELS, query)
-                    .then(result => ChannelModel.catchResolve(client, result, resolve))
+                    .then(channels => ChannelModel.catchResolve(client, new Collection(channels, this), resolve))
                     .catch(err => ChannelModel.catchRejection(client, err, reject));
             });
         });

@@ -1,37 +1,25 @@
 const ActionBase = require('../../action-base');
-const MessagesModel = require('../../../db/models/message.model');
+const MessageModel = require('../../../db/models/message.model');
 
 class SaveMessageAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._messagesModel = new MessagesModel(req, res);
-        this._init();
+        this.auth = true;
     }
 
-    _init() {
+    action() {
+        const newMessage = new MessageModel();
+        newMessage.content = this.req.body.content;
+        newMessage.authorId = this.loggedUserId;
+        newMessage.recipientId = this.req.body.recipientId;
 
-        if (!this.loggedUserId) {
-            throw new Error('user is not logged');
-        }
-
-        const message = this.req.body;
-        message.authorId = this.loggedUserId;
-        message.read = false;
-        message.readAt = null;
-
-        this
-            ._messagesModel
-            .saveMessage(message)
+        newMessage.save()
             .then(message => {
                 this.res.status(200);
-                this.res.json({
-                    data: message,
-                    message: "Message has been created",
-                    error: false
-                });
-                this.wsServer.messageToContact(message);
+                        this.res.json(message);
+                        this.wsServer.messageToContact(message);
             })
-            .catch(err => this.simpleResponse(500, 'Internal server error', err));
+            .catch(err => this.simpleResponse('Internal server error', 500, err));
     }
 }
 

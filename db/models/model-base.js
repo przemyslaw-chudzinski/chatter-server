@@ -33,10 +33,7 @@ class ModelBase {
                     if (err) {
                         return ModelBase.catchRejection(null, err, reject);
                     }
-                    ModelBase.count(db, collectionName, query).then(count => ModelBase.catchResolve(null, {
-                        results,
-                        results_count: count
-                    }, resolve)).catch(err => ModelBase.catchRejection(null, err, reject));
+                    ModelBase.catchResolve(null, results, resolve);
                 });
         });
     }
@@ -47,7 +44,7 @@ class ModelBase {
      * @param id
      * @returns {Promise<any>}
      */
-    findById(db, collectionName, id) {
+    static findById(db, collectionName, id) {
         return new Promise((resolve, reject) => {
             db.collection(collectionName)
                 .find({
@@ -67,7 +64,7 @@ class ModelBase {
      * @param query
      * @returns {Promise<any>}
      */
-    first(db, collectionName, query = {}) {
+    static first(db, collectionName, query = {}) {
         return new Promise((resolve, reject) => {
             db.collection(collectionName)
                 .find(query)

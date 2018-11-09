@@ -1,20 +1,89 @@
 const Jwt = require('../core/jwt');
 const wsServer = require('../core/ws-server');
 const fileSystem = require('../core/file-system');
+const Joi = require('joi');
 
 class ActionBase {
     constructor(req, res) {
+        /**
+         * @desc It gets request object
+         */
         this._req = req;
+        /**
+         * @desc It gets response object
+         */
         this._res = res;
+        /**
+         * @desc It gets jwt object
+         * @type {Jwt}
+         * @private
+         */
         this._jwt = new Jwt;
+        /**
+         * @desc It gets file system object
+         * @type {FileSystem}
+         * @private
+         */
         this._filesSystem = new fileSystem.FileSystem(req, res);
+        /**
+         * @desc It checks if user logged
+         * @type {boolean}
+         */
+        this.auth = false;
     }
 
-    simpleResponse(status = 400, message = '', err = null) {
+    /**
+     * @desc It initializes route
+     * @returns {*|Promise<any>}
+     */
+    init() {
+        if (this.auth) {
+            if (!this.loggedUserId) {
+                return this.simpleResponse('You don"t have access to this resource', 403, true);
+            }
+        }
+        const error = this.validationRules(Joi) ? this._validate() : null;
+        error ? this.simpleResponse(error.details[0].message, 409, error) : this.action();
+    }
+
+    /**
+     * @desc It handle route action
+     */
+    action() {
+
+    }
+
+    /**
+     * @desc It returns validation rules
+     * @param validator
+     * @returns {{}}
+     */
+    validationRules(validator) {
+        return null;
+    }
+
+    /**
+     * @desc It validates input data
+     * @returns {*}
+     * @private
+     */
+    _validate() {
+        const result = Joi.validate(this._req.body, this.validationRules(Joi));
+        return result.error;
+    }
+
+    /**
+     * @desc
+     * @param status
+     * @param message
+     * @param err
+     * @returns {*|Promise<any>}
+     */
+    simpleResponse(message = '', status = 400, error = null) {
         this._res.status(status);
         return this._res.json({
             message,
-            error: err
+            error
         });
     }
 
@@ -47,7 +116,7 @@ class ActionBase {
      * @returns {*}
      */
     get loggedUserId() {
-        return this.loggedUser._id;
+        return this.loggedUser ? this.loggedUser._id : null;
     }
 
     /**
@@ -56,14 +125,14 @@ class ActionBase {
      * @todo still working
      */
     get loggedUser() {
-        return this.decodedToken.user;
+        return this.decodedToken ? this.decodedToken.user : null;
     }
 
     /**
      * @desc It returns logged user email
      * @returns {string}
      */
-    get loggeduserEmail() {
+    get loggedUserEmail() {
         return this.loggedUser.email;
     }
 
@@ -72,8 +141,7 @@ class ActionBase {
      * @returns {*|void}
      */
     get decodedToken() {
-        const token = this._req.headers.authorization.split(' ')[1];
-        return this._jwt.decode(token);
+        return this._req.headers.authorization ? this._jwt.decode(this._req.headers.authorization.split(' ')[1]) : null;
     }
 
     /**

@@ -1,16 +1,15 @@
 const ActionBase = require('../../action-base');
 const ChannelModel = require('../../../db/models/channel.model');
-const NotificationsModel = require('../../../db/models/notification.model');
+const NotificationModel = require('../../../db/models/notification.model');
 const wsActions = require('../../../ws-actions/ws-server-actions');
 
 class SaveChannelAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._notificationsModel = new NotificationsModel();
-        this._init();
+        this.auth = true;
     }
 
-    _init() {
+    action() {
 
         const channel = new ChannelModel();
 
@@ -25,18 +24,12 @@ class SaveChannelAction extends ActionBase {
     }
 
     _sendNotification(channel) {
-        const payload = {
-            authorId: this.loggedUserId,
-            message: 'You have been invited to group chat **' + channel.name + '**',
-            recipientIds: channel.members.map(member => {
-                if (member.memberId !== this.loggedUserId) {
-                    return member.memberId;
-                }
-            }).filter(i => !!i)
-        };
-        this
-            ._notificationsModel
-            .saveNotification(payload)
+        const notification = new NotificationModel();
+        notification.authorId = this.loggedUserId;
+        notification.message = 'You have been invited to group chat **' + channel.name + '**';
+        notification.recipientIds = this._mapRecipientsIds(channel);
+
+        notification.save()
             .then(notification => {
                 delete notification.recipientIds;
                 channel.members.forEach(member => {
@@ -48,6 +41,14 @@ class SaveChannelAction extends ActionBase {
                 this._sendResponse(channel);
             })
             .catch(err => this.simpleResponse(500, 'Internal server error', err));
+    }
+
+    _mapRecipientsIds(channel) {
+        return channel.members.map(member => {
+            if (member.memberId !== this.loggedUserId) {
+                return member.memberId;
+            }
+        }).filter(i => !!i)
     }
 
     _sendResponse(channel) {

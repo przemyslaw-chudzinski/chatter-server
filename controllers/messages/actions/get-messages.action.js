@@ -1,54 +1,33 @@
 const ActionBase = require('../../action-base');
 const MessagesModel = require('../../../db/models/message.model');
-const UsersModel = require('../../../db/models/user.model');
-const async = require('async');
+const UserModel = require('../../../db/models/user.model');
+const MessageResource = require('../../../resources/message.resource');
+const UserResource = require('../../../resources/user.resource');
 
 class GetMessagesAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._messagesModel = new MessagesModel(req, res);
-        this._usersModel = new UsersModel(req, res);
-        this._init();
+        this.auth = true;
+        this._messageResource = new MessageResource();
+        this._userResource = new UserResource();
     }
 
-    _init() {
-        if (!this.req.params.recipientId) {
-            throw new Error('recipientId route param is required');
-        }
-        if (!this.loggedUserId) {
-            throw new Error('user is not logged');
-        }
+    action() {
+        const recipientId = this.req.params.recipientId;
+
+        UserModel.getById(recipientId)
+            .then(author => {
+                author = this._userResource.singular(author);
+                MessagesModel.all(this.loggedUserId, recipientId)
+                    .then(messagesCollection => {
+                        this.res.status(200);
+                        this.res.json(this._messageResource.collection(messagesCollection, {author}));
+                    })
+                    .catch(err => this.simpleResponse(500, 'Internal server error', err));
+            })
+            .catch(err => this.simpleResponse('Wrong user id has been passed', 404, err));
 
 
-        const query = {
-            $or: [{
-                authorId: this.loggedUserId,
-                recipientId: this.req.params.recipientId
-            }, {
-                authorId: this.req.params.recipientId,
-                recipientId: this.loggedUserId
-            }]
-        };
-
-        const filter = {
-            limit: this.req.query.limit || 50
-        };
-
-        this._messagesModel.getMessages(query, filter).then(data => {
-            async.map(data.results, (item, next) => {
-                this._usersModel.getUserById(item.authorId).then(author => {
-                    item.author = author;
-                    next(false, item);
-                }).catch(err => next(err));
-            }, (err, results) => {
-                if (err) {
-                    return this.simpleResponse(500, 'Internal server error', err);
-                }
-                data.results = results;
-                this.res.status(200);
-                this.res.json(data);
-            });
-        }).catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 }
 

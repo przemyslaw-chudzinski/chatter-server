@@ -1,43 +1,43 @@
 const ModelBase = require('./model-base');
 const database = require('../../db');
 const collections = require('../collections');
+const Collection = require('../../core/collection/collection');
 
 class NotificationModel extends ModelBase {
-    constructor() {
+    constructor(notification = {}) {
         super();
+        this.createdAt = notification.createdAt || new Date();
+        this.updatedAt = notification.updatedAt || null;
+        this.read = notification.read || false;
+        this.readAt = notification.readAt || null;
+        this.message = notification.message || null;
+        this.recipientIds = notification.recipientIds || [];
+        this.authorId = notification.authorId || null;
+        this._id = notification._id ? database.dbDriver.ObjectId(notification._id) : null;
     }
 
-    /**
-     * @desc It creates new notification
-     * @param payload {authorId: string, message: string, recipientIds: array}
-     * @returns {Promise<any>}
-     */
-    saveNotification(payload) {
-        payload.createdAt = new Date();
-        payload.read = false;
-        payload.readAt = null;
+    save() {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     return NotificationModel.catchRejection(client, err, reject);
                 }
-                return this.insertOne(db, collections.NOTIFICATIONS, payload)
-                    .then(result => NotificationModel.catchResolve(client, result, resolve))
+                return this.insertOne(db, collections.NOTIFICATIONS, this)
+                    .then(() => NotificationModel.catchResolve(client, this, resolve))
                     .catch(err => NotificationModel.catchRejection(client, err, reject));
             });
         });
     }
 
     /**
-     * @desc It returns logged user notifications
-     * @param id
+     * @param loggedUserId
      * @returns {Promise<any>}
      */
-    getNotifications(id) {
+    static all(loggedUserId) {
         const query = {
             recipientIds: {
                 $elemMatch: {
-                    $eq: id
+                    $eq: loggedUserId
                 }
             }
         };
@@ -48,17 +48,18 @@ class NotificationModel extends ModelBase {
                 }
 
                 NotificationModel.find(db, collections.NOTIFICATIONS, query)
-                    .then(result => NotificationModel.catchResolve(client, result, resolve))
+                    .then(notifications => NotificationModel.catchResolve(client, new Collection(notifications, this), resolve))
                     .catch(err => NotificationModel.catchRejection(client, err, reject));
             });
         });
     }
 
     /**
-     * @param id
+     *
+     * @param loggedUserId
      * @returns {Promise<any>}
      */
-    countUnreadNotifications(id) {
+    static countUnreadNotifications(loggedUserId) {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
@@ -68,7 +69,7 @@ class NotificationModel extends ModelBase {
                 const query = {
                     recipientIds: {
                         $elemMatch: {
-                            $eq: id
+                            $eq: loggedUserId
                         }
                     }
                 };

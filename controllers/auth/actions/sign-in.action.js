@@ -1,36 +1,41 @@
 const PasswordEncryption = require('../../../core/password-encryption/index');
 const PasswordEncryptionBaseStrategy = require('../../../core/password-encryption/password-encryption-base-strategy');
 const ActionBase = require('../../action-base');
-const UsersModel = require('../../../db/models/user.model');
+const UserModel = require('../../../db/models/user.model');
 
 class SignInAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
         this._passwordEncryption = new PasswordEncryption(PasswordEncryptionBaseStrategy);
-        this._userModel = new UsersModel;
-        this._init();
     }
 
-    _init() {
-        this._userModel.getUserByEmail(this.req.body.email).then(data => {
-            if (!data) {
-                return this.simpleResponse(404, 'Wrong email or password');
+    validationRules(validator) {
+        return {
+            email: validator.string().required(),
+            password: validator.string().required()
+        };
+    }
+
+    action() {
+        UserModel.getByEmail(this.req.body.email).then(user => {
+            if (!user) {
+                return this.simpleResponse( 'Wrong email or password', 404);
             }
-            if (this._passwordEncryption.verify(this.req.body.password, data.password)) {
+            if (this._passwordEncryption.verify(this.req.body.password, user.password)) {
                 this.res.status(200);
                 return this.jwt.sign({
-                    user: data
+                    user
                 }).then(token => {
                     this.res.status(200);
                     this.res.json({
-                        message: 'You have sing in correctly',
-                        user: data,
+                        message: 'You have sign in correctly',
+                        user,
                         token
                     });
-                }).catch(err => this.simpleResponse(500, 'Internal server error', err));
+                }).catch(err => this.simpleResponse('Internal server error 1', 500, err));
             }
-            this.simpleResponse(404, 'Wrong email or password');
-        }).catch(err => this.simpleResponse(500, 'Internal server error', err));
+            this.simpleResponse('Wrong email or password', 404);
+        }).catch(err => this.simpleResponse('Internal server error 2', 500, err));
     }
 }
 

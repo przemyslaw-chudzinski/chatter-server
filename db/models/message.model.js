@@ -1,58 +1,72 @@
 const database = require('../index');
 const collections = require('../collections/index');
 const ModelBase = require('./model-base');
-const UsersModel = require('./user.model');
+const UserModel = require('./user.model');
 const async = require('async');
+const Collection = require('../../core/collection/collection');
 
 class MessageModel extends ModelBase {
-    constructor() {
+    constructor(message = {}) {
         super();
-        this._usersModel = new UsersModel();
+        this.content = message.content || null;
+        this.recipientId = message.recipientId || null;
+        this.read = message.read || false;
+        this.readAt = message.readAt || null;
+        this.createdAt = message.createdAt || new Date();
+        this.updatedAt = message.updatedAt || null;
+        this.authorId = message.authorId || null;
+        this._id = message._id ? database.dbDriver.ObjectId(message._id) : null;
     }
 
-    /**
-     * @param message
-     * @returns {Promise<any>}
-     */
-    saveMessage(message) {
-        message.createdAt = new Date();
-        message.updatedAt = null;
+    save() {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     return MessageModel.catchRejection(client, err, reject);
                 }
-                return this.insertOne(db, collections.MESSAGES, message)
-                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                return this.insertOne(db, collections.MESSAGES, this)
+                    .then(message => MessageModel.catchResolve(client, new MessageModel(message), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
     }
 
     /**
-     * @param query
-     * @param filter
+     * @desc It returns all collection
+     * @param authorId
+     * @param recipientId
      * @returns {Promise<any>}
      */
-    getMessages(query = {}, filter = {}) {
+    static all(authorId, recipientId) {
+        const query = {
+            $or: [{
+                authorId,
+                recipientId,
+            }, {
+                authorId: recipientId,
+                recipientId: authorId
+            }]
+        };
+
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     return MessageModel.catchRejection(client, err, reject);
                 }
 
-                this.find(db, collections.MESSAGES, query, filter)
-                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                UserModel.find(db, collections.MESSAGES, query)
+                    .then(messages => MessageModel.catchResolve(client, new Collection(messages, this), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
+
     }
 
     /**
      * @param recipientId
      * @returns {Promise<any>}
      */
-    getUnreadMessages(recipientId) {
+    static getUnreadMessages(recipientId) {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
@@ -60,9 +74,7 @@ class MessageModel extends ModelBase {
                 }
 
                 const result = [];
-                this._usersModel
-                    .getUsers()
-                    .then(data => {
+                UserModel.all().then(data => {
                         data &&
                         async.each(data.results, (user, next) => {
                             user._id = user._id.toString();
@@ -99,10 +111,11 @@ class MessageModel extends ModelBase {
     }
 
     /**
-     * @param id
+     *
+     * @param messageId
      * @returns {Promise<any>}
      */
-    getMessageById(id) {
+    static getById(messageId) {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
@@ -110,11 +123,11 @@ class MessageModel extends ModelBase {
                 }
 
                 const query = {
-                    _id: database.dbDriver.ObjectId(id)
+                    _id: database.dbDriver.ObjectId(messageId)
                 };
 
                 return this.first(db, collections.MESSAGES, query)
-                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                    .then(message => MessageModel.catchResolve(client, new MessageModel(message), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
 
             });
@@ -125,15 +138,15 @@ class MessageModel extends ModelBase {
      * @param message
      * @returns {Promise<any>}
      */
-    updateMessage(message) {
+    update() {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     return MessageModel.catchRejection(client, err, reject);
                 }
-                message.updatedAt = new Date();
-                return this.findAndModify(db, collections.MESSAGES, message)
-                    .then(result => MessageModel.catchResolve(client, result, resolve))
+                this.updatedAt = new Date();
+                return this.findAndModify(db, collections.MESSAGES, this)
+                    .then(() => MessageModel.catchResolve(client, this, resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
@@ -165,6 +178,15 @@ class MessageModel extends ModelBase {
                     .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });
+    }
+
+    /**
+     * @desc It checks passed id belongs to message author
+     * @param authorId
+     * @returns {boolean}
+     */
+    isAuthor(authorId) {
+        return this.authorId === authorId;
     }
 }
 

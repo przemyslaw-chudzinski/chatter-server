@@ -4,12 +4,11 @@ const UserModel = require('../../../db/models/user.model');
 class CheckEmailAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._userModel = new UserModel();
         this._init();
     }
 
     _init() {
-        this._userModel.getUserByEmail(this.req.body.email.toLowerCase())
+        UserModel.getByEmail(this.req.body.email.toLowerCase())
             .then(user => {
                 if (user && user.email=== this.loggeduserEmail) {
                     return this._res.json(null);

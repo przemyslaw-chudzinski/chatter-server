@@ -1,20 +1,21 @@
 const ActionBase = require('../../action-base');
 const ChannelModel = require('../../../db/models/channel.model');
-
+const ChannelResource = require('../../../resources/channel.resource');
 
 class GetChannelsAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._init();
+        this.auth = true;
+        this._channelResource = new ChannelResource;
     }
 
-    _init() {
+    action() {
         ChannelModel.all(this.loggedUserId)
-            .then(channels => {
+            .then(channelsCollection => {
                 this.res.status(200);
-                this.res.json(channels)
+                this.res.json(this._channelResource.collection(channelsCollection));
             })
-            .catch(err => this.simpleResponse(500, 'Internal server error', err));
+            .catch(err => this.simpleResponse('Internal server error', 500, err));
     }
 }
 

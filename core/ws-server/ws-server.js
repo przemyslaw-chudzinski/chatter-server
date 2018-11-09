@@ -103,6 +103,8 @@ class WebSocketServer {
         if (conn) {
             if (conn.switchedUserId && message.authorId === conn.switchedUserId) {
                 // is connected
+                message.read = true;
+                message.readAt = new Date();
             } else if (conn.switchedUserId && message.authorId !== conn.switchedUserId) {
                 // is connected to other user
                 this.notifyContact(message.recipientId, message.authorId);

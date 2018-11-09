@@ -1,27 +1,41 @@
 const database = require('../index');
 const collections = require('../collections/index');
 const ModelBase = require('./model-base');
+const Collection = require('../../core/collection/collection');
 
 class UserModel extends ModelBase {
-    constructor() {
+    constructor(user) {
         super();
+        this.firstName = user.firstName || null;
+        this.lastName = user.lastName || null;
+        this.email = user.email || null;
+        this.password = user.password || null;
+        this.createdAt = user.createdAt || new Date();
+        this.updatedAt = user.updatedAt || null;
+        this.confirmed = user.confirmed || false;
+        this.avatar = user.avatar || null;
+        this._id = user._id ? database.dbDriver.ObjectId(user._id) : null;
     }
 
     /**
-     *
-     * @param query
-     * @param filter
+     * @desc It returns collection without logged user
+     * @param loggedUserId
      * @returns {Promise<any>}
      */
-    getUsers(query = {}, filter = {}) {
+    static all(loggedUserId) {
+        const query = {
+            _id: {
+                $ne: database.dbDriver.ObjectId(loggedUserId)
+            }
+        };
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     UserModel.catchRejection(client, err, reject);
                 }
 
-                UserModel.find(db, collections.USERS, query, filter)
-                    .then(result => UserModel.catchResolve(client, result, resolve))
+                UserModel.find(db, collections.USERS, query)
+                    .then(users => UserModel.catchResolve(client, new Collection(users, this), resolve))
                     .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });
@@ -31,7 +45,7 @@ class UserModel extends ModelBase {
      * @param userId
      * @returns {Promise<any>}
      */
-    getUserById(userId) {
+    static getById(userId) {
         if (!userId) {
             throw new Error('userId is required parameter');
         }
@@ -40,8 +54,8 @@ class UserModel extends ModelBase {
                 if (err) {
                     UserModel.catchRejection(client, err, reject);
                 }
-                this.findById(db, collections.USERS, userId)
-                    .then(result => UserModel.catchResolve(client, result, resolve))
+                UserModel.findById(db, collections.USERS, userId)
+                    .then(user => UserModel.catchResolve(client, new UserModel(user), resolve))
                     .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });
@@ -51,7 +65,7 @@ class UserModel extends ModelBase {
      * @param email
      * @returns {Promise<any>}
      */
-    getUserByEmail(email) {
+    static getByEmail(email) {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
@@ -62,7 +76,7 @@ class UserModel extends ModelBase {
                 };
 
                 this.first(db, collections.USERS, query)
-                    .then(result => UserModel.catchResolve(client, result, resolve))
+                    .then(user => UserModel.catchResolve(client, new UserModel(user), resolve))
                     .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });
@@ -73,16 +87,16 @@ class UserModel extends ModelBase {
      * @param user
      * @returns {Promise<any>}
      */
-    updateUser(user) {
+    update() {
         return new Promise((resolve, reject) => {
-            user.updatedAt = new Date();
+            this.updatedAt = new Date();
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) {
                     UserModel.catchRejection(client, err, reject);
                 }
 
-                this.findAndModify(db, collections.USERS, user)
-                    .then(result => UserModel.catchResolve(client, result, resolve))
+                this.findAndModify(db, collections.USERS, this)
+                    .then(() => UserModel.catchResolve(client, this, resolve))
                     .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });

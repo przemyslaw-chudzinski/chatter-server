@@ -4,12 +4,11 @@ const UsersModel = require('../../../db/models/user.model');
 class GetUserAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._userModel = new UsersModel(req, res);
         this._init();
     }
 
     _init() {
-        this._userModel.getUserById(this.req.params.id).then(data => {
+        UsersModel.getById(this.req.params.id).then(data => {
             if (data) {
                 this.res.status(200);
                 this.res.json(data);

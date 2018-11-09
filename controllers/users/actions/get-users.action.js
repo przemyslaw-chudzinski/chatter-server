@@ -1,32 +1,21 @@
 const ActionBase = require('../../action-base');
-const UsersModel = require('../../../db/models/user.model');
-const database = require('../../../db/index');
+const UserModel = require('../../../db/models/user.model');
+const UserResource = require('../../../resources/user.resource');
 
 class GetUsersAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._userModel = new UsersModel;
-        this._init();
+        this.auth = true;
+        this._userResource = new UserResource;
     }
 
-    _init() {
-        if (!this.loggedUserId) {
-            throw new Error('loggedUserId is required parameter');
-        }
-        const query = {
-            _id: {
-                $ne: database.dbDriver.ObjectId(this.loggedUserId)
-            }
-        }
-
-        const filter = {
-            limit: 10
-        };
-
-        this._userModel.getUsers(query, filter).then(data => {
-            this.res.status(200);
-            this.res.json(data);
-        }).catch(err => this.simpleResponse(500, 'Internal server error', err));
+    action() {
+        UserModel.all(this.loggedUserId)
+            .then(usersCollection => {
+                this.res.status(200);
+                this.res.json(this._userResource.collection(usersCollection));
+            })
+            .catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 }
 
