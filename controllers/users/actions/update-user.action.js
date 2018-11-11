@@ -4,22 +4,19 @@ const UserModel = require('../../../db/models/user.model');
 class UpdateUserAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._init();
+        this.auth = true;
     }
 
-    _init() {
+    action() {
 
         const payload = this.req.body;
 
-        if (!this.loggedUserId) {
-            throw new Error('user is not logged');
-        }
-            if (!payload._id) {
+        if (!payload._id) {
             throw new Error('payload data is incorrect');
         }
 
         if (this.loggedUserId !== payload._id) {
-            throw new Error('You dont have permission for this action');
+            throw new Error('You don"t have permission for this action');
         }
 
         UserModel.getById(this.loggedUserId)
@@ -27,6 +24,7 @@ class UpdateUserAction extends ActionBase {
                 payload.firstName ? user.firstName = payload.firstName : null;
                 payload.lastName ? user.lastName = payload.lastName : null;
                 payload.email ? user.email = payload.email : null;
+                payload.avatar ? user.avatar = payload.avatar: null;
                 user.update()
                     .then(user => {
                         this.res.status(200);
