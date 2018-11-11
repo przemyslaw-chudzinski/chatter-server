@@ -23,7 +23,7 @@ class NotificationModel extends ModelBase {
                     return NotificationModel.catchRejection(client, err, reject);
                 }
                 return this.insertOne(db, collections.NOTIFICATIONS, this)
-                    .then(() => NotificationModel.catchResolve(client, this, resolve))
+                    .then(notifications => NotificationModel.catchResolve(client, new NotificationModel(notifications), resolve))
                     .catch(err => NotificationModel.catchRejection(client, err, reject));
             });
         });

@@ -4,6 +4,6 @@ const filesController = require('../../../controllers/files/files.controller');
 /**
  * @desc It uploads files to the store
  */
-router.post('/upload-files', (req, res) => new filesController.UploadFilesAction(req, res));
+router.post('/upload-files', (req, res) => new filesController.UploadFilesAction(req, res).init());
 
 module.exports = router;
