@@ -1,6 +1,6 @@
 const JsonResponse = require('../core/resource/json-response');
 
-class MessageResource extends JsonResponse {
+class UnreadMessageResource extends JsonResponse {
 
     mapElement(item) {
         return item;
@@ -8,4 +8,4 @@ class MessageResource extends JsonResponse {
 
 }
 
-module.exports = MessageResource;
+module.exports = UnreadMessageResource;

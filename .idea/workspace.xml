@@ -2,42 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="working on project">
-      <change afterPath="$PROJECT_DIR$/core/collection/collection.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/resource/json-response.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/channel.resource.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/message.resource.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/notification.resource.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/user.resource.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/unread-message.resource.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/routes/auth.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/routes/auth.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/routes/channels.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/routes/channels.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/routes/messages.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/routes/messages.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/routes/users.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/routes/users.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/action-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/action-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/auth/actions/sign-in.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/auth/actions/sign-in.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/channels/actions/get-channels.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/channels/actions/get-channels.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/channels/actions/save-channel.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/channels/actions/save-channel.action.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/v1/routes/validator.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/routes/validator.routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/messages/actions/reset-unread-messages.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/actions/reset-unread-messages.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/messages/actions/update-message.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/messages/actions/update-message.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/notifications/actions/count-notifications.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/notifications/actions/count-notifications.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/users/actions/get-avatar.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/users/actions/get-avatar.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/users/actions/get-logged-user.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/users/actions/get-logged-user.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/users/actions/get-user.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/users/actions/get-user.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/users/actions/get-users.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/users/actions/get-users.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/users/actions/update-user.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/users/actions/update-user.action.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/validator/actions/check-email.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/validator/actions/check-email.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/ws-server/ws-server.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/ws-server/ws-server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/models/channel.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/models/channel.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/collection/collection.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/collection/collection.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/models/message.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/models/message.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/models/model-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/models/model-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/models/notification.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/models/notification.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/models/user.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/message.resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/message.resource.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,25 +23,26 @@
     <session id="5758301">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="72" />
-          <entry key="project.open.time.0" value="22" />
+          <entry key="project.closed" value="74" />
+          <entry key="project.open.time.0" value="23" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.4" value="8" />
           <entry key="project.open.time.5" value="8" />
           <entry key="project.open.time.6" value="16" />
           <entry key="project.open.time.7" value="9" />
-          <entry key="project.open.time.8" value="6" />
+          <entry key="project.open.time.8" value="7" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="74" />
+          <entry key="project.opened" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="3" />
           <entry key="jpg" value="1" />
-          <entry key="js" value="499" />
+          <entry key="js" value="524" />
           <entry key="json" value="8" />
           <entry key="lock" value="1" />
+          <entry key="ts" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -75,14 +50,16 @@
           <entry key="Git file" value="3" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="8" />
-          <entry key="JavaScript" value="499" />
+          <entry key="JavaScript" value="523" />
+          <entry key="TypeScript" value="1" />
+          <entry key="UML" value="1" />
           <entry key="yarn.lock" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="15" />
-          <entry key="js" value="33444" />
+          <entry key="js" value="37126" />
           <entry key="json" value="14" />
           <entry key="txt" value="156" />
         </counts>
@@ -91,28 +68,46 @@
         <counts>
           <entry key="Git file" value="15" />
           <entry key="JSON" value="14" />
-          <entry key="JavaScript" value="33444" />
+          <entry key="JavaScript" value="37126" />
           <entry key="PLAIN_TEXT" value="156" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/messages/actions/save-message.action.js">
+        <entry file="file://$PROJECT_DIR$/controllers/validator/actions/check-email.action.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="12" column="47" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="47" />
+            <state relative-caret-position="150">
+              <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js">
+        <entry file="file://$PROJECT_DIR$/api/v1/routes/validator.routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="17" column="37" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="37" />
+            <state relative-caret-position="161">
+              <caret line="7" column="99" selection-start-line="7" selection-start-column="99" selection-end-line="7" selection-end-column="99" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/models/user.model.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="67" column="11" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/action-base.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -146,8 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controllers/validator/validator.controller.js" />
-        <option value="$PROJECT_DIR$/api/v1/routes/validator.routes.js" />
         <option value="$PROJECT_DIR$/controllers/files/files.controller.js" />
         <option value="$PROJECT_DIR$/api/v1/routes/files.routes.js" />
         <option value="$PROJECT_DIR$/core/file-system/uploaded-file.js" />
@@ -163,24 +156,18 @@
         <option value="$PROJECT_DIR$/db/models/channels.model.js" />
         <option value="$PROJECT_DIR$/core/ws-server/ws-server.js" />
         <option value="$PROJECT_DIR$/controllers/users/actions/get-user.action.js" />
-        <option value="$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js" />
-        <option value="$PROJECT_DIR$/controllers/validator/actions/check-email.action.js" />
         <option value="$PROJECT_DIR$/controllers/users/actions/get-logged-user.action.js" />
         <option value="$PROJECT_DIR$/controllers/users/actions/update-user.action.js" />
-        <option value="$PROJECT_DIR$/controllers/messages/actions/update-message.action.js" />
         <option value="$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js" />
         <option value="$PROJECT_DIR$/controllers/notifications/actions/count-notifications.action.js" />
         <option value="$PROJECT_DIR$/controllers/users/actions/get-avatar.action.js" />
-        <option value="$PROJECT_DIR$/db/models/model-base.js" />
         <option value="$PROJECT_DIR$/core/collection/index.js" />
         <option value="$PROJECT_DIR$/api/v1/routes/channels.routes.js" />
         <option value="$PROJECT_DIR$/controllers/channels/actions/save-channel.action.js" />
         <option value="$PROJECT_DIR$/api/v1/routes/auth.routes.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/api/v1/routes/messages.routes.js" />
-        <option value="$PROJECT_DIR$/core/collection/collection.js" />
         <option value="$PROJECT_DIR$/resources/messages.resource.js" />
-        <option value="$PROJECT_DIR$/resources/message.resource.js" />
         <option value="$PROJECT_DIR$/resources/channel.resource.js" />
         <option value="$PROJECT_DIR$/controllers/channels/actions/get-channels.action.js" />
         <option value="$PROJECT_DIR$/db/models/channel.model.js" />
@@ -191,12 +178,20 @@
         <option value="$PROJECT_DIR$/resources/notification.resource.js" />
         <option value="$PROJECT_DIR$/db/models/notification.model.js" />
         <option value="$PROJECT_DIR$/core/resource/json-response.js" />
-        <option value="$PROJECT_DIR$/db/models/message.model.js" />
         <option value="$PROJECT_DIR$/controllers/messages/actions/save-message.action.js" />
         <option value="$PROJECT_DIR$/controllers/messages/actions/reset-unread-messages.action.js" />
-        <option value="$PROJECT_DIR$/controllers/action-base.js" />
         <option value="$PROJECT_DIR$/controllers/auth/actions/sign-in.action.js" />
+        <option value="$PROJECT_DIR$/resources/message.resource.js" />
         <option value="$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js" />
+        <option value="$PROJECT_DIR$/controllers/action-base.js" />
+        <option value="$PROJECT_DIR$/db/models/model-base.js" />
+        <option value="$PROJECT_DIR$/resources/unread-message.resource.js" />
+        <option value="$PROJECT_DIR$/core/collection/collection.js" />
+        <option value="$PROJECT_DIR$/controllers/messages/actions/update-message.action.js" />
+        <option value="$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js" />
+        <option value="$PROJECT_DIR$/db/models/message.model.js" />
+        <option value="$PROJECT_DIR$/controllers/validator/actions/check-email.action.js" />
+        <option value="$PROJECT_DIR$/api/v1/routes/validator.routes.js" />
       </list>
     </option>
   </component>
@@ -233,7 +228,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -251,6 +245,13 @@
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="v1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="v1" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
@@ -273,13 +274,15 @@
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="validator" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="validator" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
@@ -290,29 +293,30 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="users.model&#9;FILE&#9;file://C:/Users/przem/Desktop/chatter/server/db/models/users.model.js&#10;users.mod&#9;FILE&#9;file://C:/Users/przem/Desktop/chatter/server/db/models/users.model.js&#10;messa&#9;FILE&#9;file://C:/Users/przem/Desktop/chatter/server/db/models/messages.model.js&#10;serv&#9;FILE&#9;file://C:/Users/przem/Desktop/chatter/server/server.js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="8.11.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../react training/react-setp-form" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../tests/iterators-tests" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.JavaScript" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\przem\Desktop\chatter\server\public" />
+      <recent name="C:\Users\przem\Desktop\chatter\server\ws-actions" />
+      <recent name="C:\Users\przem\Desktop\chatter\server\controllers\validator\actions" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\przem\Desktop\chatter\server\resources" />
       <recent name="C:\Users\przem\Desktop\chatter\server\controllers\users\actions" />
       <recent name="C:\Users\przem\Desktop\chatter\server\controllers\files\actions" />
       <recent name="C:\Users\przem\Desktop\chatter\server\api\v1\routes" />
-      <recent name="C:\Users\przem\Desktop\chatter\server\controllers\validator\actions" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\przem\Desktop\chatter\server\public" />
-      <recent name="C:\Users\przem\Desktop\chatter\server\ws-actions" />
       <recent name="C:\Users\przem\Desktop\chatter\server\controllers\validator\actions" />
     </key>
   </component>
@@ -415,7 +419,9 @@
       <workItem from="1541435770141" duration="69000" />
       <workItem from="1541435855922" duration="25000" />
       <workItem from="1541670968557" duration="16388000" />
-      <workItem from="1541752908058" duration="3024000" />
+      <workItem from="1541752908058" duration="9547000" />
+      <workItem from="1541768993736" duration="1976000" />
+      <workItem from="1541947395549" duration="9892000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -526,13 +532,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="233523000" />
+    <option name="totallyTimeSpent" value="251914000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.14978679" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.20202559" />
       <window_info id="Structure" order="1" sideWeight="0.5007728" side_tool="true" weight="0.25239617" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -545,7 +551,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.31057268" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.43061674" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.35903084" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32934782" />
@@ -596,7 +602,15 @@
                 <collection />
               </option>
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
+                <collection>
+                  <UserGroup>
+                    <option name="users">
+                      <list>
+                        <option value="development-models" />
+                      </list>
+                    </option>
+                  </UserGroup>
+                </collection>
               </option>
               <option name="COLUMN_ORDER">
                 <list>
@@ -630,34 +644,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="working on project" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/file-system/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="44" selection-start-column="44" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/file-system/file-system.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/set-users/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1180">
-          <caret line="67" column="24" selection-start-line="67" selection-start-column="24" selection-end-line="67" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ws-actions/ws-server-actions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -696,24 +682,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/validator/actions/check-email.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/users/actions/update-user.action.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/update-message.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -756,13 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
           <caret line="13" column="59" lean-forward="true" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -810,13 +775,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/collection/collection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="33" selection-start-column="23" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/channel.resource.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -837,16 +795,6 @@
           <caret line="15" column="81" selection-start-line="15" selection-start-column="63" selection-end-line="15" selection-end-column="81" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/models/model-base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1/routes/validator.routes.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/db/models/channel.model.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -883,13 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/message.resource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/models/notification.model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
@@ -901,13 +842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="6" column="38" lean-forward="true" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/models/user.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -925,24 +859,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/models/message.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="85" column="56" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/joi/lib/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="127" column="14" selection-start-line="127" selection-start-column="9" selection-end-line="127" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/action-base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="60" column="29" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -953,6 +873,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="uml://JavaScript-modules-diagram/C:/Users/przem/Desktop/chatter/server/controllers/messages/actions/get-messages.action.js">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js</OriginalElement>
+          <nodes>
+            <node x="" y="">$PROJECT_DIR$/controllers/action-base.js</node>
+            <node x="" y="">$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js#ActionBase#6;C:/Users/przem/Desktop/chatter/server/controllers/messages/actions/get-messages.action.js#MessageResource#182;C:/Users/przem/Desktop/chatter/server/controllers/messages/actions/get-messages.action.js#MessagesModel#55;C:/Users/przem/Desktop/chatter/server/controllers/messages/actions/get-messages.action.js#UserModel#122;C:/Users/przem/Desktop/chatter/server/controllers/messages/actions/get-messages.action.js#UserResource#254;</node>
+            <node x="" y="">$PROJECT_DIR$/db/models/message.model.js</node>
+            <node x="" y="">$PROJECT_DIR$/resources/message.resource.js</node>
+            <node x="" y="">$PROJECT_DIR$/db/models/user.model.js</node>
+            <node x="" y="">$PROJECT_DIR$/resources/user.resource.js</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="321.0" y="206.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.collection.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/models/model-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="106" column="42" selection-start-line="106" selection-start-column="38" selection-end-line="106" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="920">
+          <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/messages/actions/save-message.action.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -960,10 +926,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/get-messages.action.js">
+    <entry file="file://$PROJECT_DIR$/controllers/validator/validator.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="17" column="37" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="37" />
+        <state relative-caret-position="69">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/message.resource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/unread-message.resource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/models/message.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/get-unread-messages.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/messages/actions/update-message.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="24" column="33" lean-forward="true" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/collection/collection.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/action-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/models/user.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="67" column="11" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/validator/actions/check-email.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1/routes/validator.routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="99" selection-start-line="7" selection-start-column="99" selection-end-line="7" selection-end-column="99" />
         </state>
       </provider>
     </entry>

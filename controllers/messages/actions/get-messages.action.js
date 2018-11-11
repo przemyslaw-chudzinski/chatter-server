@@ -3,6 +3,7 @@ const MessagesModel = require('../../../db/models/message.model');
 const UserModel = require('../../../db/models/user.model');
 const MessageResource = require('../../../resources/message.resource');
 const UserResource = require('../../../resources/user.resource');
+const async = require('async');
 
 class GetMessagesAction extends ActionBase {
     constructor(req, res) {
@@ -15,19 +16,25 @@ class GetMessagesAction extends ActionBase {
     action() {
         const recipientId = this.req.params.recipientId;
 
-        UserModel.getById(recipientId)
-            .then(author => {
-                author = this._userResource.singular(author);
-                MessagesModel.all(this.loggedUserId, recipientId)
-                    .then(messagesCollection => {
-                        this.res.status(200);
-                        this.res.json(this._messageResource.collection(messagesCollection, {author}));
-                    })
-                    .catch(err => this.simpleResponse(500, 'Internal server error', err));
+        MessagesModel.all(this.loggedUserId, recipientId)
+            .then(messagesCollection => {
+                async.map(messagesCollection.items, (message, next) => {
+                    UserModel.getById(message.authorId)
+                        .then(author => {
+                            if (author) {
+                                message.author = this._userResource.singular(author);
+                                next(null, message);
+                            }
+                        })
+                        .catch(err => this.simpleResponse('Internal server error', 500, err));
+
+                }, (err, results) => {
+                    messagesCollection.items = results;
+                    this.res.status(200);
+                    this.res.json(this._messageResource.collection(messagesCollection));
+                });
             })
-            .catch(err => this.simpleResponse('Wrong user id has been passed', 404, err));
-
-
+            .catch(err => this.simpleResponse('Internal server error', 500, err));
     }
 }
 

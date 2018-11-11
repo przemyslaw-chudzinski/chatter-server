@@ -4,16 +4,17 @@ const UserModel = require('../../../db/models/user.model');
 class CheckEmailAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._init();
+        this.auth = true;
     }
 
-    _init() {
+    action() {
         UserModel.getByEmail(this.req.body.email.toLowerCase())
             .then(user => {
-                if (user && user.email=== this.loggeduserEmail) {
-                    return this._res.json(null);
+                console.log(user)
+                if (user && user.email === this.loggedUserEmail) {
+                    return this.res.json(null);
                 } else if (!user) {
-                    return this._res.json(null);
+                    return this.res.json(null);
                 } else {
                     return this.res.json({
                         isTaken: true

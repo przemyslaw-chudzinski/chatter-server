@@ -4,10 +4,10 @@ const MessagesModel = require('../../../db/models/message.model');
 class UpdateMessageAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._init();
+        this.auth = true;
     }
 
-    _init() {
+    action() {
         if (!this.loggedUserId) {
             throw new Error('user is not logged');
         }

@@ -74,9 +74,9 @@ class MessageModel extends ModelBase {
                 }
 
                 const result = [];
-                UserModel.all().then(data => {
-                        data &&
-                        async.each(data.results, (user, next) => {
+                UserModel.all().then(usersCollection => {
+                    usersCollection.length &&
+                        async.each(usersCollection.items, (user, next) => {
                             user._id = user._id.toString();
                             const query = {
                                 recipientId,
@@ -102,7 +102,7 @@ class MessageModel extends ModelBase {
                             if (err) {
                                 return reject(err);
                             }
-                            return resolve(result);
+                            return MessageModel.catchResolve(client, new Collection(result), resolve);
                         });
                     })
                     .catch(err => MessageModel.catchRejection(client, err, reject));
@@ -135,7 +135,6 @@ class MessageModel extends ModelBase {
     }
 
     /**
-     * @param message
      * @returns {Promise<any>}
      */
     update() {
@@ -146,7 +145,7 @@ class MessageModel extends ModelBase {
                 }
                 this.updatedAt = new Date();
                 return this.findAndModify(db, collections.MESSAGES, this)
-                    .then(() => MessageModel.catchResolve(client, this, resolve))
+                    .then(message => MessageModel.catchResolve(client, new MessageModel(message), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
             });
         });

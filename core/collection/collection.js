@@ -1,10 +1,28 @@
-module.exports = class Collection {
+class Collection {
 
-    constructor(items = [], model) {
-        this._items = items.length ? items.map(item => new model(item)) : [];
+    constructor(items = [], model = null) {
+        if (items.length && model) {
+            this._items = items.map(item => new model(item));
+        } else if (items.length && !model) {
+            this._items = items;
+        }
     }
 
     get items() {
         return this._items;
     }
-};
+
+    set items(items) {
+        this._items = items;
+    }
+
+    push(item) {
+        this._items.add(item);
+    }
+
+    get length() {
+        return this._items.length;
+    }
+}
+
+module.exports = Collection;

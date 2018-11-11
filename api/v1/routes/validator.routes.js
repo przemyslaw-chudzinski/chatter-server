@@ -5,6 +5,6 @@ const validatorController = require('../../../controllers/validator/validator.co
 /**
  * @desc It checks email is valid
  */
-router.post('/check-email', (req, res) => new validatorController.CheckEmailAction(req, res));
+router.post('/check-email', (req, res) => new validatorController.CheckEmailAction(req, res).init());
 
 module.exports = router;
