@@ -9,12 +9,7 @@ class ModelBase {
      */
     static count(db, collectionName, query = {}) {
         return new Promise((resolve, reject) => {
-            db.collection(collectionName).count(query, (err, count) => {
-                if (err) {
-                    return ModelBase.catchRejection(null, err, reject);
-                }
-                return ModelBase.catchResolve(null, count, resolve);
-            });
+            db.collection(collectionName).count(query, (err, count) => ModelBase._callback(err, count, resolve, reject));
         });
     }
 
@@ -23,19 +18,33 @@ class ModelBase {
      * @param collectionName
      * @param query
      * @param filter
+     * @param sort
      * @returns {Promise<any>}
      */
-    static find(db, collectionName, query = {}, filter = {}) {
+    static find(db, collectionName, query = {}, filter = null, sort = {}) {
         return new Promise((resolve, reject) => {
-            db.collection(collectionName)
-                .find(query, filter)
-                .toArray((err, results) => {
-                    if (err) {
-                        return ModelBase.catchRejection(null, err, reject);
-                    }
-                    ModelBase.catchResolve(null, results, resolve);
-                });
+            if (filter) {
+                filter = Object.assign({}, {take: 30, skip: 0}, filter);
+                db.collection(collectionName)
+                    .find(query, filter)
+                    .limit(filter.take)
+                    .skip(filter.skip)
+                    .sort(sort)
+                    .toArray((err, results) => ModelBase._callback(err, results, resolve, reject));
+            } else {
+                db.collection(collectionName)
+                    .find(query, filter)
+                    .sort(sort)
+                    .toArray((err, results) => ModelBase._callback(err, results, resolve, reject));
+            }
         });
+    }
+
+    static _callback(err, data, resolve, reject, client = null) {
+        if (err) {
+            return ModelBase.catchRejection(client, err, reject);
+        }
+        ModelBase.catchResolve(client, data, resolve);
     }
 
     /**
@@ -49,12 +58,7 @@ class ModelBase {
             db.collection(collectionName)
                 .find({
                     _id: database.dbDriver.ObjectId(id)
-                }).toArray((err, results) => {
-                if (err) {
-                    return ModelBase.catchRejection(null, err, reject);
-                }
-                return ModelBase.catchResolve(null, results[0], resolve);
-            });
+                }).toArray((err, results) => ModelBase._callback(err, results[0], resolve, reject));
         });
     }
 
@@ -68,12 +72,7 @@ class ModelBase {
         return new Promise((resolve, reject) => {
             db.collection(collectionName)
                 .find(query)
-                .toArray((err, results) => {
-                    if (err) {
-                        return ModelBase.catchRejection(null, err, reject);
-                    }
-                    return ModelBase.catchResolve(null, results[0], resolve);
-                });
+                .toArray((err, results) => ModelBase._callback(err, results[0], resolve, reject));
         });
     }
 
@@ -87,12 +86,7 @@ class ModelBase {
     insertOne(db, collectionName, data, query = {}) {
         return new Promise((resolve, reject) => {
             db.collection(collectionName)
-                .insertOne(data, query, (err, result) => {
-                    if (err) {
-                        return ModelBase.catchRejection(null, err, reject);
-                    }
-                    return ModelBase.catchResolve(null, result.ops[0], resolve);
-                });
+                .insertOne(data, query, (err, result) => ModelBase._callback(err, result.ops[0], resolve, reject));
         });
     }
 
@@ -114,12 +108,7 @@ class ModelBase {
             update = update || {$set: data};
 
             db.collection(collectionName)
-                .findAndModify(query, {}, update, {new: true}, (err, result) => {
-                    if (err) {
-                        return ModelBase.catchRejection(null, err, reject);
-                    }
-                    return ModelBase.catchResolve(null, result.value, resolve);
-                });
+                .findAndModify(query, {}, update, {new: true}, (err, result) => ModelBase._callback(err, result.value, resolve, reject));
         });
     }
 
@@ -141,12 +130,7 @@ class ModelBase {
             update = update || {$set: data};
 
             db.collection(collectionName)
-                .updateMany(query, update, {}, (err, result) => {
-                    if (err) {
-                        return ModelBase.catchRejection(null, err, reject);
-                    }
-                    return ModelBase.catchResolve(null, result.value, resolve);
-                });
+                .updateMany(query, update, {}, (err, result) => ModelBase._callback(err, result.value, resolve, reject));
         });
     }
 

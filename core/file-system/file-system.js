@@ -52,7 +52,8 @@ class FileSystem {
                                 url: f.url,
                             },
                             mimeType: f.mimeType,
-                            extension: f.extension
+                            extension: f.extension,
+                            fileId: f.fileId
                         });
 
                         next();

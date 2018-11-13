@@ -16,6 +16,7 @@ class MessageModel extends ModelBase {
         this.updatedAt = message.updatedAt || null;
         this.authorId = message.authorId || null;
         this._id = message._id ? database.dbDriver.ObjectId(message._id) : null;
+        this.attachedFiles = message.attachedFiles || null;
     }
 
     save() {
@@ -57,6 +58,7 @@ class MessageModel extends ModelBase {
                 UserModel.find(db, collections.MESSAGES, query)
                     .then(messages => MessageModel.catchResolve(client, new Collection(messages, this), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
+
             });
         });
 
@@ -186,6 +188,43 @@ class MessageModel extends ModelBase {
      */
     isAuthor(authorId) {
         return this.authorId === authorId;
+    }
+
+    /**
+     * @param authorId
+     * @param recipientId
+     * @param take
+     * @param skip
+     * @param sort
+     * @returns {Promise<any>}
+     */
+    static paginate(authorId, recipientId, take, skip, sort = {}) {
+        return new Promise((resolve, reject) => {
+            return database.dbDriver.openConnection((err, client, db) => {
+                if (err) {
+                    return MessageModel.catchRejection(client, err, reject);
+                }
+
+                const query = {
+                    $or: [{
+                        authorId,
+                        recipientId,
+                    }, {
+                        authorId: recipientId,
+                        recipientId: authorId
+                    }]
+                };
+
+                const filter = {
+                    skip,
+                    take
+                };
+
+                UserModel.find(db, collections.MESSAGES, query, filter, sort)
+                    .then(messages => MessageModel.catchResolve(client, new Collection(messages, this), resolve))
+                    .catch(err => MessageModel.catchRejection(client, err, reject));
+            });
+        });
     }
 }
 

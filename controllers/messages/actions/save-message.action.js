@@ -12,6 +12,7 @@ class SaveMessageAction extends ActionBase {
         newMessage.content = this.req.body.content;
         newMessage.authorId = this.loggedUserId;
         newMessage.recipientId = this.req.body.recipientId;
+        newMessage.attachedFiles = this.req.body.attachedFiles;
 
         newMessage.save()
             .then(message => {

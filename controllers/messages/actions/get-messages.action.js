@@ -16,7 +16,10 @@ class GetMessagesAction extends ActionBase {
     action() {
         const recipientId = this.req.params.recipientId;
 
-        MessagesModel.all(this.loggedUserId, recipientId)
+        this.req.query.skip = parseInt(this.req.query.skip) || 0;
+        this.req.query.take = parseInt(this.req.query.take) || 30;
+
+        MessagesModel.paginate(this.loggedUserId, recipientId, this.req.query.take, this.req.query.skip)
             .then(messagesCollection => {
                 async.map(messagesCollection.items, (message, next) => {
                     UserModel.getById(message.authorId)

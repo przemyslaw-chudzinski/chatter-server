@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
+const uuid = require('uuid');
 
 class File {
     constructor(file) {
         this._file = file;
+        this._fileId = uuid();
     }
 
     save() {
@@ -18,6 +20,10 @@ class File {
 
             });
         });
+    }
+
+    get fileId() {
+        return this._fileId;
     }
 
     get uploadPath() {
