@@ -1,12 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const sharp = require('sharp');
+// const sharp = require('sharp');
 const uuid = require('uuid');
+const easyimage = require('easyimage');
 
 class File {
     constructor(file) {
         this._file = file;
         this._fileId = uuid();
+        this._output = this.baseOutput
     }
 
     save() {
@@ -16,7 +18,28 @@ class File {
                     return reject(err);
                 }
 
-                resolve(this);
+                // sharp(this._file)
+                //     .resize(160, 160)
+                //     .toFile(this.uploadPath, (err, info) => {
+                //         if (err) {
+                //             throw new Error('sharp - preparing image failed')
+                //         }
+                //         resolve(this);
+                //     });
+
+                this._output.original =  {
+                    name: this.name,
+                    size: this.size,
+                    url: this.url,
+                };
+
+                easyimage.thumbnail({
+                    src: this.uploadPath,
+                    width: 160,
+                    height: 160
+                });
+
+                resolve(this._output);
 
             });
         });
@@ -48,6 +71,16 @@ class File {
 
     get url() {
         return 'http://localhost:3000/upload/'+ this.name;
+    }
+
+    get baseOutput() {
+        return {
+            original: null,
+            thumbnail: null,
+            mimeType: this.mimeType,
+            extension: this.extension,
+            fileId: this.fileId
+        };
     }
 
 }

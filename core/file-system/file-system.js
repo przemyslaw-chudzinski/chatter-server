@@ -44,18 +44,7 @@ class FileSystem {
                 _file
                     .save()
                     .then(f => {
-
-                        savedFiles.push({
-                            original: {
-                                name: f.name,
-                                size: f.size,
-                                url: f.url,
-                            },
-                            mimeType: f.mimeType,
-                            extension: f.extension,
-                            fileId: f.fileId
-                        });
-
+                        savedFiles.push(f);
                         next();
                     })
                     .catch(err => next(err));
