@@ -36,6 +36,7 @@ db.dbDriver.openConnection((err, client, db) => {
         }, (err, doc) => {
             client.close();
             process.exit();
+            console.log('done')
         });
     });
 

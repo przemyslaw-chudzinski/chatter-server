@@ -115,7 +115,7 @@
         <counts>
           <entry key="gitignore" value="6" />
           <entry key="html" value="51" />
-          <entry key="js" value="2179" />
+          <entry key="js" value="2193" />
           <entry key="json" value="49" />
         </counts>
       </usages-collector>
@@ -123,7 +123,7 @@
         <counts>
           <entry key="HTML" value="51" />
           <entry key="JSON" value="49" />
-          <entry key="JavaScript" value="2179" />
+          <entry key="JavaScript" value="2193" />
           <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
@@ -141,8 +141,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/scripts/install/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="424">
-                  <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+                <state relative-caret-position="291">
+                  <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
                 </state>
               </provider>
             </entry>
@@ -678,7 +678,7 @@
       <workItem from="1542299531520" duration="583000" />
       <workItem from="1542300336835" duration="5600000" />
       <workItem from="1542362734827" duration="11881000" />
-      <workItem from="1542385436603" duration="10094000" />
+      <workItem from="1542385436603" duration="10186000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -789,7 +789,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="302257000" />
+    <option name="totallyTimeSpent" value="302349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
@@ -1188,8 +1188,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/install/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+        <state relative-caret-position="291">
+          <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
         </state>
       </provider>
     </entry>
