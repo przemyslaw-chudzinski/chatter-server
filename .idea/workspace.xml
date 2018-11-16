@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="working on project">
       <change beforePath="$PROJECT_DIR$/core/ws-server/ws-server.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/ws-server/ws-server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/env.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +115,7 @@
         <counts>
           <entry key="gitignore" value="6" />
           <entry key="html" value="51" />
-          <entry key="js" value="2367" />
+          <entry key="js" value="2396" />
           <entry key="json" value="49" />
         </counts>
       </usages-collector>
@@ -124,7 +123,7 @@
         <counts>
           <entry key="HTML" value="51" />
           <entry key="JSON" value="49" />
-          <entry key="JavaScript" value="2367" />
+          <entry key="JavaScript" value="2396" />
           <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
@@ -151,8 +150,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/core/ws-server/ws-server.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
-                  <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+                <state relative-caret-position="187">
+                  <caret line="11" column="96" selection-start-line="11" selection-start-column="96" selection-end-line="11" selection-end-column="96" />
                 </state>
               </provider>
             </entry>
@@ -525,11 +524,6 @@
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -673,7 +667,7 @@
       <workItem from="1542299531520" duration="583000" />
       <workItem from="1542300336835" duration="5600000" />
       <workItem from="1542362734827" duration="11881000" />
-      <workItem from="1542385436603" duration="12451000" />
+      <workItem from="1542385436603" duration="12733000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -784,7 +778,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="304614000" />
+    <option name="totallyTimeSpent" value="304896000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
@@ -803,7 +797,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.22125813" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.39045554" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.35900217" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32934782" />
@@ -1187,8 +1181,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/ws-server/ws-server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        <state relative-caret-position="187">
+          <caret line="11" column="96" selection-start-line="11" selection-start-column="96" selection-end-line="11" selection-end-column="96" />
         </state>
       </provider>
     </entry>
