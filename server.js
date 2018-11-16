@@ -10,7 +10,7 @@ const WsSwitchedToContactAction = require('./ws-actions/actions/ws-switched-to-c
 const WsNotifyContactAction = require('./ws-actions/actions/ws-notify-contact.action');
 const WsMessageUpdatedAction = require('./ws-actions/actions/ws-message-updated.action');
 
-app.listen(process.env.PORT || serverConfig.port, () => console.log('Http Server is running on http://localhost:' + serverConfig.port));
+app.listen(process.env.PORT || serverConfig.port, () => console.log('Http Server is running on http://localhost:' + process.env.PORT || serverConfig.port));
 
 wsServer
     .getInstance()
