@@ -1,5 +1,5 @@
 const app = require('./app');
-const serverConfig = require('./config/http-server/server-dev');
+// const serverConfig = require('./config/http-server/server-dev');
 const wsServer = require('./core/ws-server');
 
 const WsUserLoggedAction = require('./ws-actions/actions/ws-user-logged.action');

@@ -9,7 +9,7 @@ class WebSocketServer {
         // this._host = 'localhost';
         this._actions = [];
         this._cb = cb || function () {
-            console.log(`Websocket Server is running on ws://protected-shore-32142.herokuapp.com:${process.env.PORT}`);
+            console.log(`Websocket Server is running on ws://localhost:${process.env.PORT}`);
         };
         this._server = ws.createServer(conn => this._wsCreateServerCallback(conn));
     }
