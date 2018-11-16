@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./server.js",
-    "set:users": "node ./scripts/set-users/index.js"
+    "set:users": "node ./scripts/set-users/index.js",
+    "app:install": "node ./scripts/install/index.js"
   },
   "keywords": [],
   "author": "",
