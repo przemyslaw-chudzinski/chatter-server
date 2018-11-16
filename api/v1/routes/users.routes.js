@@ -11,7 +11,7 @@ router.get('/logged-user', (req, res) => new usersController.GetLoggedUserAction
  */
 router.get('/', (req, res) => new usersController.GetUsersAction(req, res).init());
 /**
- *
+ * @desc It updates user's profile
  */
 router.post('/update-profile', (req, res) => new usersController.UpdateUserAction(req, res).init());
 /**

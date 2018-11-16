@@ -33,7 +33,7 @@ class ModelBase {
                     .toArray((err, results) => ModelBase._callback(err, results, resolve, reject));
             } else {
                 db.collection(collectionName)
-                    .find(query, filter)
+                    .find(query)
                     .sort(sort)
                     .toArray((err, results) => ModelBase._callback(err, results, resolve, reject));
             }

@@ -15,7 +15,7 @@ class GetChannelsAction extends ActionBase {
                 this.res.status(200);
                 this.res.json(this._channelResource.collection(channelsCollection));
             })
-            .catch(err => this.simpleResponse('Internal server error', 500, err));
+            .catch(err => this.simpleResponse('Internal server error !!!!', 500, err));
     }
 }
 

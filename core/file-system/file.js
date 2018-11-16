@@ -12,6 +12,18 @@ class File {
 
     save() {
         return new Promise((resolve, reject) => {
+            this._saveFile()
+                .then(() => this.isImage && this._createThumbnail()
+                    .then(() => {
+                        resolve(this._output);
+                    })
+                    .catch(err => reject(err)) || resolve(this._output))
+                .catch(err => reject(err));
+        });
+    }
+
+    _saveFile() {
+        return new Promise((resolve, reject) => {
             fs.rename(this._file.path, this.uploadPath(), err => {
                 if (err) {
                     return reject(err);
@@ -23,11 +35,7 @@ class File {
                     url: this.url()
                 };
 
-                this._createThumbnail()
-                    .then(() => {
-                        resolve(this._output);
-                    })
-                    .catch(err => reject(err));
+                resolve();
             });
         });
     }
@@ -77,7 +85,8 @@ class File {
     }
 
     get extension() {
-        return this.name.split('.')[1];
+        const separatedName = this.name.split('.');
+        return separatedName[separatedName.length - 1];
     }
 
     url(name) {
@@ -93,6 +102,10 @@ class File {
             extension: this.extension,
             fileId: this.fileId
         };
+    }
+
+    get isImage() {
+        return this.mimeType.includes("image");
     }
 
 }

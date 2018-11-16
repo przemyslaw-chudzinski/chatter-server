@@ -12,6 +12,9 @@ class JsonResponse {
                 data: collection.items.map(item => this.mapElement(item, data))
             };
         }
+        return {
+            data: []
+        };
     }
 
     singular(model) {
