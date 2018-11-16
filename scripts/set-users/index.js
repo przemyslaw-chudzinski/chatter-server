@@ -10,12 +10,17 @@ const password = passwordEncryption.encode('123456');
 const insertData = (db, collection, body) => {
     db.collection(collection).insertMany(body, (err, data) => {
         if (err) {
+            console.log('seeding error');
             throw new Error('error while inserting user', body);
         }
+        console.log('done');
     });
 };
 
 db.dbDriver.openConnection((err, client, db) => {
+    if (err) {
+        return console.log('connection error');
+    }
     const users = [
         {
             firstName: 'Przemysław',
