@@ -1,14 +1,15 @@
 const ws = require('nodejs-websocket');
 const wsActions = require('../../ws-actions/ws-server-actions');
 const wsNotifications = require('./ws-server-notifications');
+const os = require('os');
+const http = require('http');
 
 class WebSocketServer {
-    constructor(cb, port = 8000, host = 'localhost') {
-        this._port = port;
-        this._host = host;
+    constructor(cb) {
+        this._host = 'https://protected-shore-32142.herokuapp.com';
         this._actions = [];
         this._cb = cb || function () {
-            console.log(`Websocket Server is running on ws://${host}:${port}`);
+            console.log(`Websocket Server is running on ws://${os.hostname()}:${process.env.PORT}`);
         };
         this._server = ws.createServer(conn => this._wsCreateServerCallback(conn));
     }
