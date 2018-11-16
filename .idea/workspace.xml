@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="working on project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/ws-server/ws-server.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/ws-server/ws-server.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -116,7 +115,7 @@
         <counts>
           <entry key="gitignore" value="6" />
           <entry key="html" value="51" />
-          <entry key="js" value="2350" />
+          <entry key="js" value="2352" />
           <entry key="json" value="49" />
         </counts>
       </usages-collector>
@@ -124,7 +123,7 @@
         <counts>
           <entry key="HTML" value="51" />
           <entry key="JSON" value="49" />
-          <entry key="JavaScript" value="2350" />
+          <entry key="JavaScript" value="2352" />
           <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
@@ -151,8 +150,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/core/ws-server/ws-server.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
+                <state relative-caret-position="221">
+                  <caret line="13" column="39" lean-forward="true" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
                 </state>
               </provider>
             </entry>
@@ -673,7 +672,7 @@
       <workItem from="1542299531520" duration="583000" />
       <workItem from="1542300336835" duration="5600000" />
       <workItem from="1542362734827" duration="11881000" />
-      <workItem from="1542385436603" duration="11855000" />
+      <workItem from="1542385436603" duration="12042000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -784,7 +783,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="304018000" />
+    <option name="totallyTimeSpent" value="304205000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
@@ -1187,8 +1186,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/ws-server/ws-server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
+        <state relative-caret-position="221">
+          <caret line="13" column="39" lean-forward="true" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
         </state>
       </provider>
     </entry>
