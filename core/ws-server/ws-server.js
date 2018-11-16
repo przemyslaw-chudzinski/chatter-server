@@ -6,7 +6,7 @@ const http = require('http');
 
 class WebSocketServer {
     constructor(cb) {
-        this._host = 'ws://protected-shore-32142.herokuapp.com';
+        this._host = 'protected-shore-32142.herokuapp.com';
         this._actions = [];
         this._cb = cb || function () {
             console.log(`Websocket Server is running on ws://${os.hostname()}:${process.env.PORT}`);
