@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="working on project">
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="working on project" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,7 @@
           <entry key="gitignore" value="2" />
           <entry key="html" value="2" />
           <entry key="js" value="38" />
-          <entry key="json" value="3" />
+          <entry key="json" value="5" />
           <entry key="png" value="11" />
           <entry key="ts" value="1" />
           <entry key="txt" value="1" />
@@ -105,7 +103,7 @@
         <counts>
           <entry key="HTML" value="2" />
           <entry key="Image" value="11" />
-          <entry key="JSON" value="3" />
+          <entry key="JSON" value="5" />
           <entry key="JavaScript" value="38" />
           <entry key="PLAIN_TEXT" value="3" />
           <entry key="TypeScript" value="1" />
@@ -136,7 +134,7 @@
         <entry file="file://$PROJECT_DIR$/config/http-server/server-dev.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+              <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -154,16 +152,25 @@
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            <state relative-caret-position="408">
+              <caret line="24" column="12" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -281,8 +288,6 @@
       <path value="$PROJECT_DIR$/node_modules/after/package.json" />
       <path value="$PROJECT_DIR$/node_modules/ajv/package.json" />
       <path value="$PROJECT_DIR$/node_modules/array-flatten/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/array-parallel/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/array-series/package.json" />
       <path value="$PROJECT_DIR$/node_modules/arraybuffer.slice/package.json" />
       <path value="$PROJECT_DIR$/node_modules/asn1/package.json" />
       <path value="$PROJECT_DIR$/node_modules/assert-plus/package.json" />
@@ -315,9 +320,6 @@
       <path value="$PROJECT_DIR$/node_modules/component-emitter/package.json" />
       <path value="$PROJECT_DIR$/node_modules/component-inherit/package.json" />
       <path value="$PROJECT_DIR$/node_modules/concat-map/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/concat-stream/node_modules/isarray/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/concat-stream/node_modules/readable-stream/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/concat-stream/node_modules/string_decoder/package.json" />
       <path value="$PROJECT_DIR$/node_modules/concat-stream/package.json" />
       <path value="$PROJECT_DIR$/node_modules/console-browserify/package.json" />
       <path value="$PROJECT_DIR$/node_modules/content-disposition/package.json" />
@@ -354,7 +356,6 @@
       <path value="$PROJECT_DIR$/node_modules/escape-html/package.json" />
       <path value="$PROJECT_DIR$/node_modules/etag/package.json" />
       <path value="$PROJECT_DIR$/node_modules/exit/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/express/node_modules/statuses/package.json" />
       <path value="$PROJECT_DIR$/node_modules/express/package.json" />
       <path value="$PROJECT_DIR$/node_modules/extend/package.json" />
       <path value="$PROJECT_DIR$/node_modules/extract-zip/package.json" />
@@ -363,7 +364,6 @@
       <path value="$PROJECT_DIR$/node_modules/fast-deep-equal/package.json" />
       <path value="$PROJECT_DIR$/node_modules/fast-json-stable-stringify/package.json" />
       <path value="$PROJECT_DIR$/node_modules/fd-slicer/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/finalhandler/node_modules/statuses/package.json" />
       <path value="$PROJECT_DIR$/node_modules/finalhandler/package.json" />
       <path value="$PROJECT_DIR$/node_modules/forever-agent/package.json" />
       <path value="$PROJECT_DIR$/node_modules/form-data/package.json" />
@@ -374,9 +374,6 @@
       <path value="$PROJECT_DIR$/node_modules/fs.realpath/package.json" />
       <path value="$PROJECT_DIR$/node_modules/getpass/package.json" />
       <path value="$PROJECT_DIR$/node_modules/glob/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/gm/node_modules/debug/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/gm/node_modules/ms/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/gm/package.json" />
       <path value="$PROJECT_DIR$/node_modules/graceful-fs/package.json" />
       <path value="$PROJECT_DIR$/node_modules/har-schema/package.json" />
       <path value="$PROJECT_DIR$/node_modules/har-validator/package.json" />
@@ -464,7 +461,6 @@
       <path value="$PROJECT_DIR$/node_modules/qs/package.json" />
       <path value="$PROJECT_DIR$/node_modules/range-parser/package.json" />
       <path value="$PROJECT_DIR$/node_modules/raw-body/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/readable-stream/node_modules/isarray/package.json" />
       <path value="$PROJECT_DIR$/node_modules/readable-stream/package.json" />
       <path value="$PROJECT_DIR$/node_modules/request-progress/package.json" />
       <path value="$PROJECT_DIR$/node_modules/request/package.json" />
@@ -475,7 +471,6 @@
       <path value="$PROJECT_DIR$/node_modules/safer-buffer/package.json" />
       <path value="$PROJECT_DIR$/node_modules/saslprep/package.json" />
       <path value="$PROJECT_DIR$/node_modules/semver/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/send/node_modules/statuses/package.json" />
       <path value="$PROJECT_DIR$/node_modules/send/package.json" />
       <path value="$PROJECT_DIR$/node_modules/serve-static/package.json" />
       <path value="$PROJECT_DIR$/node_modules/setprototypeof/package.json" />
@@ -519,7 +514,6 @@
       <path value="$PROJECT_DIR$/node_modules/wrappy/package.json" />
       <path value="$PROJECT_DIR$/node_modules/ws/package.json" />
       <path value="$PROJECT_DIR$/node_modules/xmlhttprequest-ssl/package.json" />
-      <path value="$PROJECT_DIR$/node_modules/yallist/package.json" />
       <path value="$PROJECT_DIR$/node_modules/yauzl/package.json" />
       <path value="$PROJECT_DIR$/node_modules/yeast/package.json" />
       <path value="$PROJECT_DIR$/package.json" />
@@ -691,7 +685,7 @@
       <workItem from="1542299531520" duration="583000" />
       <workItem from="1542300336835" duration="5600000" />
       <workItem from="1542362734827" duration="11881000" />
-      <workItem from="1542385436603" duration="1542000" />
+      <workItem from="1542385436603" duration="1927000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -802,13 +796,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="293705000" />
+    <option name="totallyTimeSpent" value="294090000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.21908316" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.21908316" />
       <window_info id="Structure" order="1" sideWeight="0.5007728" side_tool="true" weight="0.25239617" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -821,7 +814,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.48590022" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3383948" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.35900217" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32934782" />
@@ -1144,13 +1137,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/socket-server/index.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1167,7 +1153,7 @@
     <entry file="file://$PROJECT_DIR$/config/http-server/server-dev.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -1181,14 +1167,21 @@
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        <state relative-caret-position="221">
+          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="12" />
         </state>
       </provider>
     </entry>
