@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-// const sharp = require('sharp');
 const uuid = require('uuid');
-const easyimage = require('easyimage');
+const gm = require('gm');
 
 class File {
     constructor(file) {
@@ -13,35 +12,46 @@ class File {
 
     save() {
         return new Promise((resolve, reject) => {
-            fs.rename(this._file.path, this.uploadPath, err => {
+            fs.rename(this._file.path, this.uploadPath(), err => {
                 if (err) {
                     return reject(err);
                 }
 
-                // sharp(this._file)
-                //     .resize(160, 160)
-                //     .toFile(this.uploadPath, (err, info) => {
-                //         if (err) {
-                //             throw new Error('sharp - preparing image failed')
-                //         }
-                //         resolve(this);
-                //     });
-
                 this._output.original =  {
                     name: this.name,
                     size: this.size,
-                    url: this.url,
+                    url: this.url()
                 };
 
-                easyimage.thumbnail({
-                    src: this.uploadPath,
-                    width: 160,
-                    height: 160
-                });
-
-                resolve(this._output);
-
+                this._createThumbnail()
+                    .then(() => {
+                        resolve(this._output);
+                    })
+                    .catch(err => reject(err));
             });
+        });
+    }
+
+    _createThumbnail() {
+        return new Promise((resolve, reject) => {
+            const thumbnailName = 'thumbnail-' + this.name;
+            const thumbnailUploadPath = this.uploadPath(thumbnailName);
+
+            gm(this.uploadPath())
+                .resize(160,160)
+                .write(thumbnailUploadPath, err => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    this._output.thumbnail = {
+                        name: thumbnailName,
+                        size: null,
+                        url: this.url(thumbnailName)
+                    };
+
+                    resolve();
+                });
         });
     }
 
@@ -49,8 +59,9 @@ class File {
         return this._fileId;
     }
 
-    get uploadPath() {
-        return path.join(__dirname, '..', '..', 'public', 'upload', this.name);
+    uploadPath(name) {
+        name = name || this.name;
+        return path.join(__dirname, '..', '..', 'public', 'upload', name);
     }
 
     get name() {
@@ -69,8 +80,9 @@ class File {
         return this.name.split('.')[1];
     }
 
-    get url() {
-        return 'http://localhost:3000/upload/'+ this.name;
+    url(name) {
+        name = name || this.name;
+        return 'http://localhost:3000/upload/'+ name;
     }
 
     get baseOutput() {
