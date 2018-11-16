@@ -24,22 +24,19 @@ db.dbDriver.openConnection((err, client, db) => {
         updatedAt: new Date(),
         avatar: null
     }, (err, doc) => {
-        client.close();
-        process.exit();
-    });
-
-    db.collection(collections.USERS).insert({
-        firstName: 'Anna',
-        lastName: 'Kowalska',
-        email: 'anna.kowalska@example.com',
-        password: password,
-        confirmed: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        avatar: null
-    }, (err, doc) => {
-        client.close();
-        process.exit();
+        db.collection(collections.USERS).insert({
+            firstName: 'Anna',
+            lastName: 'Kowalska',
+            email: 'anna.kowalska@example.com',
+            password: password,
+            confirmed: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            avatar: null
+        }, (err, doc) => {
+            client.close();
+            process.exit();
+        });
     });
 
 });
