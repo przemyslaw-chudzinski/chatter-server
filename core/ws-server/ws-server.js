@@ -1,8 +1,6 @@
 const ws = require('nodejs-websocket');
 const wsActions = require('../../ws-actions/ws-server-actions');
 const wsNotifications = require('./ws-server-notifications');
-// const os = require('os');
-// const http = require('http');
 
 class WebSocketServer {
     constructor(cb) {
@@ -40,8 +38,8 @@ class WebSocketServer {
     /**
      * @desc It starts server
      */
-    listen() {
-        this._server.listen(this._port, this._host, this._cb);
+    listen(port) {
+        this._server.listen(port);
     }
 
     registerActions(actions = []) {

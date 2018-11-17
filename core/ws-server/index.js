@@ -9,7 +9,9 @@ const getInstance = () => {
     return wsInstance;
 };
 
-const listen = () => wsInstance.listen();
+const port = process.env.PROD ? 3000 : 3001;
+
+const listen = () => wsInstance.listen(port);
 
 module.exports = {
     getInstance,
