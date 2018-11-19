@@ -12,7 +12,7 @@ const WsMessageUpdatedAction = require('./ws-actions/actions/ws-message-updated.
 
 app.listen(process.env.PORT, () => console.log('Http Server is running on http://localhost:' + process.env.PORT));
 
-const port = process.env.PROD ? 80 : 3001;
+const port = process.env.PROD ? 81 : 3001;
 
 console.log('port', port);
 
