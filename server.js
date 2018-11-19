@@ -12,7 +12,9 @@ const WsMessageUpdatedAction = require('./ws-actions/actions/ws-message-updated.
 
 app.listen(process.env.PORT, () => console.log('Http Server is running on http://localhost:' + process.env.PORT));
 
-const port = process.env.PROD ? 3000 : 3001;
+const port = process.env.PROD ? null : 3001;
+
+console.log('port', port);
 
 wsServer
     .getInstance()
@@ -25,6 +27,6 @@ wsServer
         WsNotifyContactAction,
         WsMessageUpdatedAction
     ])
-    .listen(3000);
+    .listen(port);
 
 module.exports = app;
