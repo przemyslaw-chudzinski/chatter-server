@@ -13,6 +13,7 @@ class NotificationModel extends ModelBase {
         this.message = notification.message || null;
         this.recipientIds = notification.recipientIds || [];
         this.authorId = notification.authorId || null;
+        this.extra = notification.extra || {};
         this._id = notification._id ? database.dbDriver.ObjectId(notification._id) : null;
     }
 

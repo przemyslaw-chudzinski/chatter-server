@@ -14,8 +14,6 @@ app.listen(process.env.PORT, () => console.log('Http Server is running on http:/
 
 const port = process.env.PROD ? 81 : 3001;
 
-console.log('port', port);
-
 wsServer
     .getInstance()
     .registerActions([

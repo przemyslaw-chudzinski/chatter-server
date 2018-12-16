@@ -60,6 +60,25 @@ class ChannelModel extends ModelBase {
             });
         });
     }
+
+    /**
+     * @desc It returns single channel by id
+     * @param channelId
+     * @returns {Promise<any>}
+     */
+    static getById(channelId) {
+        return new Promise((resolve, reject) => {
+            database.dbDriver.openConnection((err, client, db) => {
+                if (err) {
+                    return ChannelModel.catchRejection(client, err, reject);
+                }
+
+                return this.findById(db, collections.CHANNELS, channelId)
+                    .then(channel => ChannelModel.catchResolve(client, new ChannelModel(channel), resolve))
+                    .catch(err => ChannelModel.catchRejection(client, err, reject));
+            });
+        });
+    }
 }
 
 module.exports = ChannelModel;

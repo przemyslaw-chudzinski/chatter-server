@@ -28,6 +28,8 @@ class SaveChannelAction extends ActionBase {
         notification.authorId = this.loggedUserId;
         notification.message = 'You have been invited to group chat **' + channel.name + '**';
         notification.recipientIds = this._mapRecipientsIds(channel);
+        notification.extra.confirmable = true;
+        notification.extra.channelId = channel._id;
 
         notification.save()
             .then(notification => {

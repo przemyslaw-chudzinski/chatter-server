@@ -30,7 +30,7 @@ class UpdateUserAction extends ActionBase {
                     payload.firstName ? user.firstName = payload.firstName : null;
                     payload.lastName ? user.lastName = payload.lastName : null;
                     payload.email ? user.email = payload.email : null;
-                    avatar ? user.avatar = avatar : null;
+                    avatar ? user.avatar = avatar : user.avatar = null;
 
                     user.update()
                         .then(user => {
@@ -48,7 +48,7 @@ class UpdateUserAction extends ActionBase {
         if (avatar && avatar.mimeType && avatar.mimeType.includes('image')) {
             return next(false, avatar);
         } else if (!avatar) {
-            return next(false, avatar);
+            return next(false, null);
         }
         return next(true, avatar);
     }
