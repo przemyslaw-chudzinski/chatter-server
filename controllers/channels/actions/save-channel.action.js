@@ -17,9 +17,7 @@ class SaveChannelAction extends ActionBase {
         channel.authorId = this.loggedUserId;
         channel.members = this.members;
         channel.save()
-            .then(channel => {
-                this._sendNotification(channel);
-            })
+            .then(channel => this._sendNotification(channel))
             .catch(err => this.simpleResponse(500, 'Internal server error', err));
     }
 
@@ -46,11 +44,7 @@ class SaveChannelAction extends ActionBase {
     }
 
     _mapRecipientsIds(channel) {
-        return channel.members.map(member => {
-            if (member.memberId !== this.loggedUserId) {
-                return member.memberId;
-            }
-        }).filter(i => !!i)
+        return channel.members.map(member => member.memberId !== this.loggedUserId ? member.memberId : null).filter(i => !!i)
     }
 
     _sendResponse(channel) {

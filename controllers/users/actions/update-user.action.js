@@ -11,35 +11,26 @@ class UpdateUserAction extends ActionBase {
 
         const payload = this.req.body;
 
-        if (!payload._id) {
-            throw new Error('payload data is incorrect');
-        }
+        if (!payload._id) throw new Error('payload data is incorrect');
 
-        if (this.loggedUserId !== payload._id) {
-            throw new Error('You don"t have permission for this action');
-        }
+        if (this.loggedUserId !== payload._id)  throw new Error('You don"t have permission for this action');
 
         UserModel.getById(this.loggedUserId)
-            .then(user => {
-                this._validateAvatar(payload.avatar, (err, avatar) => {
+            .then(user => this._validateAvatar(payload.avatar, (err, avatar) => {
+                if (err) return this.simpleResponse("Uploaded file must be an image", 409, null);
 
-                    if (err) {
-                        return this.simpleResponse("Uploaded file must be an image", 409, null);
-                    }
+                payload.firstName ? user.firstName = payload.firstName : null;
+                payload.lastName ? user.lastName = payload.lastName : null;
+                payload.email ? user.email = payload.email : null;
+                avatar ? user.avatar = avatar : user.avatar = null;
 
-                    payload.firstName ? user.firstName = payload.firstName : null;
-                    payload.lastName ? user.lastName = payload.lastName : null;
-                    payload.email ? user.email = payload.email : null;
-                    avatar ? user.avatar = avatar : user.avatar = null;
-
-                    user.update()
-                        .then(user => {
-                            this.res.status(200);
-                            this.res.json(user);
-                        })
-                        .catch(err => this.simpleResponse(500, 'Something went wrong', err));
-                });
-            })
+                user.update()
+                    .then(user => {
+                        this.res.status(200);
+                        this.res.json(user);
+                    })
+                    .catch(err => this.simpleResponse(500, 'Something went wrong', err));
+            }))
             .catch(err => this.simpleResponse(500, 'Something went wrong', err));
     }
 

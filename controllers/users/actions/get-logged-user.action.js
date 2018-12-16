@@ -8,9 +8,7 @@ class GetLoggedUserAction extends ActionBase {
     }
 
     _init() {
-        if (!this.loggedUserId) {
-            throw new Error('id is required');
-        }
+        if (!this.loggedUserId) throw new Error('id is required');
         UserModel.getById(this.loggedUserId)
             .then(user => {
                 if (user) {

@@ -7,14 +7,8 @@ class JsonResponse {
     }
 
     collection(collection, data = null) {
-        if (collection instanceof Collection) {
-            return {
-                data: collection.items.map(item => this.mapElement(item, data))
-            };
-        }
-        return {
-            data: []
-        };
+        if (collection instanceof Collection) return {data: collection.items.map(item => this.mapElement(item, data))};
+        return {data: []};
     }
 
     singular(model) {

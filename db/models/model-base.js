@@ -41,9 +41,7 @@ class ModelBase {
     }
 
     static _callback(err, data, resolve, reject, client = null) {
-        if (err) {
-            return ModelBase.catchRejection(client, err, reject);
-        }
+        if (err) return ModelBase.catchRejection(client, err, reject);
         ModelBase.catchResolve(client, data, resolve);
     }
 
@@ -56,9 +54,8 @@ class ModelBase {
     static findById(db, collectionName, id) {
         return new Promise((resolve, reject) => {
             db.collection(collectionName)
-                .find({
-                    _id: database.dbDriver.ObjectId(id)
-                }).toArray((err, results) => ModelBase._callback(err, results[0], resolve, reject));
+                .find({_id: database.dbDriver.ObjectId(id)})
+                .toArray((err, results) => ModelBase._callback(err, results[0], resolve, reject));
         });
     }
 
@@ -100,13 +97,9 @@ class ModelBase {
      */
     findAndModify(db, collectionName, data, query = null, update = null) {
         return new Promise((resolve, reject) => {
-
             query = query || {_id: database.dbDriver.ObjectId(data._id)};
-
             delete data._id;
-
             update = update || {$set: data};
-
             db.collection(collectionName)
                 .findAndModify(query, {}, update, {new: true}, (err, result) => ModelBase._callback(err, result.value, resolve, reject));
         });
@@ -122,13 +115,9 @@ class ModelBase {
      */
     updateMany(db, collectionName, data, query = null, update = null) {
         return new Promise((resolve, reject) => {
-
             query = query || {};
-
             delete data._id;
-
             update = update || {$set: data};
-
             db.collection(collectionName)
                 .updateMany(query, update, {}, (err, result) => ModelBase._callback(err, result.value, resolve, reject));
         });

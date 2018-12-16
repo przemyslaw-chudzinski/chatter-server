@@ -18,16 +18,12 @@ class NotificationModel extends ModelBase {
     }
 
     save() {
-        return new Promise((resolve, reject) => {
-            database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return NotificationModel.catchRejection(client, err, reject);
-                }
-                return this.insertOne(db, collections.NOTIFICATIONS, this)
-                    .then(notifications => NotificationModel.catchResolve(client, new NotificationModel(notifications), resolve))
-                    .catch(err => NotificationModel.catchRejection(client, err, reject));
-            });
-        });
+        return new Promise((resolve, reject) => database.dbDriver.openConnection((err, client, db) => {
+            if (err) return NotificationModel.catchRejection(client, err, reject);
+            return this.insertOne(db, collections.NOTIFICATIONS, this)
+                .then(notifications => NotificationModel.catchResolve(client, new NotificationModel(notifications), resolve))
+                .catch(err => NotificationModel.catchRejection(client, err, reject));
+        }));
     }
 
     /**
@@ -44,10 +40,7 @@ class NotificationModel extends ModelBase {
         };
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return NotificationModel.catchRejection(client, err, reject);
-                }
-
+                if (err) return NotificationModel.catchRejection(client, err, reject);
                 NotificationModel.find(db, collections.NOTIFICATIONS, query)
                     .then(notifications => NotificationModel.catchResolve(client, new Collection(notifications, this), resolve))
                     .catch(err => NotificationModel.catchRejection(client, err, reject));
@@ -63,10 +56,7 @@ class NotificationModel extends ModelBase {
     static countUnreadNotifications(loggedUserId) {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return NotificationModel.catchRejection(client, err, reject);
-                }
-
+                if (err) return NotificationModel.catchRejection(client, err, reject);
                 const query = {
                     recipientIds: {
                         $elemMatch: {
@@ -74,7 +64,6 @@ class NotificationModel extends ModelBase {
                         }
                     }
                 };
-
                 return NotificationModel.count(db, collections.NOTIFICATIONS, query)
                     .then(result => NotificationModel.catchResolve(client, result, resolve))
                     .catch(err => NotificationModel.catchRejection(client, err, reject));

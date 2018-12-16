@@ -2,9 +2,7 @@ const index = require('jsonwebtoken');
 
 class Jwt {
     constructor() {
-        this._config = {
-            expiresIn: '10h'
-        };
+        this._config = {expiresIn: '10h'};
         this._init();
     }
 
@@ -25,9 +23,7 @@ class Jwt {
     }
 
     verify(token = '') {
-        return new Promise((resolve, reject) => {
-            index.verify(token, process.env.JWT_SECRET_KEY, null, (err, decodedToken) => this._verifyCallback(err, decodedToken, resolve, reject));
-        });
+        return new Promise((resolve, reject) => index.verify(token, process.env.JWT_SECRET_KEY, null, (err, decodedToken) => this._verifyCallback(err, decodedToken, resolve, reject)));
     }
 
     _verifyCallback(err, decodedToken, resolve, reject) {

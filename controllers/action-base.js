@@ -38,9 +38,7 @@ class ActionBase {
      */
     init() {
         if (this.auth) {
-            if (!this.loggedUserId) {
-                return this.simpleResponse('You don"t have access to this resource', 403, true);
-            }
+            if (!this.loggedUserId) return this.simpleResponse('You don"t have access to this resource', 403, true);
         }
         const error = this.validationRules(Joi) ? this._validate() : null;
         error ? this.simpleResponse(error.details[0].message, 409, error) : this.action();

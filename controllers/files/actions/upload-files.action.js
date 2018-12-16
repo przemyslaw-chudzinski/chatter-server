@@ -8,9 +8,7 @@ class UploadFilesAction extends ActionBase {
 
     action() {
         this.filesSystem.upload()
-            .then(files => {
-                this.res.json(files);
-            })
+            .then(files =>  this.res.json(files))
             .catch(err => this.simpleResponse('Something went wrong with upload files', 500, err));
     }
 }

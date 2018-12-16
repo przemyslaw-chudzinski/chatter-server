@@ -2,11 +2,8 @@ class Collection {
 
     constructor(items = [], model = null) {
         this._items = [];
-        if (items.length && model) {
-            this._items = items.map(item => new model(item));
-        } else if (items.length && !model) {
-            this._items = items;
-        }
+        if (items.length && model) this._items = items.map(item => new model(item));
+        else if (items.length && !model)  this._items = items;
     }
 
     get items() {

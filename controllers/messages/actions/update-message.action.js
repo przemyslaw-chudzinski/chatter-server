@@ -8,12 +8,8 @@ class UpdateMessageAction extends ActionBase {
     }
 
     action() {
-        if (!this.loggedUserId) {
-            throw new Error('user is not logged');
-        }
-        if (!this.req.body._id) {
-            throw new Error('payload data is incorrect');
-        }
+        if (!this.loggedUserId) throw new Error('user is not logged');
+        if (!this.req.body._id) throw new Error('payload data is incorrect');
 
         MessagesModel.getById(this.req.body._id)
             .then(message => {

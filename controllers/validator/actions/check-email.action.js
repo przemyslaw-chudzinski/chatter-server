@@ -10,16 +10,9 @@ class CheckEmailAction extends ActionBase {
     action() {
         UserModel.getByEmail(this.req.body.email.toLowerCase())
             .then(user => {
-                console.log(user)
-                if (user && user.email === this.loggedUserEmail) {
-                    return this.res.json(null);
-                } else if (!user) {
-                    return this.res.json(null);
-                } else {
-                    return this.res.json({
-                        isTaken: true
-                    });
-                }
+                if (user && user.email === this.loggedUserEmail) return this.res.json(null);
+                else if (!user) return this.res.json(null);
+                else return this.res.json({isTaken: true});
             })
             .catch(err => this.simpleResponse(500, 'Internal server error', err))
     }

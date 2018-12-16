@@ -19,16 +19,12 @@ class ChannelModel extends ModelBase {
      * @returns {Promise<any>}
      */
     save() {
-        return new Promise((resolve, reject) => {
-            database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return ChannelModel.catchRejection(client, err, reject);
-                }
-                return this.insertOne(db, collections.CHANNELS, this)
-                    .then(channel => ChannelModel.catchResolve(client, new ChannelModel(channel), resolve))
-                    .catch(err => ChannelModel.catchRejection(client, err, reject));
-            });
-        });
+        return new Promise((resolve, reject) => database.dbDriver.openConnection((err, client, db) => {
+            if (err) return ChannelModel.catchRejection(client, err, reject);
+            return this.insertOne(db, collections.CHANNELS, this)
+                .then(channel => ChannelModel.catchResolve(client, new ChannelModel(channel), resolve))
+                .catch(err => ChannelModel.catchRejection(client, err, reject));
+        }));
     }
 
     /**
@@ -51,9 +47,7 @@ class ChannelModel extends ModelBase {
         };
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return ChannelModel.catchRejection(client, err, reject);
-                }
+                if (err) return ChannelModel.catchRejection(client, err, reject);
                 ChannelModel.find(db, collections.CHANNELS, query)
                     .then(channels => ChannelModel.catchResolve(client, new Collection(channels, this), resolve))
                     .catch(err => ChannelModel.catchRejection(client, err, reject));
@@ -69,10 +63,7 @@ class ChannelModel extends ModelBase {
     static getById(channelId) {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return ChannelModel.catchRejection(client, err, reject);
-                }
-
+                if (err) return ChannelModel.catchRejection(client, err, reject);
                 return this.findById(db, collections.CHANNELS, channelId)
                     .then(channel => ChannelModel.catchResolve(client, new ChannelModel(channel), resolve))
                     .catch(err => ChannelModel.catchRejection(client, err, reject));

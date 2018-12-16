@@ -4,7 +4,6 @@ const wsNotifications = require('./ws-server-notifications');
 
 class WebSocketServer {
     constructor(cb) {
-        // this._host = 'localhost';
         this._actions = [];
         this._cb = cb || function () {
             console.log(`Websocket Server is running on ws://localhost:${process.env.PORT}`);
@@ -45,9 +44,7 @@ class WebSocketServer {
     registerActions(actions = []) {
         // this._actions.push(actions);
         // todo check a name of the action is unique ??
-        if (actions && actions.length) {
-            actions.forEach(action => this._actions.push(new action));
-        }
+        actions && actions.length ?  actions.forEach(action => this._actions.push(new action)) : null;
         return this;
     }
 
@@ -68,15 +65,8 @@ class WebSocketServer {
      */
     _onTextHandler(conn, event) {
         event = JSON.parse(event);
-        if (conn && !conn.userId) {
-            conn.userId = event.userId;
-        }
-
-        if (this._actions.length) {
-            this._actions.forEach(action => {
-                event.action === action.actionName ? action.init(event, this, conn) : null;
-            });
-        }
+        conn && !conn.userId ? conn.userId = event.userId : null;
+        this._actions.length ? this._actions.forEach(action => (event.action === action.actionName ? action.init(event, this, conn) : null)) : null;
     }
 
     _onCloseHandler(conn, event) {
@@ -117,9 +107,7 @@ class WebSocketServer {
     }
 
     sendToAll(data) {
-        this.connections.forEach(c => {
-            c.sendText(data);
-        });
+        this.connections.forEach(c => c.sendText(data));
     }
 
     sendToOne(recipientId, data) {

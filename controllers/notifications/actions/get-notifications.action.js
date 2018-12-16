@@ -34,9 +34,7 @@ class GetNotificationsAction extends ActionBase {
                         })
                         .catch(err => next(err));
                 }, (err, results) => {
-                    if (err) {
-                        return this.simpleResponse('Internal server error', 500, err);
-                    }
+                    if (err) return this.simpleResponse('Internal server error', 500, err);
                     notificationsCollection.items = results;
                     this.res.status(200);
                     this.res.json(this._notificationResource.collection(notificationsCollection));

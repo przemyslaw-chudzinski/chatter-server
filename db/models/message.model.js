@@ -22,9 +22,7 @@ class MessageModel extends ModelBase {
     save() {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return MessageModel.catchRejection(client, err, reject);
-                }
+                if (err) return MessageModel.catchRejection(client, err, reject);
                 return this.insertOne(db, collections.MESSAGES, this)
                     .then(message => MessageModel.catchResolve(client, new MessageModel(message), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
@@ -51,14 +49,10 @@ class MessageModel extends ModelBase {
 
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return MessageModel.catchRejection(client, err, reject);
-                }
-
+                if (err) return MessageModel.catchRejection(client, err, reject);
                 UserModel.find(db, collections.MESSAGES, query)
                     .then(messages => MessageModel.catchResolve(client, new Collection(messages, this), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
-
             });
         });
 
@@ -71,10 +65,7 @@ class MessageModel extends ModelBase {
     static getUnreadMessages(recipientId) {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return MessageModel.catchRejection(client, err, reject);
-                }
-
+                if (err) return MessageModel.catchRejection(client, err, reject);
                 const result = [];
                 UserModel.all().then(usersCollection => {
                     usersCollection.length &&
@@ -85,27 +76,19 @@ class MessageModel extends ModelBase {
                                 read: false,
                                 authorId: user._id
                             };
-                            if (user._id !== recipientId) {
-                                this
-                                    .count(db, collections.MESSAGES, query)
-                                    .then(count => {
-                                        const res = {
-                                            authorId: user._id,
-                                            count
-                                        };
-                                        result.push(res);
-                                        next();
-                                    })
-                                    .catch(err => MessageModel.catchRejection(client, err, reject));
-                            } else {
-                                next();
-                            }
-                        }, err => {
-                            if (err) {
-                                return reject(err);
-                            }
-                            return MessageModel.catchResolve(client, new Collection(result), resolve);
-                        });
+                            user._id !== recipientId ?  this
+                                .count(db, collections.MESSAGES, query)
+                                .then(count => {
+                                    const res = {
+                                        authorId: user._id,
+                                        count
+                                    };
+                                    result.push(res);
+                                    next();
+                                })
+                                .catch(err => MessageModel.catchRejection(client, err, reject)) : next();
+
+                        }, err =>  err ? reject(err) : MessageModel.catchResolve(client, new Collection(result), resolve));
                     })
                     .catch(err => MessageModel.catchRejection(client, err, reject));
             });
@@ -120,18 +103,11 @@ class MessageModel extends ModelBase {
     static getById(messageId) {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return MessageModel.catchRejection(client, err, reject);
-                }
-
-                const query = {
-                    _id: database.dbDriver.ObjectId(messageId)
-                };
-
+                if (err) return MessageModel.catchRejection(client, err, reject);
+                const query = {_id: database.dbDriver.ObjectId(messageId)};
                 return this.first(db, collections.MESSAGES, query)
                     .then(message => MessageModel.catchResolve(client, new MessageModel(message), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
-
             });
         });
     }
@@ -142,9 +118,7 @@ class MessageModel extends ModelBase {
     update() {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return MessageModel.catchRejection(client, err, reject);
-                }
+                if (err) return MessageModel.catchRejection(client, err, reject);
                 this.updatedAt = new Date();
                 return this.findAndModify(db, collections.MESSAGES, this)
                     .then(message => MessageModel.catchResolve(client, new MessageModel(message), resolve))
@@ -160,19 +134,12 @@ class MessageModel extends ModelBase {
     resetUnreadMessages(contactId) {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return MessageModel.catchRejection(client, err, reject);
-                }
-
+                if (err) return MessageModel.catchRejection(client, err, reject);
                 const payload = {
                     read: true,
                     readAt: new Date()
                 };
-
-                const query = {
-                    authorId: contactId.toString()
-                };
-
+                const query = {authorId: contactId.toString()};
                 return this
                     .updateMany(db, collections.MESSAGES, payload, query)
                     .then(result => MessageModel.catchResolve(client, result, resolve))
@@ -201,10 +168,7 @@ class MessageModel extends ModelBase {
     static paginate(authorId, recipientId, take, skip, sort = {}) {
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
-                if (err) {
-                    return MessageModel.catchRejection(client, err, reject);
-                }
-
+                if (err) return MessageModel.catchRejection(client, err, reject);
                 const query = {
                     $or: [{
                         authorId,
@@ -214,12 +178,10 @@ class MessageModel extends ModelBase {
                         recipientId: authorId
                     }]
                 };
-
                 const filter = {
                     skip,
                     take
                 };
-
                 UserModel.find(db, collections.MESSAGES, query, filter, sort)
                     .then(messages => MessageModel.catchResolve(client, new Collection(messages, this), resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));

@@ -3,9 +3,7 @@ const PasswordEncryptionStrategy = require('./password-encryption-strategy');
 class Index {
     constructor(PasswordEncryptionStrategyClass) {
         this._strategy = new PasswordEncryptionStrategyClass;
-        if (!(this._strategy instanceof PasswordEncryptionStrategy)) {
-            throw new Error('encryptionStrategy must be instance of PasswordEncryptionStrategy');
-        }
+        if (!(this._strategy instanceof PasswordEncryptionStrategy)) throw new Error('encryptionStrategy must be instance of PasswordEncryptionStrategy');
     }
 
     encode(password) {
