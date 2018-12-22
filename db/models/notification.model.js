@@ -70,6 +70,22 @@ class NotificationModel extends ModelBase {
             });
         });
     }
+
+    /**
+     * @desc It returns single notification by id
+     * @param notificationId
+     * @returns {Promise<any>}
+     */
+    static getById(notificationId) {
+        return new Promise((resolve, reject) => {
+            database.dbDriver.openConnection((err, client, db) => {
+                if (err) return NotificationModel.catchRejection(client, err, reject);
+                return this.findById(db, collections.NOTIFICATIONS, notificationId)
+                    .then(channel => NotificationModel.catchResolve(client, new NotificationModel(channel), resolve))
+                    .catch(err => NotificationModel.catchRejection(client, err, reject));
+            });
+        });
+    }
 }
 
 module.exports = NotificationModel;

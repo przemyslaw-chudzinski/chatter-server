@@ -70,6 +70,41 @@ class ChannelModel extends ModelBase {
             });
         });
     }
+
+    /**
+     * @returns {Promise<any>}
+     */
+    update() {
+        return new Promise((resolve, reject) => {
+            database.dbDriver.openConnection((err, client, db) => {
+                if (err) return ChannelModel.catchRejection(client, err, reject);
+                this.updatedAt = new Date();
+                return this.findAndModify(db, collections.CHANNELS, this)
+                    .then(channel => ChannelModel.catchResolve(client, new ChannelModel(channel), resolve))
+                    .catch(err => ChannelModel.catchRejection(client, err, reject));
+            });
+        });
+    }
+
+    /**
+     * @param userId
+     * @returns {Promise<any>}
+     */
+    acceptInvitation(userId) {
+        return new Promise((resolve, reject) => {
+            const members = [...this.members];
+            const index = members.findIndex(m => !m.confirmed && m.memberId === userId);
+            if (index !== -1) {
+                members[index].confirmed = true;
+                members[index].confirmedAt = new Date();
+                this.members = members;
+                return this.update()
+                    .then(channel => resolve(new ChannelModel(channel)))
+                    .catch(err => reject(err));
+            }
+            return reject({reason: "Member either confirmed nor does't exist"});
+        });
+    }
 }
 
 module.exports = ChannelModel;

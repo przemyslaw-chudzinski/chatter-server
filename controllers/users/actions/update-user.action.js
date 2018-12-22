@@ -8,39 +8,30 @@ class UpdateUserAction extends ActionBase {
     }
 
     action() {
-
-        const payload = this.req.body;
-
-        if (!payload._id) throw new Error('payload data is incorrect');
-
-        if (this.loggedUserId !== payload._id)  throw new Error('You don"t have permission for this action');
+        const {firstName, lastName, email, avatar, _id} = this.req.body;
+        if (!_id) throw new Error('payload data is incorrect');
+        if (this.loggedUserId !== _id)  throw new Error('You don"t have permission for this action');
 
         UserModel.getById(this.loggedUserId)
-            .then(user => this._validateAvatar(payload.avatar, (err, avatar) => {
+            .then(user => this._validateAvatar(avatar, (err, avt) => {
                 if (err) return this.simpleResponse("Uploaded file must be an image", 409, null);
 
-                payload.firstName ? user.firstName = payload.firstName : null;
-                payload.lastName ? user.lastName = payload.lastName : null;
-                payload.email ? user.email = payload.email : null;
-                avatar ? user.avatar = avatar : user.avatar = null;
+                firstName ? user.firstName = firstName : null;
+                lastName ? user.lastName = lastName : null;
+                email ? user.email = email : null;
+                avt ? user.avatar = avt : null;
 
-                user.update()
-                    .then(user => {
+                user.update().then(user => {
                         this.res.status(200);
                         this.res.json(user);
-                    })
-                    .catch(err => this.simpleResponse(500, 'Something went wrong', err));
-            }))
-            .catch(err => this.simpleResponse(500, 'Something went wrong', err));
+                    }).catch(err => this.simpleResponse(500, 'Something went wrong', err));
+            })).catch(err => this.simpleResponse(500, 'Something went wrong', err));
     }
 
     _validateAvatar(avatar, next) {
         next = next || function () {};
-        if (avatar && avatar.mimeType && avatar.mimeType.includes('image')) {
-            return next(false, avatar);
-        } else if (!avatar) {
-            return next(false, null);
-        }
+        if (avatar && avatar.mimeType && avatar.mimeType.includes('image')) return next(false, avatar);
+        else if (!avatar) return next(false, null);
         return next(true, avatar);
     }
 

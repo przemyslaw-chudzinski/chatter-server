@@ -17,10 +17,9 @@ class SaveMessageAction extends ActionBase {
         newMessage.save()
             .then(message => {
                 this.res.status(200);
-                        this.res.json(message);
-                        this.wsServer.messageToContact(message);
-            })
-            .catch(err => this.simpleResponse('Internal server error', 500, err));
+                this.res.json(message);
+                this.wsServer.messageToContact(message);
+            }).catch(err => this.simpleResponse('Internal server error', 500, err));
     }
 }
 

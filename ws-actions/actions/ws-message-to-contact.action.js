@@ -16,6 +16,7 @@ class WsMessageToContactAction extends WsActionBase {
 
         if (conn) {
             if (conn.switchedUserId && event.data.authorId === conn.switchedUserId) {
+                console.log('user connected');
                 // is connected
             } else if (conn.switchedUserId && event.data.authorId !== conn.switchedUserId) {
                 // is connected to other user

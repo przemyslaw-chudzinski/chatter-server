@@ -8,9 +8,7 @@ class WsSwitchedToContactAction extends WsActionBase {
 
     init(event, wsServer) {
         const index = wsServer.connections.findIndex(c => c.userId === event.userId);
-        if (index !== -1) {
-            wsServer.connections[index].switchedUserId = event.contactId;
-        }
+        index !== -1 && (wsServer.connections[index].switchedUserId = event.contactId);
     }
 }
 

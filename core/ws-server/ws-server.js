@@ -1,6 +1,7 @@
 const ws = require('nodejs-websocket');
 const wsActions = require('../../ws-actions/ws-server-actions');
 const wsNotifications = require('./ws-server-notifications');
+const MessageModel = require('../../db/models/message.model');
 
 class WebSocketServer {
     constructor(cb) {
@@ -94,6 +95,9 @@ class WebSocketServer {
                 // is connected
                 message.read = true;
                 message.readAt = new Date();
+                // TODO: update message here !!!!
+                const _message = new MessageModel(message);
+                _message.update();
             } else if (conn.switchedUserId && message.authorId !== conn.switchedUserId) {
                 // is connected to other user
                 this.notifyContact(message.recipientId, message.authorId);
