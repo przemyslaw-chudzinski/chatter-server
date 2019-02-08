@@ -10,5 +10,9 @@ router.get('/', (req, res) => new notificationsController.GetNotificationsAction
  * @desc It returns number of notifications
  */
 router.get('/count', (req, res) => new notificationsController.CountNotificationsAction(req, res).init());
+/**
+ * @desc It marks as read unread notifications
+ */
+router.post('/mark-as-read', (req, res) => new notificationsController.ResetUnreadNotificationsAction(req, res).init());
 
 module.exports = router;

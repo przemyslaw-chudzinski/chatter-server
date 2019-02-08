@@ -16,24 +16,27 @@ class SignInAction extends ActionBase {
         };
     }
 
-    action() {
-        UserModel.getByEmail(this.req.body.email).then(user => {
-            if (!user) return this.simpleResponse( 'Wrong email or password', 404);
-            if (this._passwordEncryption.verify(this.req.body.password, user.password)) {
-                this.res.status(200);
-                return this.jwt.sign({
-                    user
-                }).then(token => {
-                    this.res.status(200);
-                    this.res.json({
-                        message: 'You have sign in correctly',
-                        user,
-                        token
-                    });
-                }).catch(err => this.simpleResponse('Internal server error 1', 500, err));
-            }
-            this.simpleResponse('Wrong email or password', 404);
-        }).catch(err => this.simpleResponse('Internal server error 2', 500, err));
+    async action() {
+        const {email, password} = this.req.body;
+        let user = null;
+
+        try {
+            user = await UserModel.getByEmail(email);
+        } catch (e) {
+            return this.simpleResponse('Wrong email or password', 404);
+        }
+
+        if (!user) return this.simpleResponse( 'Wrong email or password', 404);
+        if (this._passwordEncryption.verify(password, user.password)) {
+            const token = await this.jwt.sign({user});
+            this.res.status(200);
+            this.res.json({
+                message: 'You have signed in correctly',
+                user,
+                token
+            });
+        }
+        this.simpleResponse('Wrong email or password', 404);
     }
 }
 

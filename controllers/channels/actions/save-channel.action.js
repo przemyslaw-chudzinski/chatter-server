@@ -10,7 +10,6 @@ class SaveChannelAction extends ActionBase {
     }
 
     action() {
-
         const channel = new ChannelModel();
 
         channel.name = this.req.body.name;

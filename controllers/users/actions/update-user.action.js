@@ -13,13 +13,14 @@ class UpdateUserAction extends ActionBase {
         if (this.loggedUserId !== _id)  throw new Error('You don"t have permission for this action');
 
         UserModel.getById(this.loggedUserId)
-            .then(user => this._validateAvatar(avatar, (err, avt) => {
+            .then(user => UpdateUserAction._validateAvatar(avatar, (err, avt) => {
                 if (err) return this.simpleResponse("Uploaded file must be an image", 409, null);
 
                 firstName ? user.firstName = firstName : null;
                 lastName ? user.lastName = lastName : null;
                 email ? user.email = email : null;
-                avt ? user.avatar = avt : null;
+                avt ?  user.avatar = avt : null;
+                if (avt === 'remove') user.avatar = null;
 
                 user.update().then(user => {
                         this.res.status(200);
@@ -28,9 +29,10 @@ class UpdateUserAction extends ActionBase {
             })).catch(err => this.simpleResponse(500, 'Something went wrong', err));
     }
 
-    _validateAvatar(avatar, next) {
+    static _validateAvatar(avatar, next) {
         next = next || function () {};
         if (avatar && avatar.mimeType && avatar.mimeType.includes('image')) return next(false, avatar);
+        else if (avatar && avatar === 'remove') return next(false, avatar);
         else if (!avatar) return next(false, null);
         return next(true, avatar);
     }

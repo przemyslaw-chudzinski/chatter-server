@@ -1,7 +1,7 @@
 const ActionBase = require('../../action-base');
 const ChannelModel = require('../../../db/models/channel.model');
 const NotificationModel = require('../../../db/models/notification.model');
-// const wsActions = require('../../../ws-actions/ws-server-actions');
+const wsActions = require('../../../ws-actions/ws-server-actions');
 
 class AcceptInvitationAction extends ActionBase {
     constructor(req, res) {
@@ -28,10 +28,26 @@ class AcceptInvitationAction extends ActionBase {
                 const _channelModel = new ChannelModel(channel);
                 _channelModel.acceptInvitation(this.loggedUserId.toString())
                     .then(channel => {
+                        this._sendInformationToOwner(channel);
                         this.res.status(200);
                         this.res.json({});
                     }).catch(err => this.simpleResponse(err.reason, 500 , err))
             }).catch(err => this.simpleResponse(err.reason, 500 , err))
+    }
+
+    _sendInformationToOwner(channel) {
+        const notification = new NotificationModel();
+        notification.authorId = this.loggedUserId;
+        notification.message = this.loggedUser.firstName + ' ' + this.loggedUser.lastName + ' accepted your invitation to the channel - **'  + channel.name + '**';
+        notification.extra.confirmable = false;
+        notification.extra.channelId = channel._id;
+        notification.recipientIds = [channel.authorId];
+
+        notification.save()
+            .then(notification => this.wsServer.sendToOne(channel.authorId, JSON.stringify({
+                action: wsActions.ReceivedNotification,
+                data: notification
+            })));
     }
 }
 

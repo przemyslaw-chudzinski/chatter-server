@@ -2,6 +2,7 @@ const ModelBase = require('./model-base');
 const database = require('../../db');
 const collections = require('../collections');
 const Collection = require('../../core/collection/collection');
+const async = require('async');
 
 class NotificationModel extends ModelBase {
     constructor(notification = {}) {
@@ -38,10 +39,12 @@ class NotificationModel extends ModelBase {
                 }
             }
         };
+
+        const sort = {createdAt: -1};
         return new Promise((resolve, reject) => {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) return NotificationModel.catchRejection(client, err, reject);
-                NotificationModel.find(db, collections.NOTIFICATIONS, query)
+                NotificationModel.find(db, collections.NOTIFICATIONS, query, null, sort)
                     .then(notifications => NotificationModel.catchResolve(client, new Collection(notifications, this), resolve))
                     .catch(err => NotificationModel.catchRejection(client, err, reject));
             });
@@ -58,11 +61,19 @@ class NotificationModel extends ModelBase {
             return database.dbDriver.openConnection((err, client, db) => {
                 if (err) return NotificationModel.catchRejection(client, err, reject);
                 const query = {
-                    recipientIds: {
-                        $elemMatch: {
-                            $eq: loggedUserId
+                    $and: [
+                        {
+                            recipientIds: {
+                                $elemMatch: {
+                                    $eq: loggedUserId,
+                                }
+                            }},
+                        {
+                            read: {
+                                $eq: false
+                            }
                         }
-                    }
+                    ]
                 };
                 return NotificationModel.count(db, collections.NOTIFICATIONS, query)
                     .then(result => NotificationModel.catchResolve(client, result, resolve))
@@ -86,6 +97,37 @@ class NotificationModel extends ModelBase {
             });
         });
     }
+
+    /**
+     * @desc It updated single notification model
+     * @returns {Promise<any>}
+     */
+    update() {
+        return new Promise((resolve, reject) => {
+            database.dbDriver.openConnection((err, client, db) => {
+                if (err) return NotificationModel.catchRejection(client, err, reject);
+                this.updatedAt = new Date();
+                return this.findAndModify(db, collections.NOTIFICATIONS, this)
+                    .then(notification => NotificationModel.catchResolve(client, new NotificationModel(notification), resolve))
+                    .catch(err => NotificationModel.catchRejection(client, err, reject));
+            });
+        });
+    }
+
+//     static markAsRead(userId) {
+//         if (!userId) throw new Error('userId is required parameter');
+//         return new Promise((resolve, reject) => {
+//             database.dbDriver.openConnection(async (err, client, db) => {
+//                 if (err) return NotificationModel.catchRejection(client, err, reject);
+//                 const notifications = await NotificationModel.all(userId);
+//                 async.each(notifications, function (notification, next) {
+//
+//                 }, function () {
+//                     resolve();
+//                 });
+//             });
+//         });
+//     }
 }
 
 module.exports = NotificationModel;

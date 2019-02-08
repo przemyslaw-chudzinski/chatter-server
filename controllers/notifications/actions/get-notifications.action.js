@@ -27,9 +27,7 @@ class GetNotificationsAction extends ActionBase {
                                             next(null, notification);
                                         })
                                         .catch(err => next(err));
-                                } else {
-                                    next(null, notification);
-                                }
+                                } else next(null, notification);
                             }
                         })
                         .catch(err => next(err));

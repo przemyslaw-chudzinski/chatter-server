@@ -1,4 +1,4 @@
-class MongoDbDDriver {
+class MongoDbDriver {
 
     constructor(mongodb) {
         this._mongodb = mongodb;
@@ -14,4 +14,4 @@ class MongoDbDDriver {
     }
 }
 
-module.exports = MongoDbDDriver;
+module.exports = MongoDbDriver;
