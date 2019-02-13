@@ -87,6 +87,20 @@ class ChannelModel extends ModelBase {
     }
 
     /**
+     * @returns {Promise<any>}
+     */
+    deleteById() {
+        return new Promise((resolve, reject) => {
+            database.dbDriver.openConnection((err, client, db) => {
+                if (err) return ChannelModel.catchRejection(client, err, reject);
+                this.deleteOneById(db, collections.CHANNELS, this._id)
+                    .then(data => ChannelModel.catchResolve(client, data, resolve))
+                    .catch(err => ChannelModel.catchRejection(client, err, reject));
+            });
+        });
+    }
+
+    /**
      * @param userId
      * @returns {Promise<any>}
      */

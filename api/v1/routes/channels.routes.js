@@ -18,5 +18,9 @@ router.post('/accept-invitation', (req, res) => new channelsController.AcceptInv
  * @desc It returns single channel
  */
 router.get('/:id', (req, res) => new channelsController.GetChannelAction(req, res).init());
+/**
+ * @desc It deletes single channel
+ */
+router.delete('/:id', (req, res) => new channelsController.DeleteChannelAction(req, res).init());
 
 module.exports = router;

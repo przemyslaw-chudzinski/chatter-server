@@ -124,6 +124,20 @@ class ModelBase {
     }
 
     /**
+     *
+     * @param db
+     * @param collectionName
+     * @param id
+     * @returns {Promise<string>}
+     */
+    deleteOneById(db, collectionName, id) {
+        return new Promise((resolve, reject) => {
+            const filter = {_id: database.dbDriver.ObjectId(id)};
+            db.collection(collectionName).deleteOne(filter, (err) => ModelBase._callback(err, id, resolve, reject));
+        });
+    }
+
+    /**
      * @param client
      * @param err
      * @param next

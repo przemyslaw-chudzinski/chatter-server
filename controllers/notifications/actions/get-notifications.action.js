@@ -12,6 +12,7 @@ class GetNotificationsAction extends ActionBase {
         this._notificationResource = new NotificationResource;
     }
 
+    // TODO: fix logic responsible for getting data. Here is a problem when channel doesn't exist;
     action() {
         NotificationModel.all(this.loggedUserId)
             .then(notificationsCollection => {
