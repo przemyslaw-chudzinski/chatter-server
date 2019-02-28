@@ -1,7 +1,12 @@
 const ActionBase = require('../../action-base');
 const ChannelModel = require('../../../db/models/channel.model');
 const NotificationModel = require('../../../db/models/notification.model');
-const wsActions = require('../../../ws-actions/ws-server-actions');
+const channelExtra = require('./channel-extra');
+
+const _sendNotification = Symbol();
+const _prepareNotification = Symbol();
+const _prepareChannel = Symbol();
+const _getMembers = Symbol();
 
 class SaveChannelAction extends ActionBase {
     constructor(req, res) {
@@ -9,51 +14,61 @@ class SaveChannelAction extends ActionBase {
         this.auth = true;
     }
 
-    action() {
-        const channel = new ChannelModel();
-
-        channel.name = this.req.body.name;
-        channel.authorId = this.loggedUserId;
-        channel.members = this.members;
-        channel.save()
-            .then(channel => this._sendNotification(channel))
-            .catch(err => this.simpleResponse(500, 'Internal server error', err));
+    async action() {
+        const channelModel = this[_prepareChannel]();
+        try {
+            const savedChannelModel = await channelModel.save();
+            this[_sendNotification](savedChannelModel);
+            this.simpleResponse('Channel has been created', 200, savedChannelModel);
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
     }
 
-    _sendNotification(channel) {
+    /**
+     *
+     * @param channelModel
+     */
+    async [_sendNotification](channelModel) {
+        const notificationModel = this[_prepareNotification](channelModel);
+        try {
+            const notification = notificationModel.save();
+            delete notification.recipientIds;
+            channelExtra.notifyMembers.call(this, channelModel.members, notification);
+            return notification
+        } catch (e) {
+            throw new Error('Problem with saving notification');
+        }
+    }
+
+    /**
+     * @returns {ChannelModel}
+     */
+    [_prepareChannel]() {
+        const channelModel = new ChannelModel();
+        channelModel.name = this.req.body.name;
+        channelModel.authorId = this.loggedUserId;
+        channelModel.members = this[_getMembers]();
+        return channelModel;
+    }
+
+    /**
+     *
+     * @param channelModel
+     * @returns {NotificationModel}
+     */
+    [_prepareNotification](channelModel) {
         const notification = new NotificationModel();
         notification.authorId = this.loggedUserId;
-        notification.message = 'You have been invited to group chat **' + channel.name + '**';
-        notification.recipientIds = this._mapRecipientsIds(channel);
-
-        notification.save()
-            .then(notification => {
-                delete notification.recipientIds;
-                channel.members.forEach(member => {
-                    !member.confirmed && this.wsServer.sendToOne(member.memberId, JSON.stringify({
-                        action: wsActions.ReceivedNotification,
-                        data: notification
-                    }));
-                });
-                this._sendResponse(channel);
-            })
-            .catch(err => this.simpleResponse(500, 'Internal server error', err));
+        notification.message = 'You have been invited to group chat **' + channelModel.name + '**';
+        notification.recipientIds = channelExtra.mapRecipientsIds.call(this, channelModel.members, this.loggedUserId);
+        return notification;
     }
 
-    _mapRecipientsIds(channel) {
-        return channel.members.map(member => member.memberId !== this.loggedUserId ? member.memberId : null).filter(i => !!i)
-    }
-
-    _sendResponse(channel) {
-        this.res.status(200);
-        this.res.json({
-            data: channel,
-            message: "Channel has been created",
-            error: false
-        });
-    }
-
-    get members() {
+    /**
+     * @returns {{confirmedAt: null, confirmed: boolean, memberId: *}[]}
+     */
+    [_getMembers]() {
         const membersIds = [...this.req.body.memberIds, this.loggedUserId];
         return membersIds.map(memberId => {
             const result = {
@@ -66,7 +81,6 @@ class SaveChannelAction extends ActionBase {
                 result.confirmed = true;
                 result.confirmedAt = new Date();
             }
-
             return result;
         });
     }

@@ -9,14 +9,17 @@ class ResetUnreadNotificationsAction extends ActionBase {
     }
 
     async action() {
-        const notificationCollection = await NotificationModel.all(this.loggedUserId);
-
-        async.each(notificationCollection.items, async function (notification, next) {
-            notification.read = true;
-            notification.readAt = new Date();
-            await notification.update();
-            next();
-        }, () => this.res.json({}));
+        try {
+            const notificationCollection = await NotificationModel.all(this.loggedUserId);
+            async.each(notificationCollection.items, async function (notification, next) {
+                notification.read = true;
+                notification.readAt = new Date();
+                await notification.update();
+                next();
+            }, () => this.simpleResponse(null, 200));
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
     }
 }
 

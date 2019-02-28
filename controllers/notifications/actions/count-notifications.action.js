@@ -7,10 +7,13 @@ class CountNotificationsAction extends ActionBase {
         this.auth = true;
     }
 
-    action() {
-        NotificationModel.countUnreadNotifications(this.loggedUserId)
-            .then(unread => this.res.json({ unread }))
-            .catch(err => this.simpleResponse(500, 'Internal server error', err));
+    async action() {
+        try {
+            const unread = await NotificationModel.countUnreadNotifications(this.loggedUserId);
+            this.simpleResponse(null, 200, unread);
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
     }
 }
 

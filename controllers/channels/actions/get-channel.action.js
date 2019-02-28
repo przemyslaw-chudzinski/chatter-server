@@ -7,14 +7,15 @@ class GetChannelAction extends ActionBase {
         this.auth = true;
     }
 
-    action() {
+    async action() {
         const {id} = this.req.params;
         if (!id) throw new Error('id is required');
-        ChannelModel.getById(id)
-            .then(data => {
-                this.res.status(200);
-                this.res.json(data);
-            }).catch(err => this.simpleResponse('Internal server error !!!!', 500, err));
+        try {
+            const channelModel = await ChannelModel.getById(id);
+            this.simpleResponse(null, 200, channelModel);
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
     }
 }
 

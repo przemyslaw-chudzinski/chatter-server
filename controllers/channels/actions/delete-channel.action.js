@@ -1,14 +1,12 @@
 const ActionBase = require('../../action-base');
 const ChannelModel = require('../../../db/models/channel.model');
 const NotificationModel = require('../../../db/models/notification.model');
-const wsActions = require('../../../ws-actions/ws-server-actions');
+const channelExtra = require('./channel-extra');
 
 // Symbols for private usage
 const _sendNotification = Symbol();
-const _mapRecipientsIds = Symbol();
 const _deleteChannel = Symbol();
 const _prepareNotification = Symbol();
-const _notifyMembers = Symbol();
 
 class DeleteChannelAction extends ActionBase {
     constructor(req, res) {
@@ -19,7 +17,6 @@ class DeleteChannelAction extends ActionBase {
     async action() {
         const {id} = this.req.params;
         if (!id) throw new Error('Id param is required');
-
         try {
             const channelModel = await ChannelModel.getById(id);
             if (channelModel.authorId !== this.loggedUserId) return this.simpleResponse('No permissions for this operation', 403);
@@ -53,32 +50,11 @@ class DeleteChannelAction extends ActionBase {
         try {
             const notification = await notificationModel.save();
             delete notification.recipientIds;
-            this[_notifyMembers](channelModel.members, notification);
+            channelExtra.notifyMembers.call(this, channelModel.members, notification);
             return notificationModel;
         } catch (e) {
             throw new Error('Internal server error. Cannot send notifications');
         }
-    }
-
-    /**
-     * @param members
-     * @return []
-     */
-    [_mapRecipientsIds](members) {
-        return members && members.length && members.map(member => member.memberId !== this.loggedUserId ? member.memberId : null).filter(i => !!i);
-    }
-
-    /**
-     * @param members[]
-     * @param data
-     */
-    [_notifyMembers](members, data) {
-        members.forEach(member => {
-            !member.confirmed && this.wsServer.sendToOne(member.memberId, JSON.stringify({
-                action: wsActions.ReceivedNotification,
-                data
-            }));
-        });
     }
 
     /**
@@ -89,7 +65,7 @@ class DeleteChannelAction extends ActionBase {
         const notification = new NotificationModel();
         notification.authorId = this.loggedUserId;
         notification.message = 'Channel ' + channelModel.name + ' was removed by author';
-        notification.recipientIds = this[_mapRecipientsIds](channelModel.members);
+        notification.recipientIds = channelExtra.mapRecipientsIds.call(this, channelModel.members, this.loggedUserId);
         notification.extra.confirmable = true;
         notification.extra.channelId = channelModel._id;
         return notification;

@@ -30,6 +30,11 @@ class ActionBase {
          * @type {boolean}
          */
         this.auth = false;
+        // /**
+        //  * @desc Extra or shared features
+        //  * @type {any}
+        //  */
+        // this._extra = extra;
     }
 
     /**
@@ -157,6 +162,14 @@ class ActionBase {
     get filesSystem() {
         return this._filesSystem;
     }
+
+    /**
+     * @desc
+     * @returns {any}
+     */
+    // get extra() {
+    //     return this._extra;
+    // }
 }
 
 module.exports = ActionBase;
