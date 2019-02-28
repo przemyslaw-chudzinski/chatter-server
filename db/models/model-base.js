@@ -113,7 +113,7 @@ class ModelBase {
      * @param update
      * @returns {Promise<any>}
      */
-    updateMany(db, collectionName, data, query = null, update = null) {
+    static updateMany(db, collectionName, data, query = null, update = null) {
         return new Promise((resolve, reject) => {
             query = query || {};
             delete data._id;

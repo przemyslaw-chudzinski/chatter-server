@@ -1,7 +1,6 @@
 const ActionBase = require('../../action-base');
 const MessagesModel = require('../../../db/models/message.model');
 const UserModel = require('../../../db/models/user.model');
-const MessageResource = require('../../../resources/message.resource');
 const UserResource = require('../../../resources/user.resource');
 const async = require('async');
 
@@ -9,7 +8,6 @@ class GetMessagesAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
         this.auth = true;
-        this._messageResource = new MessageResource();
         this._userResource = new UserResource();
     }
 
@@ -31,13 +29,9 @@ class GetMessagesAction extends ActionBase {
                         })
                         .catch(err => this.simpleResponse('Internal server error', 500, err));
 
-                }, (err, results) => {
-                    messagesCollection.items = results;
-                    this.res.status(200);
-                    this.res.json(this._messageResource.collection(messagesCollection));
-                });
+                }, (err, results) => this.simpleResponse(null, 200, results));
             })
-            .catch(err => this.simpleResponse('Internal server error', 500, err));
+            .catch(() => this.simpleResponse('Internal server error', 500));
     }
 }
 

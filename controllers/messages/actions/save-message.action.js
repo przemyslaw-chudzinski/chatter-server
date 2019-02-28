@@ -1,25 +1,35 @@
 const ActionBase = require('../../action-base');
 const MessageModel = require('../../../db/models/message.model');
 
+const _prepareMessage = Symbol();
+
 class SaveMessageAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
         this.auth = true;
     }
 
-    action() {
-        const newMessage = new MessageModel();
-        newMessage.content = this.req.body.content;
-        newMessage.authorId = this.loggedUserId;
-        newMessage.recipientId = this.req.body.recipientId;
-        newMessage.attachedFiles = this.req.body.attachedFiles;
+    async action() {
+        const messageModel = this[_prepareMessage]();
+        try {
+            const savedMessageModel = await messageModel.save();
+            this.simpleResponse(null, 200, savedMessageModel);
+            this.wsServer.messageToContact(savedMessageModel);
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
+    }
 
-        newMessage.save()
-            .then(message => {
-                this.res.status(200);
-                this.res.json(message);
-                this.wsServer.messageToContact(message);
-            }).catch(err => this.simpleResponse('Internal server error', 500, err));
+    /**
+     * @returns {MessageModel}
+     */
+    [_prepareMessage]() {
+        const messageModel = new MessageModel();
+        messageModel.content = this.req.body.content;
+        messageModel.authorId = this.loggedUserId;
+        messageModel.recipientId = this.req.body.recipientId;
+        messageModel.attachedFiles = this.req.body.attachedFiles;
+        return messageModel;
     }
 }
 

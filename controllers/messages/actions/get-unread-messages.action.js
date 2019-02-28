@@ -1,19 +1,19 @@
 const ActionBase = require('../../action-base');
 const MessagesModel = require('../../../db/models/message.model');
-const UnreadMessageResource = require('../../../resources/unread-message.resource');
 
 class GetUnreadMessagesAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
         this.auth = true;
-        this._unreadMessageResource = new UnreadMessageResource;
     }
 
-    action() {
-        MessagesModel.getUnreadMessages(this.loggedUserId).then(unreadMessagesCollection => {
-            this.res.status(200);
-            this.res.json(this._unreadMessageResource.collection(unreadMessagesCollection));
-        }).catch(err => this.simpleResponse(500, 'Internal server error', err));
+    async action() {
+        try {
+            const unreadMessagesCollection = await MessagesModel.getUnreadMessages(this.loggedUserId);
+            this.simpleResponse(null, 200, unreadMessagesCollection.items);
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
     }
 }
 

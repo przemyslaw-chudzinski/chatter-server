@@ -93,11 +93,8 @@ class WebSocketServer {
         if (conn) {
             if (conn.switchedUserId && message.authorId === conn.switchedUserId) {
                 // is connected
-                message.read = true;
-                message.readAt = new Date();
-                // TODO: update message here !!!!
-                const _message = new MessageModel(message);
-                _message.update();
+                // TODO: Mark message as read
+                MessageModel.resetUnreadMessages(message.recipientId);
             } else if (conn.switchedUserId && message.authorId !== conn.switchedUserId) {
                 // is connected to other user
                 this.notifyContact(message.recipientId, message.authorId);

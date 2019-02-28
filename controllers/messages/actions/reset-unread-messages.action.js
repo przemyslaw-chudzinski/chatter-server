@@ -4,15 +4,17 @@ const MessagesModel = require('../../../db/models/message.model');
 class ResetUnreadMessagesAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._messagesModel = new MessagesModel();
-        this._init();
+        this.auth = true;
     }
 
-    _init() {
+    async action() {
         if (!this.loggedUserId) throw new Error('user is not logged');
-        this._messagesModel.resetUnreadMessages(this.req.params.contactId)
-            .then(() => this.simpleResponse('Messages has been set as read successfully', 200, false))
-            .catch(err => this.simpleResponse('Internal server error', 500, err));
+        try {
+            await MessagesModel.resetUnreadMessages(this.req.params.contactId);
+            this.simpleResponse('Messages has been set as read successfully', 200);
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
     }
 }
 

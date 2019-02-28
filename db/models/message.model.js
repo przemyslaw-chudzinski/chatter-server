@@ -131,7 +131,7 @@ class MessageModel extends ModelBase {
      * @param contactId
      * @returns {Promise<any>}
      */
-    resetUnreadMessages(contactId) {
+    static resetUnreadMessages(contactId) {
         return new Promise((resolve, reject) => {
             database.dbDriver.openConnection((err, client, db) => {
                 if (err) return MessageModel.catchRejection(client, err, reject);
@@ -140,7 +140,7 @@ class MessageModel extends ModelBase {
                     readAt: new Date()
                 };
                 const query = {authorId: contactId.toString()};
-                return this
+                return MessageModel
                     .updateMany(db, collections.MESSAGES, payload, query)
                     .then(result => MessageModel.catchResolve(client, result, resolve))
                     .catch(err => MessageModel.catchRejection(client, err, reject));
