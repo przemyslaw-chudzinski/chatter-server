@@ -38,9 +38,6 @@ class ChannelModel extends ModelBase {
                 $elemMatch: {
                     memberId: {
                         $eq: loggedUserId
-                    },
-                    confirmed: {
-                        $eq: true
                     }
                 }
             }

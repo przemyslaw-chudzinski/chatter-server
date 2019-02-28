@@ -74,14 +74,14 @@ class ActionBase {
      * @desc
      * @param status
      * @param message
-     * @param err
+     * @param data
      * @returns {*|Promise<any>}
      */
-    simpleResponse(message = '', status = 400, error = null) {
+    simpleResponse(message = '', status = 400, data = null) {
         this._res.status(status);
         return this._res.json({
             message,
-            error
+            data
         });
     }
 

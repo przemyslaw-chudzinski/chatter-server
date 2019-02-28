@@ -9,13 +9,15 @@ class GetUsersAction extends ActionBase {
         this._userResource = new UserResource;
     }
 
-    action() {
-        UserModel.all(this.loggedUserId)
-            .then(usersCollection => {
-                this.res.status(200);
-                this.res.json(this._userResource.collection(usersCollection));
-            })
-            .catch(err => this.simpleResponse(500, 'Internal server error', err));
+    async action() {
+        try {
+            const usersCollection = await UserModel.all(this.loggedUserId);
+            this.res.status(200);
+            this.res.json(this._userResource.collection(usersCollection));
+            return usersCollection;
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
     }
 }
 

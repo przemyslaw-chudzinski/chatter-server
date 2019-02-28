@@ -4,19 +4,18 @@ const UserModel = require('../../../db/models/user.model');
 class GetAvatarAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
-        this._init();
+        this.auth = true;
     }
 
-    _init() {
+    async action() {
         if (!this.loggedUserId) throw new Error('id is required');
-        UserModel.getById(this.loggedUserId).then(data => {
-            if (data) {
-                this.res.status(200);
-                this.res.json(data.avatar);
-                return;
-            }
-            this.simpleResponse(404, 'User not found');
-        }).catch(err => this.simpleResponse(500, 'Internal server error', err))
+        try {
+            const user = await UserModel.getById(this.loggedUserId);
+            user ? this.simpleResponse(null, 200, user.avatar) : this.simpleResponse('User not found', 404);
+            return user;
+        } catch (e) {
+            return 'error';
+        }
     }
 
 }
