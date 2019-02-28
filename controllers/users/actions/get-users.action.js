@@ -14,7 +14,6 @@ class GetUsersAction extends ActionBase {
             const usersCollection = await UserModel.all(this.loggedUserId);
             this.res.status(200);
             this.res.json(this._userResource.collection(usersCollection));
-            return usersCollection;
         } catch (e) {
             this.simpleResponse('Internal server error', 500);
         }

@@ -12,7 +12,6 @@ class GetUserAction extends ActionBase {
             const {params} = this.req;
             const user = await UsersModel.getById(params.id);
             user && this.simpleResponse(null, 200, user);
-            return user;
         } catch (e) {
             this.simpleResponse('Internal server error', 500);
         }

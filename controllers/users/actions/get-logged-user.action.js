@@ -9,16 +9,12 @@ class GetLoggedUserAction extends ActionBase {
 
     async action() {
         if (!this.loggedUserId) throw new Error('id is required');
-
         try {
             const user = await UserModel.getById(this.loggedUserId);
             user ? this.simpleResponse(null, 200, user) : this.simpleResponse('User not found', 404);
-            return user;
         } catch (e) {
             this.simpleResponse('Internal server error', 500);
-            return 'error';
         }
-
     }
 
 }

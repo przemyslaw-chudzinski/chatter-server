@@ -12,9 +12,8 @@ class GetAvatarAction extends ActionBase {
         try {
             const user = await UserModel.getById(this.loggedUserId);
             user ? this.simpleResponse(null, 200, user.avatar) : this.simpleResponse('User not found', 404);
-            return user;
         } catch (e) {
-            return 'error';
+            this.simpleResponse('Interval server error', 500);
         }
     }
 
