@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03cb3265-804c-4fc6-af6e-592f16feb52e" name="Default" comment="working on project">
-      <change afterPath="$PROJECT_DIR$/controllers/channels/actions/channel-extra.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/action-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/action-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/channels/actions/accept-invitation.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/channels/actions/accept-invitation.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/channels/actions/delete-channel.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/channels/actions/delete-channel.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/channels/actions/get-channel.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/channels/actions/get-channel.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/channels/actions/get-channels.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/channels/actions/get-channels.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/channels/actions/save-channel.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/channels/actions/save-channel.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/notifications/actions/count-notifications.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/notifications/actions/count-notifications.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/notifications/actions/reset-unread-notifications.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/notifications/actions/reset-unread-notifications.action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/channel.resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/channel.resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/users/actions/get-users.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/users/actions/get-users.action.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/validator/actions/check-email.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/validator/actions/check-email.action.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/models/user.model.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,20 +28,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-users.action.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            <state relative-caret-position="23">
+              <caret line="1" column="59" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="59" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/notifications/actions/reset-unread-notifications.action.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/users/actions/update-user.action.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+            <state relative-caret-position="506">
+              <caret line="22" column="62" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/validator/actions/check-email.action.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="13" column="46" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/models/user.model.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="13" column="58" lean-forward="true" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -126,9 +135,7 @@
         <option value="$PROJECT_DIR$/db/models/notification.model.js" />
         <option value="$PROJECT_DIR$/controllers/auth/actions/sign-up.action.js" />
         <option value="$PROJECT_DIR$/controllers/auth/actions/sign-in.action.js" />
-        <option value="$PROJECT_DIR$/controllers/validator/actions/check-email.action.js" />
         <option value="$PROJECT_DIR$/db/drivers/mongodb/mongodb.driver.js" />
-        <option value="$PROJECT_DIR$/db/models/user.model.js" />
         <option value="$PROJECT_DIR$/controllers/channels/channels.controller.js" />
         <option value="$PROJECT_DIR$/api/v1/routes/channels.routes.js" />
         <option value="$PROJECT_DIR$/db/models/model-base.js" />
@@ -136,7 +143,6 @@
         <option value="$PROJECT_DIR$/controllers/users/actions/get-avatar.action.js" />
         <option value="$PROJECT_DIR$/controllers/users/actions/get-logged-user.action.js" />
         <option value="$PROJECT_DIR$/controllers/users/actions/get-user.action.js" />
-        <option value="$PROJECT_DIR$/controllers/users/actions/get-users.action.js" />
         <option value="$PROJECT_DIR$/controllers/users/actions/update-user.action.js" />
         <option value="$PROJECT_DIR$/controllers/channels/actions/get-channels.action.js" />
         <option value="$PROJECT_DIR$/resources/channel.resource.js" />
@@ -150,6 +156,9 @@
         <option value="$PROJECT_DIR$/controllers/notifications/actions/count-notifications.action.js" />
         <option value="$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js" />
         <option value="$PROJECT_DIR$/controllers/notifications/actions/reset-unread-notifications.action.js" />
+        <option value="$PROJECT_DIR$/db/models/user.model.js" />
+        <option value="$PROJECT_DIR$/controllers/validator/actions/check-email.action.js" />
+        <option value="$PROJECT_DIR$/controllers/users/actions/get-users.action.js" />
       </list>
     </option>
   </component>
@@ -187,13 +196,13 @@
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
+              <item name="validator" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
+              <item name="validator" type="462c0819:PsiDirectoryNode" />
               <item name="actions" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -366,7 +375,7 @@
       <workItem from="1551165895243" duration="622000" />
       <workItem from="1551351902499" duration="41000" />
       <workItem from="1551351960351" duration="29000" />
-      <workItem from="1551355007858" duration="16245000" />
+      <workItem from="1551355007858" duration="17526000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -477,13 +486,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="380009000" />
+    <option name="totallyTimeSpent" value="381290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.15351813" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.15351813" />
       <window_info id="Structure" order="1" sideWeight="0.5007728" side_tool="true" weight="0.25239617" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -505,7 +514,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.26119402" />
       <window_info anchor="right" id="Mongo Explorer" order="4" />
-      <window_info anchor="right" id="Terminal" order="5" visible="true" weight="0.12686567" />
+      <window_info active="true" anchor="right" id="Terminal" order="5" visible="true" weight="0.3022388" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.2172524" />
@@ -746,31 +755,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/validator/actions/check-email.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/models/user.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="74" lean-forward="true" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/v1/routes/channels.routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="529">
           <caret line="23" column="97" selection-start-line="23" selection-start-column="97" selection-end-line="23" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/models/model-base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="121" column="95" selection-start-line="121" selection-start-column="89" selection-end-line="121" selection-end-column="95" />
         </state>
       </provider>
     </entry>
@@ -783,41 +771,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/users/users.controller.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-avatar.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="62" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-logged-user.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-user.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="44" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-users.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="17" column="62" lean-forward="true" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/users/actions/update-user.action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="22" column="62" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="62" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/channel.resource.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -924,17 +877,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js">
+    <entry file="file://$PROJECT_DIR$/controllers/notifications/actions/reset-unread-notifications.action.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="483">
+          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/notifications/actions/reset-unread-notifications.action.js">
+    <entry file="file://$PROJECT_DIR$/controllers/notifications/actions/get-notifications.action.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+        <state relative-caret-position="161">
+          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/models/model-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="67" column="11" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/models/user.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" column="58" lean-forward="true" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/validator/actions/check-email.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" column="46" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/users/actions/update-user.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="22" column="62" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-logged-user.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-avatar.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-user.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/users/actions/get-users.action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="59" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="59" />
         </state>
       </provider>
     </entry>

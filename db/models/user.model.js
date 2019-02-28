@@ -6,15 +6,17 @@ const Collection = require('../../core/collection/collection');
 class UserModel extends ModelBase {
     constructor(user) {
         super();
-        this.firstName = user.firstName || null;
-        this.lastName = user.lastName || null;
-        this.email = user.email || null;
-        this.password = user.password || null;
-        this.createdAt = user.createdAt || new Date();
-        this.updatedAt = user.updatedAt || null;
-        this.confirmed = user.confirmed || false;
-        this.avatar = user.avatar || null;
-        this._id = user._id ? database.dbDriver.ObjectId(user._id) : null;
+        if (user) {
+            this.firstName = user.firstName || null;
+            this.lastName = user.lastName || null;
+            this.email = user.email || null;
+            this.password = user.password || null;
+            this.createdAt = user.createdAt || new Date();
+            this.updatedAt = user.updatedAt || null;
+            this.confirmed = user.confirmed || false;
+            this.avatar = user.avatar || null;
+            this._id = user._id ? database.dbDriver.ObjectId(user._id) : null;
+        }
     }
 
     /**

@@ -7,13 +7,14 @@ class CheckEmailAction extends ActionBase {
         this.auth = true;
     }
 
-    action() {
-        UserModel.getByEmail(this.req.body.email.toLowerCase())
-            .then(user => {
-                if (user && user.email === this.loggedUserEmail) return this.res.json(null);
-                else if (!user) return this.res.json(null);
-                else return this.res.json({isTaken: true});
-            }).catch(err => this.simpleResponse(500, 'Internal server error', err))
+    async action() {
+        try {
+            const userModel = await UserModel.getByEmail(this.req.body.email.toLowerCase());
+            if (!userModel.email || userModel.email === this.loggedUserEmail) return this.res.json(null);
+            else return this.res.json({isTaken: true});
+        } catch (e) {
+            this.simpleResponse('Internal server error', 500);
+        }
     }
 }
 
