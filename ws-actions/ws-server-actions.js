@@ -7,5 +7,7 @@ module.exports = {
     DetachContact: 'DETACH_CONTACT',
     NotifyContact: 'NOTIFY_CONTACT',
     MessageUpdated: 'MESSAGE_UPDATED',
-    ReceivedNotification: 'RECEIVED_NOTIFICATION'
+    ReceivedNotification: 'RECEIVED_NOTIFICATION',
+    ChannelHasBeenDeleted: 'CHANNEL_HAS_BEEN_DELETED',
+    ChannelHasBeenCreated: 'CHANNEL_HAS_BEEN_CREATED',
 };
