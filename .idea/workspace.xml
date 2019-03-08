@@ -412,7 +412,7 @@
       <workItem from="1551351960351" duration="29000" />
       <workItem from="1551355007858" duration="22278000" />
       <workItem from="1551424712763" duration="48000" />
-      <workItem from="1552052420641" duration="6156000" />
+      <workItem from="1552052420641" duration="6246000" />
     </task>
     <task id="LOCAL-00001" summary="clean up">
       <created>1532542603741</created>
@@ -523,11 +523,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="392246000" />
+    <option name="totallyTimeSpent" value="392336000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992272" visible="true" weight="0.2238806" />
       <window_info id="Structure" order="1" sideWeight="0.5007728" side_tool="true" weight="0.25239617" />
