@@ -2,11 +2,13 @@ const ActionBase = require('../../action-base');
 const ChannelModel = require('../../../db/models/channel.model');
 const NotificationModel = require('../../../db/models/notification.model');
 const channelExtra = require('./channel-extra');
+const {ChannelHasBeenCreated} = require('../../../ws-actions/ws-server-actions');
 
 const _sendNotification = Symbol();
 const _prepareNotification = Symbol();
 const _prepareChannel = Symbol();
 const _getMembers = Symbol();
+const _updateChannelsLists = Symbol();
 
 class SaveChannelAction extends ActionBase {
     constructor(req, res) {
@@ -19,6 +21,7 @@ class SaveChannelAction extends ActionBase {
         try {
             const savedChannelModel = await channelModel.save();
             this[_sendNotification](savedChannelModel);
+            this[_updateChannelsLists](savedChannelModel);
             this.simpleResponse('Channel has been created', 200, savedChannelModel);
         } catch (e) {
             this.simpleResponse('Internal server error', 500);
@@ -83,6 +86,14 @@ class SaveChannelAction extends ActionBase {
             }
             return result;
         });
+    }
+
+    /**
+     * @param channelModel
+     */
+    [_updateChannelsLists](channelModel) {
+        const recipients = channelModel.members.filter(member => member._id !== this.loggedUserId);
+        channelExtra.notifyMembers.call(this, recipients, channelModel, ChannelHasBeenCreated);
     }
 }
 

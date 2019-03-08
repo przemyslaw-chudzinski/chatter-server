@@ -15,12 +15,13 @@ class AcceptInvitationAction extends ActionBase {
 
     async action() {
         // TODO: Put validators rules!!!
-        const {notificationId} = this.req.body;
-        if (!notificationId) throw new Error ('notificationId is required');
+        const {channelId} = this.req.body;
+        if (!channelId) throw new Error ('channelId is required');
 
         try {
-            const {extra} = await NotificationModel.getById(notificationId);
-            extra && extra.channelId ? this[_acceptChannelInvitation](extra.channelId) : this.simpleResponse('channelId is not recognized', 500 , null);
+            // const {extra} = await NotificationModel.getById(notificationId);
+            // extra && extra.channelId ? this[_acceptChannelInvitation](extra.channelId) : this.simpleResponse('channelId is not recognized', 500 , null);
+            this[_acceptChannelInvitation](channelId, this.loggedUserId);
             this.simpleResponse('Invitation has been accepted', 200);
         } catch (e) {
             this.simpleResponse('Internal server error', 500);
@@ -29,12 +30,13 @@ class AcceptInvitationAction extends ActionBase {
 
     /**
      * @param channelId
+     * @param loggedUserId
      * @returns {Promise<any>}
      */
-    async [_acceptChannelInvitation](channelId) {
+    async [_acceptChannelInvitation](channelId, loggedUserId) {
        try {
            const channelModel = await ChannelModel.getById(channelId);
-           const updatedChannelModel = await channelModel.acceptInvitation();
+           const updatedChannelModel = await channelModel.acceptInvitation(loggedUserId);
            this[_sendInformationToOwner](updatedChannelModel);
            return channelModel;
        } catch (e) {
