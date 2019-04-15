@@ -13,7 +13,7 @@ class AcceptInvitationAction extends ActionBase {
         this.auth = true;
     }
 
-    async action() {
+    action() {
         // TODO: Put validators rules!!!
         const {channelId} = this.req.body;
         if (!channelId) throw new Error ('channelId is required');

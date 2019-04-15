@@ -2,6 +2,8 @@ const database = require('../index');
 const collections = require('../collections/index');
 const ModelBase = require('./model-base');
 const Collection = require('../../core/collection/collection');
+const async = require('async');
+const UserModel = require('./user.model');
 
 class ChannelModel extends ModelBase {
     constructor(channel = {}) {
@@ -114,6 +116,28 @@ class ChannelModel extends ModelBase {
                     .catch(err => reject(err));
             }
             return reject({reason: "Member either confirmed nor does't exist"});
+        });
+    }
+
+    /**
+     *
+     * @param excludedIds
+     * @returns {Promise<any>}
+     */
+    decodeMembers(excludedIds = []) {
+        return new Promise((resolve, reject) => {
+            let members = [];
+            this.members && this.members.length && async.each(this.members.filter(m => !excludedIds.includes(m.memberId)), ({memberId, confirmed, confirmedAt}, next) => {
+                UserModel.getById(memberId).then(decodedMember => {
+                    decodedMember.confirmed = confirmed;
+                    decodedMember.confirmedAt = confirmedAt;
+                    members.push(decodedMember);
+                    next();
+                }).catch(() => next(true));
+            }, err => {
+                if (err) return reject(err);
+                resolve(members);
+            });
         });
     }
 }

@@ -22,5 +22,9 @@ router.get('/:id', (req, res) => new channelsController.GetChannelAction(req, re
  * @desc It deletes single channel
  */
 router.delete('/:id', (req, res) => new channelsController.DeleteChannelAction(req, res).init());
+/**
+ * @desc It returns the channel members list
+ */
+router.get('/:id/members', (req, res) => new channelsController.GetChannelMembersAction(req, res).init());
 
 module.exports = router;

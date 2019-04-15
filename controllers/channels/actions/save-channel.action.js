@@ -1,7 +1,7 @@
 const ActionBase = require('../../action-base');
 const ChannelModel = require('../../../db/models/channel.model');
 const NotificationModel = require('../../../db/models/notification.model');
-const channelExtra = require('./channel-extra');
+const {notifyUnconfirmedMembers, mapRecipientsIds} = require('./channel-extra');
 const {ChannelHasBeenCreated} = require('../../../ws-actions/ws-server-actions');
 
 const _sendNotification = Symbol();
@@ -37,7 +37,7 @@ class SaveChannelAction extends ActionBase {
         try {
             const notification = notificationModel.save();
             delete notification.recipientIds;
-            channelExtra.notifyMembers.call(this, channelModel.members, notification);
+            notifyUnconfirmedMembers.call(this, channelModel.members, notification);
             return notification
         } catch (e) {
             throw new Error('Problem with saving notification');
@@ -64,7 +64,7 @@ class SaveChannelAction extends ActionBase {
         const notification = new NotificationModel();
         notification.authorId = this.loggedUserId;
         notification.message = 'You have been invited to group chat **' + channelModel.name + '**';
-        notification.recipientIds = channelExtra.mapRecipientsIds.call(this, channelModel.members, this.loggedUserId);
+        notification.recipientIds = mapRecipientsIds.call(this, channelModel.members, this.loggedUserId);
         return notification;
     }
 
@@ -93,7 +93,7 @@ class SaveChannelAction extends ActionBase {
      */
     [_updateChannelsLists](channelModel) {
         const recipients = channelModel.members.filter(member => member._id !== this.loggedUserId);
-        channelExtra.notifyMembers.call(this, recipients, channelModel, ChannelHasBeenCreated);
+        notifyUnconfirmedMembers.call(this, recipients, channelModel, ChannelHasBeenCreated);
     }
 }
 

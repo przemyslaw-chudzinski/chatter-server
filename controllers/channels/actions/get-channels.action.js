@@ -12,7 +12,7 @@ class GetChannelsAction extends ActionBase {
             const channelsCollection = await ChannelModel.all(this.loggedUserId);
             this.simpleResponse(null, 200, channelsCollection.items);
         } catch (e) {
-            this.simpleResponse('Internal server error')
+            this.simpleResponse('Internal server error', 500);
         }
     }
 }
