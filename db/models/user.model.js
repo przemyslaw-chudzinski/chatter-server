@@ -10,7 +10,7 @@ class UserModel extends ModelBase {
             this.firstName = user.firstName || null;
             this.lastName = user.lastName || null;
             this.email = user.email || null;
-            // this.password = user.password || null;
+            this.password = user.password || null;
             this.createdAt = user.createdAt || new Date();
             this.updatedAt = user.updatedAt || null;
             this.confirmed = user.confirmed || false;
@@ -66,7 +66,7 @@ class UserModel extends ModelBase {
                 if (err) return UserModel.catchRejection(client, err, reject);
                 const query = {email};
                 this.first(db, collections.USERS, query)
-                    .then(user => UserModel.catchResolve(client, new UserModel(this[_removeSensitiveData](user)), resolve))
+                    .then(user => UserModel.catchResolve(client, new UserModel(user), resolve))
                     .catch(err => UserModel.catchRejection(client, err, reject));
             });
         });

@@ -119,10 +119,15 @@ class ChannelModel extends ModelBase {
         });
     }
 
-    decodeMembers() {
+    /**
+     *
+     * @param excludedIds
+     * @returns {Promise<any>}
+     */
+    decodeMembers(excludedIds = []) {
         return new Promise((resolve, reject) => {
             let members = [];
-            this.members && this.members.length && async.each(this.members, ({memberId, confirmed, confirmedAt}, next) => {
+            this.members && this.members.length && async.each(this.members.filter(m => !excludedIds.includes(m.memberId)), ({memberId, confirmed, confirmedAt}, next) => {
                 UserModel.getById(memberId).then(decodedMember => {
                     decodedMember.confirmed = confirmed;
                     decodedMember.confirmedAt = confirmedAt;

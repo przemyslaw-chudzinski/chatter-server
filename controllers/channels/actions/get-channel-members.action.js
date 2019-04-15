@@ -12,8 +12,9 @@ class GetChannelMembersAction extends ActionBase {
 
         try {
             const channel = await ChannelModel.getById(channelId);
-            const members = await channel.decodeMembers();
-            this.simpleResponse(null, 200, members);
+            const decodedMembers = await channel.decodeMembers([this.loggedUserId]);
+            console.log(decodedMembers);
+            this.simpleResponse(null, 200, decodedMembers);
         } catch (e) {
             this.simpleResponse('Internal server error', 500);
         }
