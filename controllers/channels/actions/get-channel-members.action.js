@@ -1,20 +1,23 @@
 const ActionBase = require('../../action-base');
 const ChannelModel = require('../../../db/models/channel.model');
 
-class GetChannelsAction extends ActionBase {
+class GetChannelMembersAction extends ActionBase {
     constructor(req, res) {
         super(req, res);
         this.auth = true;
     }
 
     async action() {
+        const channelId = this.req.params.id;
+
         try {
-            const channelsCollection = await ChannelModel.all(this.loggedUserId);
-            this.simpleResponse(null, 200, channelsCollection.items);
+            const channel = await ChannelModel.getById(channelId);
+            const members = await channel.decodeMembers();
+            this.simpleResponse(null, 200, members);
         } catch (e) {
             this.simpleResponse('Internal server error', 500);
         }
     }
 }
 
-module.exports = GetChannelsAction;
+module.exports = GetChannelMembersAction;

@@ -21,6 +21,7 @@
     "gm": "^1.23.1",
     "joi": "^14.0.4",
     "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.11",
     "mongodb": "^3.1.0",
     "morgan": "^1.9.0",
     "nodejs-websocket": "^1.7.1",
