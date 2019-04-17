@@ -26,7 +26,7 @@ class DeleteChannelAction extends ActionBase {
             this[_updateChannelsLists](channelModel);
             this.simpleResponse('Channel has been deleted', 200, channelModel);
         } catch (e) {
-            this.simpleResponse('Internal server error. Cannot get channel by id', 500);
+            this.simpleResponse('Internal server error.', 500);
         }
     }
 

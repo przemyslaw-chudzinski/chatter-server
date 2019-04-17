@@ -19,8 +19,6 @@ class AcceptInvitationAction extends ActionBase {
         if (!channelId) throw new Error ('channelId is required');
 
         try {
-            // const {extra} = await NotificationModel.getById(notificationId);
-            // extra && extra.channelId ? this[_acceptChannelInvitation](extra.channelId) : this.simpleResponse('channelId is not recognized', 500 , null);
             this[_acceptChannelInvitation](channelId, this.loggedUserId);
             this.simpleResponse('Invitation has been accepted', 200);
         } catch (e) {
